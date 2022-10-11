@@ -31,13 +31,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
     public void onClick(View v){
-        switch(v.getId()) {
+        switch(v.getId()){
             case R.id.btnClient:
-                startActivity(new Intent(this, Client_Registration.class));
+                startActivity(new Intent(this,Client_Registration.class));
+                break;
             case R.id.btnCook:
-                startActivity(new Intent(this, Cook_Registration.class));
+                startActivity(new Intent(this,Cook_Registration.class));
+                break;
             case R.id.btnAdmin:
-                startActivity(new Intent(this, Admin_Login.class));
+                startActivity(new Intent(this,Admin_Login.class));
+
         }
     }
 }
