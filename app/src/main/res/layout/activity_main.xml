@@ -2,90 +2,82 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".MainActivity"
 
-    >
+    tools:context=".MainActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Registration"
-        android:gravity="center"
-        android:textColor="@color/black"
         android:layout_marginTop="40dp"
-        android:textSize="40dp"
-        />
+        android:gravity="center"
+        android:text="Registration"
+        android:textColor="@color/black"
+        android:textSize="40dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register as a..."
         android:gravity="center"
+        android:text="Register as a..."
         android:textColor="@color/black"
-        android:textSize="20dp"
-        />
+        android:textSize="20dp" />
 
     <Button
         android:id="@+id/btnClient"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="50dp"
+        android:backgroundTint="@color/teal_200"
         android:gravity="center"
         android:paddingLeft="75dp"
         android:paddingTop="50dp"
         android:paddingRight="75dp"
         android:paddingBottom="50dp"
-        android:text="CLIENT"
-        android:backgroundTint="@color/teal_200"
-        />
+        android:text="CLIENT" />
 
     <Button
+        android:id="@+id/btnCook"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnCook"
-        android:text = "COOK"
-        android:gravity="center"
-        android:layout_marginTop="50dp"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="50dp"
-        android:paddingTop="50dp"
-        android:paddingBottom="50dp"
-        android:paddingLeft="75dp"
-        android:paddingRight="75dp"
         android:backgroundTint="@color/teal_200"
-        />
+        android:gravity="center"
+        android:paddingLeft="75dp"
+        android:paddingTop="50dp"
+        android:paddingRight="75dp"
+        android:paddingBottom="50dp"
+        android:text="COOK" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Administration: "
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="20dp"
         android:layout_marginTop="50dp"
-        />
+        android:gravity="center"
+        android:text="Administration: "
+        android:textColor="@color/black"
+        android:textSize="20dp" />
 
     <Button
+        android:id="@+id/btnAdmin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnAdmin"
-        android:text = "ADMINISTRATOR"
-        android:gravity="center"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:paddingTop="50dp"
-        android:paddingBottom="50dp"
-        android:paddingLeft="75dp"
-        android:paddingRight="75dp"
         android:backgroundTint="@color/teal_200"
-        />
-
+        android:gravity="center"
+        android:paddingLeft="75dp"
+        android:paddingTop="50dp"
+        android:paddingRight="75dp"
+        android:paddingBottom="50dp"
+        android:text="ADMINISTRATOR" />
 
 
 </LinearLayout>
