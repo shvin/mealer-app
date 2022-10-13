@@ -3,12 +3,12 @@ import java.util.ArrayList;
 
 public class Client extends User{
 
-    private int cardNumber;
+    private String cardNumber;
     private String expiry;
-    private int CVV;
+    private String CVV;
     private ArrayList<Integer> orderHistory = new ArrayList<>();
 
-    public Client(int id, String firstName, String lastName, String email, String password, String address, int cardNumber, String expiry, int CVV) {
+    public Client(int id, String firstName, String lastName, String email, String password, String address, String cardNumber, String expiry, String CVV) {
         super(id, firstName, lastName, email, password, address);
         this.cardNumber = cardNumber;
         this.expiry = expiry;
@@ -19,11 +19,11 @@ public class Client extends User{
         this.orderHistory.add(id);
     }
 
-    public int getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 
-    public void setCardNumber(int cardNumber) {
+    public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
 
@@ -35,11 +35,11 @@ public class Client extends User{
         this.expiry = expiry;
     }
 
-    public int getCVV() {
+    public String getCVV() {
         return CVV;
     }
 
-    public void setCVV(int CVV) {
+    public void setCVV(String CVV) {
         this.CVV = CVV;
     }
 

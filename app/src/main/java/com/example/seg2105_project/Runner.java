@@ -1,4 +1,6 @@
 package com.example.seg2105_project;
+import static android.content.Context.MODE_PRIVATE;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.io.*;
@@ -188,13 +190,14 @@ public class Runner {
         return rand;
     }
 
-    public void clientSignup(int id, String firstName, String lastName, String email, String password, String address, int cardNumber, String expiry, int CVV) throws IOException {
+    public void clientSignup(int id, String firstName, String lastName, String email, String password, String address, String cardNumber, String expiry, String CVV) throws IOException {
         this.clients.add(new Client(id, firstName, lastName, email, password, address, cardNumber, expiry, CVV));
         saveClientToDB();
     }
 
     private void saveClientToDB() throws IOException {
-        FileOutputStream f = new FileOutputStream(new File(ClF));
+
+        FileOutputStream f = new FileOutputStream((ClF));
         ObjectOutputStream o = new ObjectOutputStream(f);
         for (Client i: this.clients){
             o.writeObject(i);
