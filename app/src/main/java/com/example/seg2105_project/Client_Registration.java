@@ -189,6 +189,6 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         final int tempId = run.randomIdGenerator();
         Client client = new Client(tempId, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressEntered, cardNumEntered, monthYearEntered, cvvEntered);
 
-        DR.child("Clients").child(Integer.toString(tempId)).setValue(client);
+        DR.child("Users").child("Clients").child(Integer.toString(tempId)).setValue(client);
     }
 }

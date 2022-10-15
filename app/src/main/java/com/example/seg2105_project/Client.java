@@ -8,6 +8,8 @@ public class Client extends User{
     private String CVV;
     private ArrayList<Integer> orderHistory = new ArrayList<>();
 
+    public Client(){
+    }
     public Client(int id, String firstName, String lastName, String email, String password, String address, String cardNumber, String expiry, String CVV) {
         super(id, firstName, lastName, email, password, address);
         this.cardNumber = cardNumber;
