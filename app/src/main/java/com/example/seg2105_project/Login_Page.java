@@ -61,7 +61,6 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
 
     boolean exists = false;
 
-
     private boolean checkForExistingUser(EditText user, EditText pass){
 
         FirebaseDatabase.getInstance().getReference().child("users")
