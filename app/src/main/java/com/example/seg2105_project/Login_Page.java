@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -58,32 +59,11 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-
     boolean exists = false;
 
+
+
     private boolean checkForExistingUser(EditText user, EditText pass){
-
-        FirebaseDatabase.getInstance().getReference().child("users")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        System.out.println("12312313");
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            Client client = snapshot.getValue(Client.class);
-                            System.out.println(client.getEmail());
-                            System.out.println(client.getPassword());
-                            if (user.getText().toString() == client.getEmail() && pass.getText().toString() == client.getPassword()) {
-                                exists = true;
-                            }
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
-        System.out.println(exists);
-        return exists;
-
-
+        return true;
     }
 }
