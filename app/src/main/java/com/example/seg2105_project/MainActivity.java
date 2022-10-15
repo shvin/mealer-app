@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Button btnClient;
     Button btnCook;
-    Button btnAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +22,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnClient = (Button) findViewById(R.id.btnClient);
         btnCook = (Button) findViewById(R.id.btnCook);
-        btnAdmin = (Button) findViewById(R.id.btnAdmin);
 
         btnClient.setOnClickListener(this);
         btnCook.setOnClickListener(this);
-        btnAdmin.setOnClickListener(this);
 
     }
     public void onClick(View v){
@@ -38,8 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnCook:
                 startActivity(new Intent(this,Cook_Registration.class));
                 break;
-            case R.id.btnAdmin:
-                startActivity(new Intent(this,Admin_Login.class));
 
         }
     }
