@@ -11,5 +11,8 @@ public class Client_Homepage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_homepage);
     }
+    public void hi(){
+        System.out.println("hi");
+    }
 
 }
