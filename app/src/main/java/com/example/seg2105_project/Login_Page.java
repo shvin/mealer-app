@@ -57,16 +57,11 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
 
         }
     }
-    public void onDataChange(DataSnapshot dataSnapshot) {
 
-
-
-    }
-
-    public void onCancelled(DatabaseError databaseError) {
-    }
 
     boolean exists = false;
+
+
     private boolean checkForExistingUser(EditText user, EditText pass){
 
         FirebaseDatabase.getInstance().getReference().child("users")
