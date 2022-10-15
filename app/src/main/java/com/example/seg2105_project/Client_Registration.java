@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class Client_Registration extends AppCompatActivity implements View.OnClickListener {
 
     Button btnRegisterClient;
@@ -30,6 +33,8 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
     boolean correctCVV = true;
 
 
+    DatabaseReference DR;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -45,6 +50,8 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         monthYearClient = (EditText) findViewById(R.id.monthYearClient);
         cvvClient = (EditText) findViewById(R.id.cvvClient);
 
+        DR = FirebaseDatabase.getInstance().getReference();
+
         btnRegisterClient.setOnClickListener(this);
     }
 
@@ -54,7 +61,8 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
                if (checkInfo() == true) {
 
                    try {
-                       clientSignup();
+                       System.out.println("hi");
+                       writeNewUser();
                    } catch (ClassNotFoundException e) {
                        e.printStackTrace();
                    } catch (IOException e) {
@@ -168,8 +176,7 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         return true;
     }
 
-    public void clientSignup() throws ClassNotFoundException, IOException {
-
+    public void writeNewUser() throws IOException, ClassNotFoundException {
         Runner run = Runner.getInstance();
         final String firstNameEntered = firstNameClient.getText().toString();
         final String lastNameEntered = lastNameClient.getText().toString();
@@ -179,8 +186,9 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         final String cardNumEntered = (cardNumberClient.getText().toString()).replace(" ","");
         final String monthYearEntered = monthYearClient.getText().toString();
         final String cvvEntered = cvvClient.getText().toString();
-        System.out.println("hi");
-        run.clientSignup(run.randomIdGenerator(), firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressEntered, cardNumEntered, monthYearEntered, cvvEntered);
-    }
+        final int tempId = run.randomIdGenerator();
+        Client client = new Client(tempId, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressEntered, cardNumEntered, monthYearEntered, cvvEntered);
 
+        DR.child("Clients").child(Integer.toString(tempId)).setValue(client);
+    }
 }

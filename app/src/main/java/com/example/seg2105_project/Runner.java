@@ -4,6 +4,17 @@ import static android.content.Context.MODE_PRIVATE;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import android.content.Context;
+import android.app.Activity;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class Runner {
@@ -20,6 +31,7 @@ public class Runner {
     ArrayList<Meal> meals = new ArrayList<>();
     ArrayList<Complaint> complaints = new ArrayList<>();
     ArrayList<Admin> admins = new ArrayList<>();
+
 
     protected Runner() throws IOException, ClassNotFoundException {
         loadDBData();
@@ -197,6 +209,7 @@ public class Runner {
 
     private void saveClientToDB() throws IOException {
 
+
         FileOutputStream f = new FileOutputStream((ClF));
         ObjectOutputStream o = new ObjectOutputStream(f);
         for (Client i: this.clients){
@@ -205,6 +218,7 @@ public class Runner {
         o.close();
         f.close();
     }
+
 
     public void cookSignup(int id, String firstName, String lastName, String email, String password, String address, String description) throws IOException {
         this.cooks.add(new Cook(id, firstName, lastName, email, password, address, description));
