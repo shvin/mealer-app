@@ -24,6 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Login_Page extends AppCompatActivity implements View.OnClickListener{
 
     EditText usernameLogin;
@@ -32,7 +35,7 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
     Button loginBtn;
     DatabaseReference DR;
     Boolean exists;
-
+    List<Client> clients;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +46,8 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
         registerTXT = (TextView) findViewById(R.id.registerTXT);
         loginBtn = (Button) findViewById(R.id.loginBtn);
         exists = false;
-
-        DR = FirebaseDatabase.getInstance().getReference();
-
+        clients = new ArrayList<>();
+        DR = FirebaseDatabase.getInstance().getReference().child("Users");;
         registerTXT.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
 
@@ -56,6 +58,8 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
                 startActivity(new Intent(this,MainActivity.class));
                 break;
             case R.id.loginBtn:
+                //FOR ADMIN LOG IN
+
                 if (checkForExistingUser(usernameLogin)){
                     startActivity(new Intent(this,Client_Homepage.class));
                 }
@@ -68,7 +72,27 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
 
 
     private boolean checkForExistingUser(EditText user) {
-        System.out.println(user.getText().toString());
+        //Adding eventListener to reference
+        DR.addValueEventListener(new ValueEventListener() {
+            @Override
+
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    //Getting the string value of that node
+                    System.out.println(data);
+                    Client client = data.getValue(Client.class);
+                    Toast.makeText(getApplicationContext(), "Data Received: username: " + client.getEmail(), Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled: Something went wrong! Error:" + databaseError.getMessage() );
+
+            }
+        });
+
         return true;
     }
 }

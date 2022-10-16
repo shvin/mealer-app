@@ -1,25 +1,28 @@
 package com.example.seg2105_project;
 import java.util.ArrayList;
 
-public class Client extends User{
+public class Client extends User {
 
     private String cardNumber;
     private String expiry;
-    private String CVV;
+    private String cvv;
     private ArrayList<Integer> orderHistory = new ArrayList<>();
 
     public Client(){
     }
-    public Client(int id, String firstName, String lastName, String email, String password, String address, String cardNumber, String expiry, String CVV) {
+
+    public Client(int id, String firstName, String lastName, String email, String password, String address, String cardNumber, String expiry, String cvv, ArrayList<Integer> orderHistory) {
         super(id, firstName, lastName, email, password, address);
         this.cardNumber = cardNumber;
         this.expiry = expiry;
-        this.CVV = CVV;
+        this.cvv = cvv;
+        this.orderHistory = orderHistory;
     }
 
-    public void addToMealsOrder(int id){
-        this.orderHistory.add(id);
-    }
+    //public void addToMealsOrder(int id){
+        //this.orderHistory.add(id);
+    //}
+
 
     public String getCardNumber() {
         return cardNumber;
@@ -37,12 +40,12 @@ public class Client extends User{
         this.expiry = expiry;
     }
 
-    public String getCVV() {
-        return CVV;
+    public String getCvv() {
+        return cvv;
     }
 
-    public void setCVV(String CVV) {
-        this.CVV = CVV;
+    public void setCvv(String cvv) {
+        this.cvv = cvv;
     }
 
     public ArrayList<Integer> getOrderHistory() {

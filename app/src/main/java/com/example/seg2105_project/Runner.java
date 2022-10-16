@@ -202,10 +202,10 @@ public class Runner {
         return rand;
     }
 
-    public void clientSignup(int id, String firstName, String lastName, String email, String password, String address, String cardNumber, String expiry, String CVV) throws IOException {
+    /*public void clientSignup(int id, String firstName, String lastName, String email, String password, String address, String cardNumber, String expiry, String CVV) throws IOException {
         this.clients.add(new Client(id, firstName, lastName, email, password, address, cardNumber, expiry, CVV));
         saveClientToDB();
-    }
+    }*/
 
     private void saveClientToDB() throws IOException {
 

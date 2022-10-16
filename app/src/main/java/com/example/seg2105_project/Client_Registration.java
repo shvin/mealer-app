@@ -2,6 +2,8 @@ package com.example.seg2105_project;
 
 import androidx.appcompat.app.AppCompatActivity;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -61,7 +63,6 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
                if (checkInfo() == true) {
 
                    try {
-                       System.out.println("hi");
                        writeNewUser();
                    } catch (ClassNotFoundException e) {
                        e.printStackTrace();
@@ -187,7 +188,9 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         final String monthYearEntered = monthYearClient.getText().toString();
         final String cvvEntered = cvvClient.getText().toString();
         final int tempId = run.randomIdGenerator();
-        Client client = new Client(tempId, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressEntered, cardNumEntered, monthYearEntered, cvvEntered);
+        ArrayList<Integer> orderHistory = new ArrayList<>();
+        orderHistory.add(2);
+        Client client = new Client(tempId, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressEntered, cardNumEntered, monthYearEntered, cvvEntered,orderHistory);
 
         DR.child("Users").child("Clients").child(Integer.toString(tempId)).setValue(client);
     }
