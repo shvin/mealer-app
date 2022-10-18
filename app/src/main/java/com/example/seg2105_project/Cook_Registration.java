@@ -1,7 +1,11 @@
 package com.example.seg2105_project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import java.io.IOException;
+import java.util.ArrayList;
 
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,10 +14,7 @@ import android.widget.EditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-public class Cook_Registration extends AppCompatActivity {
+public class Cook_Registration extends AppCompatActivity implements View.OnClickListener{
 
     Button btnRegisterCook;
     EditText firstNameCook;
@@ -46,17 +47,35 @@ public class Cook_Registration extends AppCompatActivity {
 
         DR = FirebaseDatabase.getInstance().getReference();
 
-        btnRegisterCook.setOnClickListener((View.OnClickListener) this);
+        btnRegisterCook.setOnClickListener( this);
     }
 
-    boolean correct = true;
-    final String firstNameEntered = firstNameCook.getText().toString();
-    final String lastNameEntered = lastNameCook.getText().toString();
-    final String emailEntered = emailAddressCook.getText().toString();
-    final String passwordEntered = passwordCook.getText().toString();
-    final String addressEntered = addressCook.getText().toString();
-    final String descriptionEntered = descriptionCook.getText().toString();
+    public void onClick(View v) {
+        switch(v.getId()) {
+            case R.id.btnRegisterCook:
+                if (checkInfo() == true) {
+
+                    try {
+                        writeNewUser();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    startActivity(new Intent(this, Login_Page.class));
+                }
+        }
+    }
+
+
     public boolean checkInfo() {
+        boolean correct = true;
+        final String firstNameEntered = firstNameCook.getText().toString();
+        final String lastNameEntered = lastNameCook.getText().toString();
+        final String emailEntered = emailAddressCook.getText().toString();
+        final String passwordEntered = passwordCook.getText().toString();
+        final String addressEntered = addressCook.getText().toString();
+        final String descriptionEntered = descriptionCook.getText().toString();
         for (int i = 0; i < firstNameEntered.length(); i++) {
             if ((Character.isLetter(firstNameEntered.charAt(i)) == false)) {
                 correctFirstName = false;
@@ -97,12 +116,20 @@ public class Cook_Registration extends AppCompatActivity {
     }
 
     public void writeNewUser() throws IOException, ClassNotFoundException {
+        final String firstNameEntered = firstNameCook.getText().toString();
+        final String lastNameEntered = lastNameCook.getText().toString();
+        final String emailEntered = emailAddressCook.getText().toString();
+        final String passwordEntered = passwordCook.getText().toString();
+        final String addressEntered = addressCook.getText().toString();
+        final String descriptionEntered = descriptionCook.getText().toString();
         Runner run = Runner.getInstance();
         final int tempId = run.randomIdGenerator();
         ArrayList<Integer> menu = new ArrayList<>();
         menu.add(2);
         Cook cook = new Cook(tempId, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressEntered, descriptionEntered);
 
-        DR.child("Users").child("Clients").child(Integer.toString(tempId)).setValue(cook);
+        DR.child("Users").child("Cooks").child(Integer.toString(tempId)).setValue(cook);
     }
+
+
 }

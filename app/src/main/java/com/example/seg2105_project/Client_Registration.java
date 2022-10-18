@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -69,23 +70,22 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
                    } catch (IOException e) {
                        e.printStackTrace();
                    }
-                   //startActivity(new Intent(this, Client_Homepage.class));
+                   startActivity(new Intent(this, Login_Page.class));
                }
         }
     }
 
 
-    boolean correct = true;
-    final String firstNameEntered = firstNameClient.getText().toString();
-    final String lastNameEntered = lastNameClient.getText().toString();
-    final String emailEntered = emailAddressClient.getText().toString();
-    final String passwordEntered = passwordClient.getText().toString();
-    final String addressEntered = addressClient.getText().toString();
-    final String cardNumEntered = (cardNumberClient.getText().toString()).replace(" ","");
-    final String monthYearEntered = monthYearClient.getText().toString();
-    final String cvvEntered = cvvClient.getText().toString();
-
     public boolean checkInfo() {
+        boolean correct = true;
+        final String firstNameEntered = firstNameClient.getText().toString();
+        final String lastNameEntered = lastNameClient.getText().toString();
+        final String emailEntered = emailAddressClient.getText().toString();
+        final String passwordEntered = passwordClient.getText().toString();
+        final String addressEntered = addressClient.getText().toString();
+        final String cardNumEntered = (cardNumberClient.getText().toString()).replace(" ","");
+        final String monthYearEntered = monthYearClient.getText().toString();
+        final String cvvEntered = cvvClient.getText().toString();
         for (int i = 0; i < firstNameEntered.length(); i++) {
             if ((Character.isLetter(firstNameEntered.charAt(i)) == false)) {
                 correctFirstName = false;
@@ -178,6 +178,14 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
     }
 
     public void writeNewUser() throws IOException, ClassNotFoundException {
+        final String firstNameEntered = firstNameClient.getText().toString();
+        final String lastNameEntered = lastNameClient.getText().toString();
+        final String emailEntered = emailAddressClient.getText().toString();
+        final String passwordEntered = passwordClient.getText().toString();
+        final String addressEntered = addressClient.getText().toString();
+        final String cardNumEntered = (cardNumberClient.getText().toString()).replace(" ","");
+        final String monthYearEntered = monthYearClient.getText().toString();
+        final String cvvEntered = cvvClient.getText().toString();
         Runner run = Runner.getInstance();
         final int tempId = run.randomIdGenerator();
         ArrayList<Integer> orderHistory = new ArrayList<>();
