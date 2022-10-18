@@ -15,13 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -36,6 +33,8 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
     DatabaseReference DR;
     Boolean exists;
     List<Client> clients;
+
+    Boolean valid = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +46,7 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
         loginBtn = (Button) findViewById(R.id.loginBtn);
         exists = false;
         clients = new ArrayList<>();
-        DR = FirebaseDatabase.getInstance().getReference().child("Users");;
+        DR = FirebaseDatabase.getInstance().getReference().child("Users");
         registerTXT.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
 
@@ -60,10 +59,28 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
             case R.id.loginBtn:
                 //FOR ADMIN LOG IN
 
-                if (checkForExistingUser(usernameLogin)){
-                    startActivity(new Intent(this,Client_Homepage.class));
+                DR = FirebaseDatabase.getInstance().getReference().child("Users/Clients");
+                if ((usernameLogin.getText().toString().length())> 0 && passwordLogin.getText().toString().length()> 0){
+                    checkForExistingUser(usernameLogin,passwordLogin);
                 }
-                Toast.makeText(getApplicationContext(),"Username or Password is incorrect",Toast.LENGTH_SHORT).show();
+                if (valid == true){
+                    startActivity(new Intent(this,Client_Homepage.class));
+                    Toast.makeText(getApplicationContext(), "LOGGED IN", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Username or Password is incorrect", Toast.LENGTH_SHORT).show();
+                }
+
+
+                DR = FirebaseDatabase.getInstance().getReference().child("Users/Cooks");
+                if ((usernameLogin.getText().toString().length())> 0 && passwordLogin.getText().toString().length()> 0){
+                    checkForExistingUser(usernameLogin,passwordLogin);
+                }
+                if (valid == true){
+                    startActivity(new Intent(this,Client_Homepage.class));
+                    Toast.makeText(getApplicationContext(), "LOGGED IN", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Username or Password is incorrect", Toast.LENGTH_SHORT).show();
+                }
 
                 break;
 
@@ -71,7 +88,9 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
     }
 
 
-    private boolean checkForExistingUser(EditText user) {
+    private void checkForExistingUser(EditText user, EditText pass) {
+        String userCheck = user.getText().toString();
+        String userPass = pass.getText().toString();
         //Adding eventListener to reference
         DR.addValueEventListener(new ValueEventListener() {
             @Override
@@ -81,10 +100,14 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
                     //Getting the string value of that node
                     System.out.println(data);
                     Client client = data.getValue(Client.class);
-                    Toast.makeText(getApplicationContext(), "Data Received: username: " + client.getEmail(), Toast.LENGTH_SHORT).show();
+                    if (userCheck.equals(client.getEmail())&& userPass.equals(client.getPassword())){
+                        returnTrueValue();
+                    }
 
                 }
             }
+
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -93,6 +116,9 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
             }
         });
 
-        return true;
+
+    }
+    private void returnTrueValue() {
+        valid = true;
     }
 }
