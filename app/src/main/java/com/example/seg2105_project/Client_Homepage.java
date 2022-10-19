@@ -1,6 +1,8 @@
 package com.example.seg2105_project;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,4 +14,9 @@ public class Client_Homepage extends AppCompatActivity {
         setContentView(R.layout.activity_client_homepage);
     }
 
+    //onClick for logoutButtonHomepage in activity client homepage
+    public void logoutButtonHomepage(View view) {
+        Intent intent = new Intent(this, Login_Page.class);
+        startActivity(intent);
+    }
 }
