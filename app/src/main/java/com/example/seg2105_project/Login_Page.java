@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Login_Page extends AppCompatActivity implements View.OnClickListener{
+public class Login_Page extends AppCompatActivity implements View.OnClickListener {
 
     EditText usernameLogin;
     EditText passwordLogin;
@@ -35,6 +35,7 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
     List<Client> clients;
 
     Boolean valid = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,41 +47,20 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
         loginBtn = (Button) findViewById(R.id.loginBtn);
         exists = false;
         clients = new ArrayList<>();
-        DR = FirebaseDatabase.getInstance().getReference().child("Users");
+        DR = FirebaseDatabase.getInstance().getReference().child("Users/Clients");
         registerTXT.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
 
     }
-    public void onClick(View v){
-        switch(v.getId()){
+
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.registerTXT:
-                startActivity(new Intent(this,MainActivity.class));
+                startActivity(new Intent(this, MainActivity.class));
                 break;
             case R.id.loginBtn:
                 //FOR ADMIN LOG IN
-
-                DR = FirebaseDatabase.getInstance().getReference().child("Users/Clients");
-                if ((usernameLogin.getText().toString().length())> 0 && passwordLogin.getText().toString().length()> 0){
-                    checkForExistingUser(usernameLogin,passwordLogin);
-                }
-                if (valid == true){
-                    startActivity(new Intent(this,Client_Homepage.class));
-                    Toast.makeText(getApplicationContext(), "LOGGED IN", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Username or Password is incorrect", Toast.LENGTH_SHORT).show();
-                }
-
-
-                DR = FirebaseDatabase.getInstance().getReference().child("Users/Cooks");
-                if ((usernameLogin.getText().toString().length())> 0 && passwordLogin.getText().toString().length()> 0){
-                    checkForExistingUser(usernameLogin,passwordLogin);
-                }
-                if (valid == true){
-                    startActivity(new Intent(this,Client_Homepage.class));
-                    Toast.makeText(getApplicationContext(), "LOGGED IN", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Username or Password is incorrect", Toast.LENGTH_SHORT).show();
-                }
+                checkForExistingUser(usernameLogin, passwordLogin);
 
                 break;
 
@@ -89,6 +69,7 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
 
 
     private void checkForExistingUser(EditText user, EditText pass) {
+
         String userCheck = user.getText().toString();
         String userPass = pass.getText().toString();
         //Adding eventListener to reference
@@ -100,25 +81,55 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
                     //Getting the string value of that node
                     System.out.println(data);
                     Client client = data.getValue(Client.class);
-                    if (userCheck.equals(client.getEmail())&& userPass.equals(client.getPassword())){
-                        returnTrueValue();
-                    }
+                    if (userCheck.equals(client.getEmail()) && userPass.equals(client.getPassword())) {
 
+                        returnTrueValue();
+                        optionTrueClient();
+                    }
+                }
+                DR = FirebaseDatabase.getInstance().getReference().child("Users/Cooks");
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    //Getting the string value of that node
+                    System.out.println(data);
+                    Client client = data.getValue(Client.class);
+                    if (userCheck.equals(client.getEmail()) && userPass.equals(client.getPassword())) {
+
+                        returnTrueValue();
+                        optionTrueCook();
+                    }
+                }
+                if (valid == false) {
+                    optionFalse();
                 }
             }
 
 
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e(TAG, "onCancelled: Something went wrong! Error:" + databaseError.getMessage() );
+                Log.e(TAG, "onCancelled: Something went wrong! Error:" + databaseError.getMessage());
 
             }
         });
 
-
     }
+
     private void returnTrueValue() {
         valid = true;
     }
+
+    private void optionTrueClient(){
+        startActivity(new Intent(this, Client_Homepage.class));
+        Toast.makeText(getApplicationContext(), "LOGGED IN", Toast.LENGTH_SHORT).show();
+    }
+
+    private void optionTrueCook(){
+        startActivity(new Intent(this, Cook_Homepage.class));
+        Toast.makeText(getApplicationContext(), "LOGGED IN", Toast.LENGTH_SHORT).show();
+    }
+
+    private void optionFalse(){
+        Toast.makeText(getApplicationContext(), "Username or Password is incorrect", Toast.LENGTH_SHORT).show();
+
+    }
+
 }
