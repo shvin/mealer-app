@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnClient.setOnClickListener(this);
         btnCook.setOnClickListener(this);
+        btnLoginClient.setOnClickListener(this);
+        btnLoginCook.setOnClickListener(this);
+        btnLoginAdmin.setOnClickListener(this);
 
     }
     public void onClick(View v){
@@ -45,11 +48,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this,Cook_Registration.class));
                 break;
             case R.id.btnLoginClient:
+                startActivity(new Intent(this,Client_Login_Page.class));
+                break;
+          /*  case R.id.btnLoginCook:
                 startActivity(new Intent(this,Cook_Registration.class));
                 break;
-            case R.id.btnLoginCook:
+            case R.id.btnLoginAdmin:
                 startActivity(new Intent(this,Cook_Registration.class));
-                break;
+                break;*/
 
         }
     }

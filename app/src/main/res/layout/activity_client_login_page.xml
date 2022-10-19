@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:gravity="center"
-        android:text="Log In"
+        android:text="Client Log In"
         android:textColor="@color/black"
         android:textSize="40dp" />
 
@@ -52,15 +52,5 @@
         android:text="login"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"/>
-
-    <TextView
-        android:id="@+id/registerTXT"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Or register"
-        android:textColor="@color/black"
-        android:textStyle="bold"/>
 
 </LinearLayout>

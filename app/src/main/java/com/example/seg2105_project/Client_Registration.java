@@ -70,7 +70,7 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
                    } catch (IOException e) {
                        e.printStackTrace();
                    }
-                   startActivity(new Intent(this, Login_Page.class));
+                   startActivity(new Intent(this, Client_Login_Page.class));
                }
         }
     }

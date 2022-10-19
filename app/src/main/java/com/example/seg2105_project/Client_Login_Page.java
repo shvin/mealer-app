@@ -24,11 +24,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Login_Page extends AppCompatActivity implements View.OnClickListener {
+public class Client_Login_Page extends AppCompatActivity implements View.OnClickListener {
 
     EditText usernameLogin;
     EditText passwordLogin;
-    TextView registerTXT;
     Button loginBtn;
     DatabaseReference DR;
     Boolean exists;
@@ -39,25 +38,20 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_page);
+        setContentView(R.layout.activity_client_login_page);
 
         usernameLogin = (EditText) findViewById(R.id.usernameLogin);
         passwordLogin = (EditText) findViewById(R.id.passwordLogin);
-        registerTXT = (TextView) findViewById(R.id.registerTXT);
         loginBtn = (Button) findViewById(R.id.loginBtn);
         exists = false;
         clients = new ArrayList<>();
         DR = FirebaseDatabase.getInstance().getReference().child("Users/Clients");
-        registerTXT.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
 
     }
 
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.registerTXT:
-                startActivity(new Intent(this, MainActivity.class));
-                break;
             case R.id.loginBtn:
                 //FOR ADMIN LOG IN
                 checkForExistingUser(usernameLogin, passwordLogin);

@@ -62,7 +62,7 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    startActivity(new Intent(this, Login_Page.class));
+                    startActivity(new Intent(this, Client_Login_Page.class));
                 }
         }
     }

@@ -16,7 +16,7 @@ public class Client_Homepage extends AppCompatActivity {
 
     //onClick for logoutButtonHomepage in activity client homepage
     public void logoutButtonHomepage(View view) {
-        Intent intent = new Intent(this, Login_Page.class);
+        Intent intent = new Intent(this, Client_Login_Page.class);
         startActivity(intent);
     }
 }
