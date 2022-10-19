@@ -14,7 +14,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="43dp"
-            android:text="Welcome!"
+            android:text="You are logged in as Client"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <Space
@@ -25,7 +25,7 @@
             android:id="@+id/logoutButtonHomepage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="logoutButtonHomepage"
+            android:onClick="log"
             android:text="Log Out" />
     </LinearLayout>
 

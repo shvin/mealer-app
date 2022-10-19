@@ -14,5 +14,9 @@ public class Cook_Homepage extends AppCompatActivity {
         setContentView(R.layout.activity_cook_homepage);
     }
 
-
+    //onClick for logoutButtonHomepage in activity cook homepage
+    public void logoutButtonHomepage(View view) {
+        Intent intent = new Intent(this, Login_Page.class);
+        startActivity(intent);
+    }
 }
