@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Client_Login_Page extends AppCompatActivity implements View.OnClickListener {
+public class Cook_Login_Page extends AppCompatActivity implements View.OnClickListener {
 
     EditText usernameLogin;
     EditText passwordLogin;
@@ -32,22 +32,22 @@ public class Client_Login_Page extends AppCompatActivity implements View.OnClick
     Button backBtn;
     DatabaseReference DR;
     Boolean exists;
-    List<Client> clients;
+    List<Cook> cooks;
 
     Boolean valid = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_client_login_page);
+        setContentView(R.layout.activity_cook_login_page);
 
         usernameLogin = (EditText) findViewById(R.id.usernameLogin);
         passwordLogin = (EditText) findViewById(R.id.passwordLogin);
         loginBtn = (Button) findViewById(R.id.loginBtn);
         backBtn = (Button) findViewById(R.id.backBtn);
         exists = false;
-        clients = new ArrayList<>();
-        DR = FirebaseDatabase.getInstance().getReference().child("Users/Clients");
+        cooks = new ArrayList<>();
+        DR = FirebaseDatabase.getInstance().getReference().child("Users/Cooks");
         loginBtn.setOnClickListener(this);
         backBtn.setOnClickListener(this);
 
@@ -81,13 +81,14 @@ public class Client_Login_Page extends AppCompatActivity implements View.OnClick
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     //Getting the string value of that node
                     System.out.println(data);
-                    Client client = data.getValue(Client.class);
-                    if (userCheck.equals(client.getEmail()) && userPass.equals(client.getPassword())) {
+                    Cook cook = data.getValue(Cook.class);
+                    if (userCheck.equals(cook.getEmail()) && userPass.equals(cook.getPassword())) {
 
                         returnTrueValue();
                         optionTrue();
                     }
                 }
+
 
                 if (valid == false) {
                     optionFalse();
@@ -109,7 +110,7 @@ public class Client_Login_Page extends AppCompatActivity implements View.OnClick
     }
 
     private void optionTrue(){
-        startActivity(new Intent(this, Client_Homepage.class));
+        startActivity(new Intent(this, Cook_Homepage.class));
         Toast.makeText(getApplicationContext(), "LOGGED IN", Toast.LENGTH_SHORT).show();
     }
 

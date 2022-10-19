@@ -50,12 +50,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnLoginClient:
                 startActivity(new Intent(this,Client_Login_Page.class));
                 break;
-          /*  case R.id.btnLoginCook:
-                startActivity(new Intent(this,Cook_Registration.class));
+            case R.id.btnLoginCook:
+                startActivity(new Intent(this,Cook_Login_Page.class));
                 break;
             case R.id.btnLoginAdmin:
-                startActivity(new Intent(this,Cook_Registration.class));
-                break;*/
+                startActivity(new Intent(this,Admin_Login.class));
+                break;
 
         }
     }

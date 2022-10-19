@@ -126,4 +126,10 @@
         android:id="@+id/btnRegisterCook"
         android:backgroundTint="@color/teal_200"/>
 
+    <Button
+        android:id="@+id/btnBackCookReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back" />
+
 </LinearLayout>

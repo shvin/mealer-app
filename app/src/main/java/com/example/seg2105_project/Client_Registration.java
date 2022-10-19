@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Client_Registration extends AppCompatActivity implements View.OnClickListener {
 
     Button btnRegisterClient;
+    Button btnBack;
     EditText firstNameClient;
     EditText lastNameClient;
     EditText emailAddressClient;
@@ -44,6 +45,7 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_client_registration);
 
         btnRegisterClient = (Button) findViewById(R.id.btnRegisterClient);
+        btnBack = (Button) findViewById(R.id.btnBack);
         firstNameClient = (EditText) findViewById(R.id.firstNameClient);
         lastNameClient = (EditText) findViewById(R.id.lastNameClient);
         emailAddressClient = (EditText) findViewById(R.id.emailAddressClient);
@@ -56,6 +58,7 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         DR = FirebaseDatabase.getInstance().getReference();
 
         btnRegisterClient.setOnClickListener(this);
+        btnBack.setOnClickListener(this);
     }
 
     public void onClick(View v) {
@@ -72,6 +75,9 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
                    }
                    startActivity(new Intent(this, Client_Login_Page.class));
                }
+            case R.id.btnBack:
+                    startActivity(new Intent(this, MainActivity.class));
+
         }
     }
 

@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Cook_Registration extends AppCompatActivity implements View.OnClickListener{
 
     Button btnRegisterCook;
+    Button btnBackCookReg;
     EditText firstNameCook;
     EditText lastNameCook;
     EditText emailAddressCook;
@@ -38,6 +39,7 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_cook_registration);
 
         btnRegisterCook = (Button) findViewById(R.id.btnRegisterCook);
+        btnBackCookReg = (Button) findViewById(R.id.btnBackCookReg);
         firstNameCook = (EditText) findViewById(R.id.firstNameCook);
         lastNameCook = (EditText) findViewById(R.id.lastNameCook);
         emailAddressCook = (EditText) findViewById(R.id.emailAddressCook);
@@ -48,6 +50,7 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
         DR = FirebaseDatabase.getInstance().getReference();
 
         btnRegisterCook.setOnClickListener( this);
+        btnBackCookReg.setOnClickListener( this);
     }
 
     public void onClick(View v) {
@@ -64,6 +67,8 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
                     }
                     startActivity(new Intent(this, Client_Login_Page.class));
                 }
+            case R.id.btnBackCookReg:
+                startActivity(new Intent(this, MainActivity.class));
         }
     }
 
