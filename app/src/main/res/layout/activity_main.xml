@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:gravity="center"
-        android:text="Registration"
+        android:text="Registration/Login"
         android:textColor="@color/black"
         android:textSize="40dp" />
 
@@ -55,5 +55,23 @@
         android:paddingRight="75dp"
         android:paddingBottom="50dp"
         android:text="COOK" />
+
+    <Button
+        android:id="@+id/btnLoginClient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login as Client" />
+
+    <Button
+        android:id="@+id/btnLoginCook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login as cook" />
+
+    <Button
+        android:id="@+id/btnLoginAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login as Admin" />
 
 </LinearLayout>

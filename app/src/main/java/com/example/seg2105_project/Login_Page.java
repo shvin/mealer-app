@@ -63,7 +63,6 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
                 checkForExistingUser(usernameLogin, passwordLogin);
 
                 break;
-
         }
     }
 
@@ -84,10 +83,10 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
                     if (userCheck.equals(client.getEmail()) && userPass.equals(client.getPassword())) {
 
                         returnTrueValue();
-                        optionTrueClient();
+                        optionTrue();
                     }
                 }
-                DR = FirebaseDatabase.getInstance().getReference().child("Users/Cooks");
+
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     //Getting the string value of that node
                     System.out.println(data);
@@ -95,7 +94,7 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
                     if (userCheck.equals(client.getEmail()) && userPass.equals(client.getPassword())) {
 
                         returnTrueValue();
-                        optionTrueCook();
+                        optionTrue();
                     }
                 }
                 if (valid == false) {
@@ -117,13 +116,8 @@ public class Login_Page extends AppCompatActivity implements View.OnClickListene
         valid = true;
     }
 
-    private void optionTrueClient(){
+    private void optionTrue(){
         startActivity(new Intent(this, Client_Homepage.class));
-        Toast.makeText(getApplicationContext(), "LOGGED IN", Toast.LENGTH_SHORT).show();
-    }
-
-    private void optionTrueCook(){
-        startActivity(new Intent(this, Cook_Homepage.class));
         Toast.makeText(getApplicationContext(), "LOGGED IN", Toast.LENGTH_SHORT).show();
     }
 
