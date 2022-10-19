@@ -28,7 +28,6 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
     EditText monthYearClient;
     EditText cvvClient;
 
-
     DatabaseReference DR;
 
     @Override
@@ -76,7 +75,8 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
 
 
     public boolean checkInfo() {
-        boolean correct = true;
+
+        boolean found = false;
         final String firstNameEntered = firstNameClient.getText().toString();
         final String lastNameEntered = lastNameClient.getText().toString();
         final String emailEntered = emailAddressClient.getText().toString();
@@ -106,23 +106,29 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
                 return false;
             }
         }
-//        for (int i = 0; i < emailEntered.length(); i++) {
-//            boolean found = false;
-//            if ((emailEntered.charAt(i) == ' ')) {
-//                return false;
-//            }
-//            if (emailEntered.charAt(i) == '@' == true) {
-//                found = true;
-//                for (int j = i + 1; j < emailEntered.length(); j++) {
-//                    if (emailEntered.charAt(j) == '@') {
-//                        return false;
-//                    }
-//                }
-//                if (i == emailEntered.length() - 1 && found == false) {
-//                    return false;
-//                }
-//            }
-//        }
+        for (int i = 0; i < emailEntered.length(); i++) {
+            if ((emailEntered.charAt(i) == ' ')) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Your email must have no spaces",Toast.LENGTH_SHORT);
+                toast.show();
+                return false;
+            }
+            if (emailEntered.charAt(i) == '@' ) {
+                found = true;
+                for (int j = i + 1; j < emailEntered.length(); j++) {
+                    if (emailEntered.charAt(j) == '@') {
+                        Toast toast = Toast.makeText(getApplicationContext(), "Your email cannot have more than one '@'",Toast.LENGTH_SHORT);
+                        toast.show();
+                        return false;
+                    }
+                }
+            }
+        }
+        if (found == false) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Your email must have a '@'", Toast.LENGTH_SHORT);
+            toast.show();
+            return false;
+        }
+
         if (passwordEntered.length() < 8) {
             Toast toast = Toast.makeText(getApplicationContext(), "Your password must be at least 8 characters",Toast.LENGTH_SHORT);
             toast.show();
@@ -200,7 +206,6 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         Runner run = Runner.getInstance();
         final int tempId = run.randomIdGenerator();
         ArrayList<Integer> orderHistory = new ArrayList<>();
-        orderHistory.add(2);
         Client client = new Client(tempId, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressEntered, cardNumEntered, monthYearEntered, cvvEntered,orderHistory);
 
         DR.child("Users").child("Clients").child(Integer.toString(tempId)).setValue(client);
