@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -26,15 +27,6 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
     EditText cardNumberClient;
     EditText monthYearClient;
     EditText cvvClient;
-
-    boolean correctFirstName = true;
-    boolean correctLastName = true;
-    boolean correctEmail = true;
-    boolean correctPassword = true;
-    boolean correctAddress = true;
-    boolean correctCardNum = true;
-    boolean correctMonthYear = true;
-    boolean correctCVV = true;
 
 
     DatabaseReference DR;
@@ -75,9 +67,10 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
                    }
                    startActivity(new Intent(this, Client_Login_Page.class));
                }
+               break;
             case R.id.btnBack:
-                    startActivity(new Intent(this, MainActivity.class));
-
+                startActivity(new Intent(this, MainActivity.class));
+                break;
         }
     }
 
@@ -92,94 +85,106 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         final String cardNumEntered = (cardNumberClient.getText().toString()).replace(" ","");
         final String monthYearEntered = monthYearClient.getText().toString();
         final String cvvEntered = cvvClient.getText().toString();
+
+        if(firstNameEntered.length() == 0 || lastNameEntered.length() == 0 || emailEntered.length() == 0||
+                passwordEntered.length() == 0 || cardNumEntered.length() == 0 || monthYearEntered.length() == 0 || cvvEntered.length() == 0){
+            Toast toast = Toast.makeText(getApplicationContext(), "Input cannot be empty",Toast.LENGTH_SHORT);
+            toast.show();
+            return false;
+        }
         for (int i = 0; i < firstNameEntered.length(); i++) {
-            if ((Character.isLetter(firstNameEntered.charAt(i)) == false)) {
-                correctFirstName = false;
+            if (!(Character.isLetter(firstNameEntered.charAt(i)))) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Your first name must only contain letters",Toast.LENGTH_SHORT);
+                toast.show();
+                return false;
             }
         }
         for (int i = 0; i < lastNameEntered.length(); i++) {
-            if ((Character.isLetter(lastNameEntered.charAt(i)) == false)) {
-                correctLastName = false;
+            if (!(Character.isLetter(lastNameEntered.charAt(i)))) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Your last name must only contain letters",Toast.LENGTH_SHORT);
+                toast.show();
+                return false;
             }
         }
-        for (int i = 0; i < emailEntered.length(); i++) {
-            boolean found = false;
-            if ((emailEntered.charAt(i) == ' ')) {
-                correctEmail = false;
-            }
-            if (emailEntered.charAt(i) == '@' == true) {
-                found = true;
-                for (int j = i + 1; j < emailEntered.length(); j++) {
-                    if (emailEntered.charAt(j) == '@') {
-                        correctEmail = false;
-                    }
-                }
-                if (i == emailEntered.length() - 1 && found == false) {
-                    correctEmail = false;
-                }
-            }
-        }
+//        for (int i = 0; i < emailEntered.length(); i++) {
+//            boolean found = false;
+//            if ((emailEntered.charAt(i) == ' ')) {
+//                return false;
+//            }
+//            if (emailEntered.charAt(i) == '@' == true) {
+//                found = true;
+//                for (int j = i + 1; j < emailEntered.length(); j++) {
+//                    if (emailEntered.charAt(j) == '@') {
+//                        return false;
+//                    }
+//                }
+//                if (i == emailEntered.length() - 1 && found == false) {
+//                    return false;
+//                }
+//            }
+//        }
         if (passwordEntered.length() < 8) {
-            correctPassword = false;
+            Toast toast = Toast.makeText(getApplicationContext(), "Your password must be at least 8 characters",Toast.LENGTH_SHORT);
+            toast.show();
+            return false;
         }
 
         for (int i = 0; i < cardNumEntered.length(); i++) {
 
             if (!Character.isDigit(cardNumEntered.charAt(i))) {
-                correctCardNum = false;
-            }
-            if (i > 15){
-                correctCardNum = false;
+                Toast toast = Toast.makeText(getApplicationContext(), "Your card number must only contain numbers",Toast.LENGTH_SHORT);
+                toast.show();
+                return false;
             }
         }
-        if (monthYearEntered.length() != 5){
-            correctMonthYear = false;
-        } else {
-            for (int i = 0; i < monthYearEntered.length(); i++) {
-                switch(i){
-                    case 0:
-                    if (!Character.isDigit(monthYearEntered.charAt(0))){
-                        correctMonthYear = false;
-                    } else {
-                        if (monthYearEntered.charAt(0) != '0'||monthYearEntered.charAt(0) != '1'){
-                            correctMonthYear = false;
-
-                        }
-                    }
-                    case 1:
-                        if (!Character.isDigit(monthYearEntered.charAt(1))){
-                            correctMonthYear = false;
-                        }
-                    case 2:
-                        if (monthYearEntered.charAt(2) != '/'){
-                            correctMonthYear = false;
-                        }
-                    case 3:
-                        if (!Character.isDigit(monthYearEntered.charAt(0))){
-                            correctMonthYear = false;
-                        }
-                    case 4:
-                        if (!Character.isDigit(monthYearEntered.charAt(0))){
-                            correctMonthYear = false;
-                        }
-                }
-
-            }
-
+        if (cardNumEntered.length() != 16){
+            Toast toast = Toast.makeText(getApplicationContext(), "Your card number must be 16 digits",Toast.LENGTH_SHORT);
+            toast.show();
+            return false;
         }
+
+        if (monthYearEntered.length() != 4){
+            Toast toast = Toast.makeText(getApplicationContext(), "Your credit card expiration date must be four digits", Toast.LENGTH_SHORT);
+            toast.show();
+            return false;
+        }
+//        else {
+//            for (int i = 0; i < monthYearEntered.length(); i++) {
+//                if (!Character.isDigit(monthYearEntered.charAt(i))) {
+//                    Toast toast = Toast.makeText(getApplicationContext(), "Your credit card expiration date must only contain digits", Toast.LENGTH_SHORT);
+//                    toast.show();
+//                    return false;
+//                }
+//            }
+//            if (monthYearEntered.charAt(0) != '0' && monthYearEntered.charAt(0) != '1'){
+//                Toast toast = Toast.makeText(getApplicationContext(), "Your credit card expiration month cannot be over 12",Toast.LENGTH_SHORT);
+//                toast.show();
+//                return false;
+//            }
+//            if (monthYearEntered.charAt(0) == '1' && Character.getNumericValue(monthYearEntered.charAt(1)) > 2){
+//                Toast toast = Toast.makeText(getApplicationContext(), "Your credit card expiration month cannot be over 12",Toast.LENGTH_SHORT);
+//                toast.show();
+//                return false;
+//            }
+//            if (monthYearEntered.charAt(3) != '2' && Character.getNumericValue(monthYearEntered.charAt(4)) < 2){
+//                Toast toast = Toast.makeText(getApplicationContext(), "Your credit card expiration year must be over 2022",Toast.LENGTH_SHORT);
+//                toast.show();
+//                return false;
+//            }
+//        }
 
         for(int i = 0; i < cvvEntered.length(); i++){
             if (!Character.isDigit(cvvEntered.charAt(i))){
-                correctCVV = false;
-            }
-            if (i > 2){
-                correctCVV = false;
+                Toast toast = Toast.makeText(getApplicationContext(), "Your cvv must only contain digits",Toast.LENGTH_SHORT);
+                toast.show();
+                return false;
             }
         }
-
-        /*System.out.println((correctFirstName == false || correctLastName == false || correctEmail == false || correctPassword == false || correctAddress == false || correctCardNum == false || correctMonthYear == false || correctCVV == false));
-        if (correctFirstName == false || correctLastName == false || correctEmail == false || correctPassword == false || correctAddress == false || correctCardNum == false || correctMonthYear == false || correctCVV == false)
-            return false;*/
+        if (cvvEntered.length() != 3){
+            Toast toast = Toast.makeText(getApplicationContext(), "Your cvv must be 3 digits",Toast.LENGTH_SHORT);
+            toast.show();
+            return false;
+        }
         return true;
     }
 
