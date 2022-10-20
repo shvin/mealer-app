@@ -194,6 +194,8 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         return true;
     }
 
+
+
     public void writeNewUser() throws IOException, ClassNotFoundException {
         final String firstNameEntered = firstNameClient.getText().toString();
         final String lastNameEntered = lastNameClient.getText().toString();
@@ -203,8 +205,8 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         final String cardNumEntered = (cardNumberClient.getText().toString()).replace(" ","");
         final String monthYearEntered = monthYearClient.getText().toString();
         final String cvvEntered = cvvClient.getText().toString();
-        Runner run = Runner.getInstance();
-        final int tempId = run.randomIdGenerator();
+
+        int tempId = (int) (Math.random()*10000);
         ArrayList<Integer> orderHistory = new ArrayList<>();
         Client client = new Client(tempId, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressEntered, cardNumEntered, monthYearEntered, cvvEntered,orderHistory);
 
