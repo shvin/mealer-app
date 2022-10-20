@@ -92,7 +92,8 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         final String cvvEntered = cvvClient.getText().toString();
 
         if(firstNameEntered.length() == 0 || lastNameEntered.length() == 0 || emailEntered.length() == 0||
-                passwordEntered.length() == 0 || cardNumEntered.length() == 0 || monthYearEntered.length() == 0 || cvvEntered.length() == 0){
+                passwordEntered.length() == 0 || addressNumEntered.length() == 0 ||
+                addressNameEntered.length() == 0 || cardNumEntered.length() == 0 || monthYearEntered.length() == 0 || cvvEntered.length() == 0){
             Toast toast = Toast.makeText(getApplicationContext(), "Input cannot be empty",Toast.LENGTH_SHORT);
             toast.show();
             return false;
