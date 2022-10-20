@@ -63,7 +63,7 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
                 }
                 break;
             case R.id.btnBackCookReg:
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, Register_Login_Page.class));
                 break;
         }
     }
