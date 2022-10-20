@@ -127,8 +127,8 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
         final String passwordEntered = passwordCook.getText().toString();
         final String addressEntered = addressCook.getText().toString();
         final String descriptionEntered = descriptionCook.getText().toString();
-        Runner run = Runner.getInstance();
-        final int tempId = run.randomIdGenerator();
+
+        int tempId = (int) (Math.random()*10000);
         ArrayList<Integer> menu = new ArrayList<>();
         menu.add(2);
         Cook cook = new Cook(tempId, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressEntered, descriptionEntered);

@@ -1,6 +1,6 @@
 package com.example.seg2105_project;
 
-public class User {
+abstract class User {
     private int id;
     private String firstName;
     private String lastName;
