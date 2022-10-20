@@ -23,7 +23,8 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
     EditText lastNameCook;
     EditText emailAddressCook;
     EditText passwordCook;
-    EditText addressCook;
+    EditText addressNumCook;
+    EditText addressNameCook;
     EditText descriptionCook;
 
     DatabaseReference DR;
@@ -39,7 +40,8 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
         lastNameCook = (EditText) findViewById(R.id.lastNameCook);
         emailAddressCook = (EditText) findViewById(R.id.emailAddressCook);
         passwordCook = (EditText) findViewById(R.id.passwordCook);
-        addressCook = (EditText) findViewById(R.id.addressCook);
+        addressNumCook = (EditText) findViewById(R.id.addressNumCook);
+        addressNameCook = (EditText) findViewById(R.id.addressNameCook);
         descriptionCook = (EditText) findViewById(R.id.descriptionCook);
 
         DR = FirebaseDatabase.getInstance().getReference();
@@ -74,11 +76,13 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
         final String firstNameEntered = firstNameCook.getText().toString();
         final String lastNameEntered = lastNameCook.getText().toString();
         final String emailEntered = emailAddressCook.getText().toString();
+        final String addressNumEntered = addressNumCook.getText().toString();
+        final String addressNameEntered = addressNameCook.getText().toString();
         final String passwordEntered = passwordCook.getText().toString();
         final String descriptionEntered = descriptionCook.getText().toString();
 
         if(firstNameEntered.length() == 0 || lastNameEntered.length() == 0 || emailEntered.length() == 0||
-                passwordEntered.length() == 0 || descriptionEntered.length() == 0){
+                addressNumEntered.length() == 0 || addressNameEntered.length() == 0 || passwordEntered.length() == 0 || descriptionEntered.length() == 0){
             Toast toast = Toast.makeText(getApplicationContext(), "Input cannot be empty",Toast.LENGTH_SHORT);
             toast.show();
             return false;
@@ -94,6 +98,22 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
         for (int i = 0; i < lastNameEntered.length(); i++) {
             if (!(Character.isLetter(lastNameEntered.charAt(i)))) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Your last name must only contain letters",Toast.LENGTH_SHORT);
+                toast.show();
+                return false;
+            }
+        }
+
+        for (int i = 0;i < addressNumEntered.length(); i++){
+            if (!Character.isDigit(addressNumEntered.charAt(i))) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Your street number must only contain numbers",Toast.LENGTH_SHORT);
+                toast.show();
+                return false;
+            }
+        }
+
+        for (int i = 0;i < addressNameEntered.length(); i++){
+            if (!Character.isLetter(addressNameEntered.charAt(i)) && addressNameEntered.charAt(i) != ' ') {
+                Toast toast = Toast.makeText(getApplicationContext(), "Your street name must only contain letters and spaces",Toast.LENGTH_SHORT);
                 toast.show();
                 return false;
             }
@@ -134,13 +154,14 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
         final String lastNameEntered = lastNameCook.getText().toString();
         final String emailEntered = emailAddressCook.getText().toString();
         final String passwordEntered = passwordCook.getText().toString();
-        final String addressEntered = addressCook.getText().toString();
+        final String addressNumEntered = addressNumCook.getText().toString();
+        final String addressNameEntered = addressNameCook.getText().toString();
         final String descriptionEntered = descriptionCook.getText().toString();
 
         int tempId = (int) (Math.random()*10000);
         ArrayList<Integer> menu = new ArrayList<>();
 
-        Cook cook = new Cook(tempId, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressEntered, descriptionEntered);
+        Cook cook = new Cook(tempId, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressNumEntered + " " + addressNameEntered, descriptionEntered);
 
         DR.child("Users").child("Cooks").child(Integer.toString(tempId)).setValue(cook);
     }

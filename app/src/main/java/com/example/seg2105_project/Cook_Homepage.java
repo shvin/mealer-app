@@ -6,8 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-
-
+/**
+ * Cook homepage lets you know you're logged in as a cook and lets you back out to the register/login page
+ */
 public class Cook_Homepage extends AppCompatActivity  implements View.OnClickListener{
     Button btnLogout;
     @Override
@@ -18,6 +19,10 @@ public class Cook_Homepage extends AppCompatActivity  implements View.OnClickLis
         btnLogout.setOnClickListener(this);
     }
 
+    /**
+     * onClick listens for a button to click and starts the corresponding activity
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnLogout){

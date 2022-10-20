@@ -56,6 +56,10 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         btnBack.setOnClickListener(this);
     }
 
+    /**
+     * onClick listens for a click and proceeds to corresponding activity/method
+     * @param v
+     */
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.btnRegisterClient:
@@ -77,7 +81,11 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         }
     }
 
-
+    /**
+     * Checks to see if provided info is correct or not. If all conditions are met, then the Client can be registered
+     * E.g, first name can only contain letters
+     * @return
+     */
     public boolean checkInfo() {
 
         boolean found = false;
@@ -91,6 +99,9 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         final String monthYearEntered = monthYearClient.getText().toString();
         final String cvvEntered = cvvClient.getText().toString();
 
+        /*
+        inputs must be at least of length 1
+         */
         if(firstNameEntered.length() == 0 || lastNameEntered.length() == 0 || emailEntered.length() == 0||
                 passwordEntered.length() == 0 || addressNumEntered.length() == 0 ||
                 addressNameEntered.length() == 0 || cardNumEntered.length() == 0 || monthYearEntered.length() == 0 || cvvEntered.length() == 0){
@@ -98,6 +109,10 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
             toast.show();
             return false;
         }
+
+        /*
+        first name cannot contain anything but letters
+         */
         for (int i = 0; i < firstNameEntered.length(); i++) {
             if (!(Character.isLetter(firstNameEntered.charAt(i)))) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Your first name must only contain letters",Toast.LENGTH_SHORT);
@@ -105,6 +120,10 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
                 return false;
             }
         }
+
+        /*
+        first name cannot contain anything but letters
+         */
         for (int i = 0; i < lastNameEntered.length(); i++) {
             if (!(Character.isLetter(lastNameEntered.charAt(i)))) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Your last name must only contain letters",Toast.LENGTH_SHORT);
@@ -112,6 +131,10 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
                 return false;
             }
         }
+
+        /*
+        email cannot have any spaces and must not contain more than one '@'
+         */
         for (int i = 0; i < emailEntered.length(); i++) {
             if ((emailEntered.charAt(i) == ' ')) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Your email must have no spaces",Toast.LENGTH_SHORT);
@@ -129,18 +152,28 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
                 }
             }
         }
+
+        /*
+        email must contain a '@'
+         */
         if (found == false) {
             Toast toast = Toast.makeText(getApplicationContext(), "Your email must have a '@'", Toast.LENGTH_SHORT);
             toast.show();
             return false;
         }
 
+        /*
+        password must be at least 8 characters in length
+         */
         if (passwordEntered.length() < 8) {
             Toast toast = Toast.makeText(getApplicationContext(), "Your password must be at least 8 characters",Toast.LENGTH_SHORT);
             toast.show();
             return false;
         }
 
+        /*
+        address number must only contain numbers
+         */
         for (int i = 0;i < addressNumEntered.length(); i++){
             if (!Character.isDigit(addressNumEntered.charAt(i))) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Your street number must only contain numbers",Toast.LENGTH_SHORT);
@@ -149,6 +182,9 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
             }
         }
 
+        /*
+        address name must only contain letters and spaces
+         */
         for (int i = 0;i < addressNameEntered.length(); i++){
             if (!Character.isLetter(addressNameEntered.charAt(i)) && addressNameEntered.charAt(i) != ' ') {
                 Toast toast = Toast.makeText(getApplicationContext(), "Your street name must only contain letters and spaces",Toast.LENGTH_SHORT);
@@ -157,50 +193,38 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
             }
         }
 
+        /*
+        card number must only contain numbers
+         */
         for (int i = 0; i < cardNumEntered.length(); i++) {
-
             if (!Character.isDigit(cardNumEntered.charAt(i))) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Your card number must only contain numbers",Toast.LENGTH_SHORT);
                 toast.show();
                 return false;
             }
         }
+
+        /*
+        card number must be 16 characters long
+         */
         if (cardNumEntered.length() != 16){
             Toast toast = Toast.makeText(getApplicationContext(), "Your card number must be 16 digits",Toast.LENGTH_SHORT);
             toast.show();
             return false;
         }
 
+        /*
+        length of month/year must be 4 characters 'mm/yy'
+         */
         if (monthYearEntered.length() != 4){
             Toast toast = Toast.makeText(getApplicationContext(), "Your credit card expiration date must be four digits", Toast.LENGTH_SHORT);
             toast.show();
             return false;
         }
-//        else {
-//            for (int i = 0; i < monthYearEntered.length(); i++) {
-//                if (!Character.isDigit(monthYearEntered.charAt(i))) {
-//                    Toast toast = Toast.makeText(getApplicationContext(), "Your credit card expiration date must only contain digits", Toast.LENGTH_SHORT);
-//                    toast.show();
-//                    return false;
-//                }
-//            }
-//            if (monthYearEntered.charAt(0) != '0' && monthYearEntered.charAt(0) != '1'){
-//                Toast toast = Toast.makeText(getApplicationContext(), "Your credit card expiration month cannot be over 12",Toast.LENGTH_SHORT);
-//                toast.show();
-//                return false;
-//            }
-//            if (monthYearEntered.charAt(0) == '1' && Character.getNumericValue(monthYearEntered.charAt(1)) > 2){
-//                Toast toast = Toast.makeText(getApplicationContext(), "Your credit card expiration month cannot be over 12",Toast.LENGTH_SHORT);
-//                toast.show();
-//                return false;
-//            }
-//            if (monthYearEntered.charAt(3) != '2' && Character.getNumericValue(monthYearEntered.charAt(4)) < 2){
-//                Toast toast = Toast.makeText(getApplicationContext(), "Your credit card expiration year must be over 2022",Toast.LENGTH_SHORT);
-//                toast.show();
-//                return false;
-//            }
-//        }
 
+        /*
+        CVV pin must only contain numbers
+         */
         for(int i = 0; i < cvvEntered.length(); i++){
             if (!Character.isDigit(cvvEntered.charAt(i))){
                 Toast toast = Toast.makeText(getApplicationContext(), "Your cvv must only contain digits",Toast.LENGTH_SHORT);
@@ -208,6 +232,10 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
                 return false;
             }
         }
+
+        /*
+        the length of the CVV pin must be 3 characters
+         */
         if (cvvEntered.length() != 3){
             Toast toast = Toast.makeText(getApplicationContext(), "Your cvv must be 3 digits",Toast.LENGTH_SHORT);
             toast.show();
@@ -216,6 +244,11 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         return true;
     }
 
+    /**
+     * Writes a new Client to the Database with the information input to the page
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void writeNewUser() throws IOException, ClassNotFoundException {
         final String firstNameEntered = firstNameClient.getText().toString();
         final String lastNameEntered = lastNameClient.getText().toString();

@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.Button;
 
 
-
+/**
+ * Admin homepage lets you know you're logged in as an admin and lets you back out to the register/login page
+ */
 public class Admin_Homepage extends AppCompatActivity  implements View.OnClickListener{
     Button btnLogout;
     @Override
@@ -20,6 +22,10 @@ public class Admin_Homepage extends AppCompatActivity  implements View.OnClickLi
         btnLogout.setOnClickListener(this);
     }
 
+    /**
+     * onClick listens for a button to click and starts the correct activity
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnLogout){

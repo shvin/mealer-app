@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * The login page of the Admin lets the user login in if they have the correct username and password
+ */
 public class Admin_Login_Page extends AppCompatActivity implements View.OnClickListener {
     EditText usernameLogin;
     EditText passwordLogin;
@@ -29,6 +32,11 @@ public class Admin_Login_Page extends AppCompatActivity implements View.OnClickL
         loginBtn.setOnClickListener(this);
         backBtn.setOnClickListener(this);
     }
+
+    /**
+     * onClick listens for a click and proceeds to the correct activity
+     * @param v
+     */
     public void onClick(View v) {
         String userCheck = usernameLogin.getText().toString();
         String userPass = passwordLogin.getText().toString();

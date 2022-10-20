@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * This is the Activity that is launched when opening the app. Lets you register as Client/Cook and also log in as Cook/Client/Admin
+ */
 public class Register_Login_Page extends AppCompatActivity implements View.OnClickListener{
 
     Button btnClient;
@@ -14,8 +17,6 @@ public class Register_Login_Page extends AppCompatActivity implements View.OnCli
     Button btnLoginClient;
     Button btnLoginCook;
     Button btnLoginAdmin;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,11 @@ public class Register_Login_Page extends AppCompatActivity implements View.OnCli
         btnLoginAdmin.setOnClickListener(this);
 
     }
+
+    /**
+     * onClick listens for a click and proceeds to corresponding activity
+     * @param v
+     */
     public void onClick(View v){
         switch(v.getId()){
             case R.id.btnClient:

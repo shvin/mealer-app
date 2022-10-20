@@ -23,6 +23,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Cook login page lets the log in as Cook. If their information is incorrect it will not let them log in, asking them to enter correct information
+ */
 public class Cook_Login_Page extends AppCompatActivity implements View.OnClickListener {
 
     EditText usernameLogin;
@@ -52,6 +55,10 @@ public class Cook_Login_Page extends AppCompatActivity implements View.OnClickLi
 
     }
 
+    /**
+     * onClick listens for a click and proceeds to corresponding activity/method
+     * @param v
+     */
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.loginBtn:
@@ -67,7 +74,11 @@ public class Cook_Login_Page extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-
+    /**
+     * Checks if the user information corresponds to a Client in the Database.
+     * @param user
+     * @param pass
+     */
     private void checkForExistingUser(EditText user, EditText pass) {
 
         String userCheck = user.getText().toString();
@@ -75,11 +86,9 @@ public class Cook_Login_Page extends AppCompatActivity implements View.OnClickLi
         //Adding eventListener to reference
         DR.addValueEventListener(new ValueEventListener() {
             @Override
-
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    //Getting the string value of that node
-                    System.out.println(data);
+                    //System.out.println(data);
                     Cook cook = data.getValue(Cook.class);
                     if (userCheck.equals(cook.getEmail()) && userPass.equals(cook.getPassword())) {
 
@@ -87,14 +96,10 @@ public class Cook_Login_Page extends AppCompatActivity implements View.OnClickLi
                         optionTrue();
                     }
                 }
-
-
                 if (valid == false) {
                     optionFalse();
                 }
             }
-
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.e(TAG, "onCancelled: Something went wrong! Error:" + databaseError.getMessage());
@@ -104,15 +109,24 @@ public class Cook_Login_Page extends AppCompatActivity implements View.OnClickLi
 
     }
 
+    /**
+     * Sets boolean valid to true
+     */
     private void returnTrueValue() {
         valid = true;
     }
 
+    /**
+     * Starts the Cook Homepage Activity and lets the user know they are signed in
+     */
     private void optionTrue(){
         startActivity(new Intent(this, Cook_Homepage.class));
         Toast.makeText(getApplicationContext(), "LOGGED IN", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Lets the user know that their information is incorrect
+     */
     private void optionFalse(){
         Toast.makeText(getApplicationContext(), "Username or Password is incorrect", Toast.LENGTH_SHORT).show();
 

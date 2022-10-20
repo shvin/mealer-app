@@ -1,6 +1,9 @@
 package com.example.seg2105_project;
 import java.util.ArrayList;
 
+/**
+ * Cook is a subclass of User and inherits it's functions and attributes. Is used to create a Cook object
+ */
 public class Cook extends User{
     private String description;
     private int mealsSold;
@@ -9,10 +12,23 @@ public class Cook extends User{
     private ArrayList<Integer> menu = new ArrayList<>();
     private ArrayList<Integer> mealsRequest = new ArrayList<>();
 
+    /**
+     * Empty constructor
+     */
     public Cook(){
 
     }
 
+    /**
+     * Constructs Cook based on parameters given
+     * @param id
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param password
+     * @param address
+     * @param description
+     */
     public Cook(int id, String firstName, String lastName, String email, String password, String address, String description) {
         super(id, firstName, lastName, email, password, address);
         this.description = description;
@@ -20,14 +36,22 @@ public class Cook extends User{
         this.averageRating = 0;
     }
 
+    /**
+     * returns the cook's description
+     * @return
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * sets the cook's description to parameter
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
-
+/*
     public int getMealsSold() {
         return mealsSold;
     }
@@ -67,14 +91,13 @@ public class Cook extends User{
     public void setMealsRequest(ArrayList<Integer> mealsRequest) {
         this.mealsRequest = mealsRequest;
     }
-/*
+
     public void calculateAverageRating(){
         int sum = 0;
         for (int i = 0; i < ratings.size(); i++){
             sum += ratings.get(i);
         }
         averageRating = Math.round((sum/ratings.size())*10)/10.0;
-    }*/
-
-
+    }
+    */
 }
