@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -24,12 +25,6 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
     EditText passwordCook;
     EditText addressCook;
     EditText descriptionCook;
-
-    boolean correctFirstName = true;
-    boolean correctLastName = true;
-    boolean correctEmail = true;
-    boolean correctPassword = true;
-    boolean correctAddress = true;
 
     DatabaseReference DR;
 
@@ -57,7 +52,6 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
         switch(v.getId()) {
             case R.id.btnRegisterCook:
                 if (checkInfo() == true) {
-
                     try {
                         writeNewUser();
                     } catch (ClassNotFoundException e) {
@@ -67,56 +61,71 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
                     }
                     startActivity(new Intent(this, Client_Login_Page.class));
                 }
+                break;
             case R.id.btnBackCookReg:
-                startActivity(new Intent(this, Register_Login_Page.class));
+                startActivity(new Intent(this, MainActivity.class));
+                break;
         }
     }
 
-
     public boolean checkInfo() {
-        boolean correct = true;
+
+        boolean found = false;
         final String firstNameEntered = firstNameCook.getText().toString();
         final String lastNameEntered = lastNameCook.getText().toString();
         final String emailEntered = emailAddressCook.getText().toString();
         final String passwordEntered = passwordCook.getText().toString();
-        final String addressEntered = addressCook.getText().toString();
         final String descriptionEntered = descriptionCook.getText().toString();
+
+        if(firstNameEntered.length() == 0 || lastNameEntered.length() == 0 || emailEntered.length() == 0||
+                passwordEntered.length() == 0 || descriptionEntered.length() == 0){
+            Toast toast = Toast.makeText(getApplicationContext(), "Input cannot be empty",Toast.LENGTH_SHORT);
+            toast.show();
+            return false;
+        }
         for (int i = 0; i < firstNameEntered.length(); i++) {
-            if ((Character.isLetter(firstNameEntered.charAt(i)) == false)) {
-                correctFirstName = false;
+            if (!(Character.isLetter(firstNameEntered.charAt(i)))) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Your first name must only contain letters",Toast.LENGTH_SHORT);
+                toast.show();
+                return false;
             }
         }
+
         for (int i = 0; i < lastNameEntered.length(); i++) {
-            if ((Character.isLetter(lastNameEntered.charAt(i)) == false)) {
-                correctLastName = false;
+            if (!(Character.isLetter(lastNameEntered.charAt(i)))) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Your last name must only contain letters",Toast.LENGTH_SHORT);
+                toast.show();
+                return false;
             }
         }
+
         for (int i = 0; i < emailEntered.length(); i++) {
-            boolean found = false;
             if ((emailEntered.charAt(i) == ' ')) {
-                correctEmail = false;
+                Toast toast = Toast.makeText(getApplicationContext(), "Your email must have no spaces",Toast.LENGTH_SHORT);
+                toast.show();
+                return false;
             }
-            if (emailEntered.charAt(i) == '@' == true) {
+            if (emailEntered.charAt(i) == '@' ) {
                 found = true;
                 for (int j = i + 1; j < emailEntered.length(); j++) {
                     if (emailEntered.charAt(j) == '@') {
-                        correctEmail = false;
+                        Toast toast = Toast.makeText(getApplicationContext(), "Your email cannot have more than one '@'",Toast.LENGTH_SHORT);
+                        toast.show();
+                        return false;
                     }
-                }
-                if (i == emailEntered.length() - 1 && found == false) {
-                    correctEmail = false;
                 }
             }
         }
-        if (passwordEntered.length() < 8) {
-            correctPassword = false;
+        if (found == false) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Your email must have a '@'", Toast.LENGTH_SHORT);
+            toast.show();
+            return false;
         }
-
-
-
-        /*System.out.println((correctFirstName == false || correctLastName == false || correctEmail == false || correctPassword == false || correctAddress == false || correctCardNum == false || correctMonthYear == false || correctCVV == false));
-        if (correctFirstName == false || correctLastName == false || correctEmail == false || correctPassword == false || correctAddress == false || correctCardNum == false || correctMonthYear == false || correctCVV == false)
-            return false;*/
+        if (passwordEntered.length() < 8) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Your password must be at least 8 characters",Toast.LENGTH_SHORT);
+            toast.show();
+            return false;
+        }
         return true;
     }
 
@@ -130,7 +139,7 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
 
         int tempId = (int) (Math.random()*10000);
         ArrayList<Integer> menu = new ArrayList<>();
-        menu.add(2);
+
         Cook cook = new Cook(tempId, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressEntered, descriptionEntered);
 
         DR.child("Users").child("Cooks").child(Integer.toString(tempId)).setValue(cook);
