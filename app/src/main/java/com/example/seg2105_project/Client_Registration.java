@@ -23,7 +23,8 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
     EditText lastNameClient;
     EditText emailAddressClient;
     EditText passwordClient;
-    EditText addressClient;
+    EditText addressNumClient;
+    EditText addressNameClient;
     EditText cardNumberClient;
     EditText monthYearClient;
     EditText cvvClient;
@@ -41,10 +42,13 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         lastNameClient = (EditText) findViewById(R.id.lastNameClient);
         emailAddressClient = (EditText) findViewById(R.id.emailAddressClient);
         passwordClient = (EditText) findViewById(R.id.passwordClient);
-        addressClient = (EditText) findViewById(R.id.addressClient);
+        addressNumClient = (EditText) findViewById(R.id.addressNumClient);
+        addressNameClient = (EditText) findViewById(R.id.addressNameClient);
         cardNumberClient = (EditText) findViewById(R.id.cardNumberClient);
         monthYearClient = (EditText) findViewById(R.id.monthYearClient);
         cvvClient = (EditText) findViewById(R.id.cvvClient);
+
+
 
         DR = FirebaseDatabase.getInstance().getReference();
 
@@ -81,7 +85,8 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         final String lastNameEntered = lastNameClient.getText().toString();
         final String emailEntered = emailAddressClient.getText().toString();
         final String passwordEntered = passwordClient.getText().toString();
-        final String addressEntered = addressClient.getText().toString();
+        final String addressNumEntered = addressNumClient.getText().toString();
+        final String addressNameEntered = addressNameClient.getText().toString();
         final String cardNumEntered = (cardNumberClient.getText().toString()).replace(" ","");
         final String monthYearEntered = monthYearClient.getText().toString();
         final String cvvEntered = cvvClient.getText().toString();
@@ -133,6 +138,22 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
             Toast toast = Toast.makeText(getApplicationContext(), "Your password must be at least 8 characters",Toast.LENGTH_SHORT);
             toast.show();
             return false;
+        }
+
+        for (int i = 0;i < addressNumEntered.length(); i++){
+            if (!Character.isDigit(addressNumEntered.charAt(i))) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Your street number must only contain numbers",Toast.LENGTH_SHORT);
+                toast.show();
+                return false;
+            }
+        }
+
+        for (int i = 0;i < addressNameEntered.length(); i++){
+            if (!Character.isLetter(addressNameEntered.charAt(i))) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Your street name must only contain numbers",Toast.LENGTH_SHORT);
+                toast.show();
+                return false;
+            }
         }
 
         for (int i = 0; i < cardNumEntered.length(); i++) {
@@ -194,21 +215,20 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         return true;
     }
 
-
-
     public void writeNewUser() throws IOException, ClassNotFoundException {
         final String firstNameEntered = firstNameClient.getText().toString();
         final String lastNameEntered = lastNameClient.getText().toString();
         final String emailEntered = emailAddressClient.getText().toString();
         final String passwordEntered = passwordClient.getText().toString();
-        final String addressEntered = addressClient.getText().toString();
+        final String addressNumEntered = addressNumClient.getText().toString();
+        final String addressNameEntered = addressNameClient.getText().toString();
         final String cardNumEntered = (cardNumberClient.getText().toString()).replace(" ","");
         final String monthYearEntered = monthYearClient.getText().toString();
         final String cvvEntered = cvvClient.getText().toString();
 
         int tempId = (int) (Math.random()*10000);
         ArrayList<Integer> orderHistory = new ArrayList<>();
-        Client client = new Client(tempId, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressEntered, cardNumEntered, monthYearEntered, cvvEntered,orderHistory);
+        Client client = new Client(tempId, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressNumEntered + " " + addressNameEntered, cardNumEntered, monthYearEntered, cvvEntered,orderHistory);
 
         DR.child("Users").child("Clients").child(Integer.toString(tempId)).setValue(client);
     }
