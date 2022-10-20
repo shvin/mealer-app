@@ -4,7 +4,7 @@ package com.example.seg2105_project;
  * Used to make an object of type User (Cook or Client) which can navigate in the app
  */
 public class User {
-    private int id;
+    private String id;
     private String firstName;
     private String lastName;
     private String email;
@@ -26,7 +26,7 @@ public class User {
      * @param password
      * @param address
      */
-    public User(int id, String firstName, String lastName, String email, String password, String address){
+    public User(String id, String firstName, String lastName, String email, String password, String address){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,7 +39,7 @@ public class User {
      * returns the users ID
      * @return user ID
      */
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -47,7 +47,7 @@ public class User {
      * Sets users ID to parameter
      * @param id ID input
      */
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

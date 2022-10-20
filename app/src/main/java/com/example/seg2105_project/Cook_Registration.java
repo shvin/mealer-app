@@ -3,6 +3,7 @@ package com.example.seg2105_project;
 import androidx.appcompat.app.AppCompatActivity;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 
 import android.content.Intent;
@@ -158,12 +159,13 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
         final String addressNameEntered = addressNameCook.getText().toString();
         final String descriptionEntered = descriptionCook.getText().toString();
 
-        int tempId = (int) (Math.random()*10000);
+        UUID randID = UUID.randomUUID();
+        String randIDString = randID.toString();
         ArrayList<Integer> menu = new ArrayList<>();
 
-        Cook cook = new Cook(tempId, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressNumEntered + " " + addressNameEntered, descriptionEntered);
+        Cook cook = new Cook(randIDString, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressNumEntered + " " + addressNameEntered, descriptionEntered);
 
-        DR.child("Users").child("Cooks").child(Integer.toString(tempId)).setValue(cook);
+        DR.child("Users").child("Cooks").child(randIDString).setValue(cook);
     }
 
 

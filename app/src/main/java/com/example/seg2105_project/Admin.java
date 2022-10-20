@@ -13,7 +13,7 @@ public class Admin{
     String adminPassword;
 
     /**
-     * Constructor which sets ID and possword to "111"
+     * Constructor which sets ID and password to "111"
      */
     Admin(){
         adminId = "111";

@@ -30,7 +30,7 @@ public class Client extends User {
      * @param cvv
      * @param orderHistory
      */
-    public Client(int id, String firstName, String lastName, String email, String password, String address, String cardNumber, String expiry, String cvv, ArrayList<Integer> orderHistory) {
+    public Client(String id, String firstName, String lastName, String email, String password, String address, String cardNumber, String expiry, String cvv, ArrayList<Integer> orderHistory) {
         super(id, firstName, lastName, email, password, address);
         this.cardNumber = cardNumber;
         this.expiry = expiry;

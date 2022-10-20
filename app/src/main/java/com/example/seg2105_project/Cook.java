@@ -1,5 +1,6 @@
 package com.example.seg2105_project;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Cook is a subclass of User and inherits it's functions and attributes. Is used to create a Cook object
@@ -29,7 +30,7 @@ public class Cook extends User{
      * @param address
      * @param description
      */
-    public Cook(int id, String firstName, String lastName, String email, String password, String address, String description) {
+    public Cook(String id, String firstName, String lastName, String email, String password, String address, String description) {
         super(id, firstName, lastName, email, password, address);
         this.description = description;
         this.mealsSold = 0;

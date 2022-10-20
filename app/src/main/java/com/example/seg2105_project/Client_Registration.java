@@ -3,6 +3,7 @@ package com.example.seg2105_project;
 import androidx.appcompat.app.AppCompatActivity;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 
 import android.content.Intent;
@@ -260,10 +261,11 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         final String monthYearEntered = monthYearClient.getText().toString();
         final String cvvEntered = cvvClient.getText().toString();
 
-        int tempId = (int) (Math.random()*10000);
+        UUID randID = UUID.randomUUID();
+        String randIDString = randID.toString();
         ArrayList<Integer> orderHistory = new ArrayList<>();
-        Client client = new Client(tempId, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressNumEntered + " " + addressNameEntered, cardNumEntered, monthYearEntered, cvvEntered,orderHistory);
+        Client client = new Client(randIDString, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressNumEntered + " " + addressNameEntered, cardNumEntered, monthYearEntered, cvvEntered,orderHistory);
 
-        DR.child("Users").child("Clients").child(Integer.toString(tempId)).setValue(client);
+        DR.child("Users").child("Clients").child(randIDString).setValue(client);
     }
 }
