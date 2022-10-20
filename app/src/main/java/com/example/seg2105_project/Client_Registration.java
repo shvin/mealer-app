@@ -150,8 +150,8 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         }
 
         for (int i = 0;i < addressNameEntered.length(); i++){
-            if (!Character.isLetter(addressNameEntered.charAt(i))) {
-                Toast toast = Toast.makeText(getApplicationContext(), "Your street name must only contain numbers",Toast.LENGTH_SHORT);
+            if (!Character.isLetter(addressNameEntered.charAt(i)) && addressNameEntered.charAt(i) != ' ') {
+                Toast toast = Toast.makeText(getApplicationContext(), "Your street name must only contain letters and spaces",Toast.LENGTH_SHORT);
                 toast.show();
                 return false;
             }
