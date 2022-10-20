@@ -92,13 +92,14 @@
             android:textSize="20dp"
             android:layout_marginRight="100dp"
             android:textColor="@color/black"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MM/YY:"
-            android:textSize="20dp"
             android:layout_marginRight="20dp"
-            android:textColor="@color/black"/>
+            android:text="MMYY:"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
