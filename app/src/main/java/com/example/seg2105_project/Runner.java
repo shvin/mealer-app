@@ -183,11 +183,11 @@ public class Runner {
                     unique = false;
                 }
             }
-            for (Admin i : admins) {
-                if (i.getId() == rand){
-                    unique = false;
-                }
-            }
+//            for (Admin i : admins) {
+//                if (i.getId() == rand){
+//                    unique = false;
+//                }
+//            }
             for (Meal i : meals) {
                 if (i.getId() == rand){
                     unique = false;
@@ -235,10 +235,10 @@ public class Runner {
         f.close();
     }
 
-    public void addAdmin(int id, String firstName, String lastName, String email, String password, String address) throws IOException {
-        this.admins.add(new Admin(id, firstName, lastName, email, password, address));
-        saveAdminToDB();
-    }
+//    public void addAdmin(int id, String firstName, String lastName, String email, String password, String address) throws IOException {
+//        this.admins.add(new Admin(id, firstName, lastName, email, password, address));
+//        saveAdminToDB();
+//    }
 
     private void saveAdminToDB() throws IOException {
         FileOutputStream f = new FileOutputStream(new File(AF));

@@ -2,17 +2,32 @@ package com.example.seg2105_project;
 
 import java.util.ArrayList;
 
-public class Admin extends User{
-    private ArrayList<Integer> complaintsToProcess = new ArrayList<>();
-    public Admin(int id, String firstName, String lastName, String email, String password, String address) {
-        super(id, firstName, lastName, email, password, address);
+public class Admin{
+//    private ArrayList<Integer> complaintsToProcess = new ArrayList<>();
+
+    String adminId;
+    String adminPassword;
+
+    Admin(){
+        adminId = "111";
+        adminPassword = "111";
     }
 
-    public void addToComplaints(int id){
-        this.complaintsToProcess.add(id);
+    public String getAdminId(){
+        return adminId;
     }
 
-    public void removeFromComplaints(int id){
-        this.complaintsToProcess.remove(0);
+    public String getAdminPassword(){
+        return adminPassword;
     }
+
+
+
+//    public void addToComplaints(int id){
+//        this.complaintsToProcess.add(id);
+//    }
+
+//    public void removeFromComplaints(int id){
+//        this.complaintsToProcess.remove(0);
+//    }
 }

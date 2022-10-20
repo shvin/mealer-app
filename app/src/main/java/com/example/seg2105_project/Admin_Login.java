@@ -14,6 +14,7 @@ public class Admin_Login extends AppCompatActivity implements View.OnClickListen
     EditText passwordLogin;
     Button loginBtn;
     Button backBtn;
+    Admin admin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +24,8 @@ public class Admin_Login extends AppCompatActivity implements View.OnClickListen
         loginBtn = (Button) findViewById(R.id.loginBtn);
         backBtn = (Button) findViewById(R.id.backBtn);
 
+        admin = new Admin();
+
         loginBtn.setOnClickListener(this);
         backBtn.setOnClickListener(this);
     }
@@ -31,7 +34,7 @@ public class Admin_Login extends AppCompatActivity implements View.OnClickListen
         String userPass = passwordLogin.getText().toString();
         switch (v.getId()) {
             case R.id.loginBtn:
-                if (userCheck.equals("111") && userPass.equals("111") ){
+                if (userCheck.equals(admin.getAdminId()) && userPass.equals(admin.getAdminPassword()) ){
                     startActivity(new Intent(this, Admin_Homepage.class));
                 } else {
                     Toast.makeText(getApplicationContext(), "Username or Password is incorrect", Toast.LENGTH_SHORT).show();
