@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="10dp"
 
-    tools:context=".MainActivity">
+    tools:context=".Register_Login_Page">
 
     <TextView
         android:layout_width="match_parent"

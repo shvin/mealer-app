@@ -6,12 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import java.util.Set;
 
-import com.example.seg2105_project.Client_Registration;
-import com.example.seg2105_project.R;
-
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class Register_Login_Page extends AppCompatActivity implements View.OnClickListener{
 
     Button btnClient;
     Button btnCook;
@@ -54,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this,Cook_Login_Page.class));
                 break;
             case R.id.btnLoginAdmin:
-                startActivity(new Intent(this,Admin_Login.class));
+                startActivity(new Intent(this, Admin_Login_Page.class));
                 break;
 
         }

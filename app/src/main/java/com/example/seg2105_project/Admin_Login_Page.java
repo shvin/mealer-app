@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class Admin_Login extends AppCompatActivity implements View.OnClickListener {
+public class Admin_Login_Page extends AppCompatActivity implements View.OnClickListener {
     EditText usernameLogin;
     EditText passwordLogin;
     Button loginBtn;
@@ -43,7 +43,7 @@ public class Admin_Login extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.backBtn:
                 //FOR ADMIN LOG IN
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, Register_Login_Page.class));
 
                 break;
         }

@@ -23,7 +23,7 @@ public class Admin_Homepage extends AppCompatActivity  implements View.OnClickLi
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnLogout){
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, Register_Login_Page.class);
             startActivity(intent);
         }
     }

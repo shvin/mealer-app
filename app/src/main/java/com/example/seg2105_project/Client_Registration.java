@@ -72,7 +72,7 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
                }
                break;
             case R.id.btnBack:
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, Register_Login_Page.class));
                 break;
         }
     }
