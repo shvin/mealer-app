@@ -1,5 +1,8 @@
 package com.example.seg2105_project;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,13 +11,17 @@ import java.util.UUID;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Client registration page lets the register as a client. If their information is invalid it will not let them register, asking them to enter correct information
@@ -32,6 +39,8 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
     EditText cardNumberClient;
     EditText monthYearClient;
     EditText cvvClient;
+    boolean repeat = false;
+    boolean goneThrough = false;
 
     DatabaseReference DR;
 
@@ -54,7 +63,7 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
 
 
 
-        DR = FirebaseDatabase.getInstance().getReference();
+        DR = FirebaseDatabase.getInstance().getReference("Users/Clients");
 
         btnRegisterClient.setOnClickListener(this);
         btnBack.setOnClickListener(this);
@@ -67,17 +76,9 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.btnRegisterClient:
-               if (checkInfo() == true) {
+                checkEmail(emailAddressClient);
+                repeat = false;
 
-                   try {
-                       writeNewUser();
-                   } catch (ClassNotFoundException e) {
-                       e.printStackTrace();
-                   } catch (IOException e) {
-                       e.printStackTrace();
-                   }
-                   startActivity(new Intent(this, Client_Homepage.class));
-               }
                break;
             case R.id.btnBack:
                 startActivity(new Intent(this, Register_Login_Page.class));
@@ -248,6 +249,63 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         return true;
     }
 
+    private void checkEmail(EditText email){
+        final String emailEntered = email.getText().toString().toLowerCase();
+
+        DR.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    //System.out.println(data);
+                    Client client = data.getValue(Client.class);
+                    if (emailEntered.equals(client.getEmail())) {
+                        repeatTrue();
+                        emailRepeated();
+
+
+                    }
+                }
+                System.out.println(repeat);
+
+                if (repeat == false){
+
+                    emailNotRepeated();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled: Something went wrong! Error:" + databaseError.getMessage());
+
+            }
+        });
+
+
+    }
+
+    private void repeatTrue(){
+        repeat = true;
+    }
+
+    private void emailRepeated(){
+        if(goneThrough == false) {
+            Toast.makeText(getApplicationContext(), "Email is already registered", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void emailNotRepeated() {
+        goneThrough=true;
+        if (checkInfo() == true) {
+            try {
+                writeNewUser();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            startActivity(new Intent(this, Client_Homepage.class));
+        }
+    }
+
     /**
      * Writes a new Client to the Database with the information input to the page
      * @throws IOException
@@ -269,6 +327,6 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         ArrayList<Integer> orderHistory = new ArrayList<>();
         Client client = new Client(randIDString, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressNumEntered + " " + addressNameEntered, cardNumEntered, monthYearEntered, cvvEntered,orderHistory);
 
-        DR.child("Users").child("Clients").child(randIDString).setValue(client);
+        DR.child(randIDString).setValue(client);
     }
 }
