@@ -73,7 +73,7 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
                    } catch (IOException e) {
                        e.printStackTrace();
                    }
-                   startActivity(new Intent(this, Client_Login_Page.class));
+                   startActivity(new Intent(this, Client_Homepage.class));
                }
                break;
             case R.id.btnBack:
@@ -253,7 +253,7 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
     public void writeNewUser() throws IOException, ClassNotFoundException {
         final String firstNameEntered = firstNameClient.getText().toString();
         final String lastNameEntered = lastNameClient.getText().toString();
-        final String emailEntered = emailAddressClient.getText().toString();
+        final String emailEntered = (emailAddressClient.getText().toString()).toLowerCase();
         final String passwordEntered = passwordClient.getText().toString();
         final String addressNumEntered = addressNumClient.getText().toString();
         final String addressNameEntered = addressNameClient.getText().toString();

@@ -79,7 +79,7 @@ public class Client_Login_Page extends AppCompatActivity implements View.OnClick
      */
     private void checkForExistingUser(EditText user, EditText pass) {
 
-        String userCheck = user.getText().toString();
+        String userCheck = (user.getText().toString()).toLowerCase();
         String userPass = pass.getText().toString();
         //Adding eventListener to reference
         DR.addValueEventListener(new ValueEventListener() {

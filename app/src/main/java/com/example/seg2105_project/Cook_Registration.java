@@ -1,5 +1,8 @@
 package com.example.seg2105_project;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,13 +11,17 @@ import java.util.UUID;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Cook_Registration extends AppCompatActivity implements View.OnClickListener{
 
@@ -27,6 +34,8 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
     EditText addressNumCook;
     EditText addressNameCook;
     EditText descriptionCook;
+    boolean repeat = false;
+    boolean goneThrough = false;
 
     DatabaseReference DR;
 
@@ -45,7 +54,7 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
         addressNameCook = (EditText) findViewById(R.id.addressNameCook);
         descriptionCook = (EditText) findViewById(R.id.descriptionCook);
 
-        DR = FirebaseDatabase.getInstance().getReference();
+        DR = FirebaseDatabase.getInstance().getReference("Users/Cooks");
 
         btnRegisterCook.setOnClickListener( this);
         btnBackCookReg.setOnClickListener( this);
@@ -54,16 +63,10 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.btnRegisterCook:
-                if (checkInfo() == true) {
-                    try {
-                        writeNewUser();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    startActivity(new Intent(this, Client_Login_Page.class));
-                }
+
+                checkEmail(emailAddressCook);
+                repeat = false;
+
                 break;
             case R.id.btnBackCookReg:
                 startActivity(new Intent(this, Register_Login_Page.class));
@@ -76,7 +79,7 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
         boolean found = false;
         final String firstNameEntered = firstNameCook.getText().toString();
         final String lastNameEntered = lastNameCook.getText().toString();
-        final String emailEntered = emailAddressCook.getText().toString();
+        final String emailEntered = (emailAddressCook.getText().toString()).toLowerCase();
         final String addressNumEntered = addressNumCook.getText().toString();
         final String addressNameEntered = addressNameCook.getText().toString();
         final String passwordEntered = passwordCook.getText().toString();
@@ -150,10 +153,72 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
         return true;
     }
 
+    private void checkEmail(EditText email){
+        final String emailEntered = email.getText().toString().toLowerCase();
+
+        DR.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    //System.out.println(data);
+                    Cook cook = data.getValue(Cook.class);
+                    if (emailEntered.equals(cook.getEmail())) {
+                        repeatTrue();
+                        emailRepeated();
+                        System.out.println("2");
+                        System.out.println(repeat);
+
+
+                    }
+                }
+                System.out.println("3");
+                System.out.println(repeat);
+
+                if (repeat == false){
+                    System.out.println("4");
+
+                    emailNotRepeated();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled: Something went wrong! Error:" + databaseError.getMessage());
+
+            }
+        });
+
+
+    }
+    private void repeatTrue(){
+        repeat = true;
+    }
+
+    private void emailRepeated(){
+        if(goneThrough == false) {
+            Toast.makeText(getApplicationContext(), "Email is already registered", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void emailNotRepeated() {
+        System.out.println("5");
+        System.out.println("2");
+        goneThrough=true;
+        if (checkInfo() == true) {
+            try {
+                writeNewUser();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            startActivity(new Intent(this, Cook_Homepage.class));
+        }
+    }
+
     public void writeNewUser() throws IOException, ClassNotFoundException {
         final String firstNameEntered = firstNameCook.getText().toString();
         final String lastNameEntered = lastNameCook.getText().toString();
-        final String emailEntered = emailAddressCook.getText().toString();
+        final String emailEntered = (emailAddressCook.getText().toString()).toLowerCase();
         final String passwordEntered = passwordCook.getText().toString();
         final String addressNumEntered = addressNumCook.getText().toString();
         final String addressNameEntered = addressNameCook.getText().toString();
@@ -165,8 +230,10 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
 
         Cook cook = new Cook(randIDString, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressNumEntered + " " + addressNameEntered, descriptionEntered);
 
-        DR.child("Users").child("Cooks").child(randIDString).setValue(cook);
+        DR.child(randIDString).setValue(cook);
     }
+
+
 
 
 }

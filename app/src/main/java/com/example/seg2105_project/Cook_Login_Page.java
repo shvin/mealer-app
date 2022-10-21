@@ -62,12 +62,10 @@ public class Cook_Login_Page extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.loginBtn:
-                //FOR ADMIN LOG IN
                 checkForExistingUser(usernameLogin, passwordLogin);
 
                 break;
             case R.id.backBtn:
-                //FOR ADMIN LOG IN
                 startActivity(new Intent(this, Register_Login_Page.class));
 
                 break;
@@ -81,7 +79,7 @@ public class Cook_Login_Page extends AppCompatActivity implements View.OnClickLi
      */
     private void checkForExistingUser(EditText user, EditText pass) {
 
-        String userCheck = user.getText().toString();
+        String userCheck = (user.getText().toString()).toLowerCase();
         String userPass = pass.getText().toString();
         //Adding eventListener to reference
         DR.addValueEventListener(new ValueEventListener() {
