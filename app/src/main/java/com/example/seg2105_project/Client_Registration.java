@@ -16,6 +16,9 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * Client registration page lets the register as a client. If their information is invalid it will not let them register, asking them to enter correct information
+ */
 public class Client_Registration extends AppCompatActivity implements View.OnClickListener {
 
     Button btnRegisterClient;

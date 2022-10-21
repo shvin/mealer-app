@@ -23,6 +23,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * Cook registration page lets the register as a Cook. If their information is invalid it will not let them register, asking them to enter correct information
+ */
 public class Cook_Registration extends AppCompatActivity implements View.OnClickListener{
 
     Button btnRegisterCook;
@@ -60,13 +63,15 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
         btnBackCookReg.setOnClickListener( this);
     }
 
+    /**
+     * onClick listens for a click and proceeds to the correct activity/method
+     * @param v
+     */
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.btnRegisterCook:
-
                 checkEmail(emailAddressCook);
                 repeat = false;
-
                 break;
             case R.id.btnBackCookReg:
                 startActivity(new Intent(this, Register_Login_Page.class));
@@ -74,6 +79,11 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
         }
     }
 
+    /**
+     * Checks to see if provided info is correct or not. If all conditions are met, then the Client can be registered
+     * E.g, first name can only contain letters
+     * @return
+     */
     public boolean checkInfo() {
 
         boolean found = false;
@@ -153,6 +163,10 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
         return true;
     }
 
+    /**
+     * Checks if email already exists in the database
+     * @param email
+     */
     private void checkEmail(EditText email){
         final String emailEntered = email.getText().toString().toLowerCase();
 
@@ -165,43 +179,41 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
                     if (emailEntered.equals(cook.getEmail())) {
                         repeatTrue();
                         emailRepeated();
-                        System.out.println("2");
-                        System.out.println(repeat);
-
-
                     }
                 }
-                System.out.println("3");
-                System.out.println(repeat);
-
                 if (repeat == false){
-                    System.out.println("4");
-
                     emailNotRepeated();
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.e(TAG, "onCancelled: Something went wrong! Error:" + databaseError.getMessage());
-
             }
         });
 
 
     }
+
+    /**
+     * Sets repeat to true
+     */
     private void repeatTrue(){
         repeat = true;
     }
 
+    /**
+     * Displays a toast if the email entered is repeated
+     */
     private void emailRepeated(){
         if(goneThrough == false) {
             Toast.makeText(getApplicationContext(), "Email is already registered", Toast.LENGTH_SHORT).show();
         }
     }
 
+    /**
+     * If the email is not repeated, this method is called to check the other entered info
+     */
     private void emailNotRepeated() {
-        System.out.println("5");
-        System.out.println("2");
         goneThrough=true;
         if (checkInfo() == true) {
             try {
@@ -215,6 +227,11 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
         }
     }
 
+    /**
+     * Writes a new Client to the Database with the information input to the page
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void writeNewUser() throws IOException, ClassNotFoundException {
         final String firstNameEntered = firstNameCook.getText().toString();
         final String lastNameEntered = lastNameCook.getText().toString();
