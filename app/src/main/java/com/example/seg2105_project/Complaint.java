@@ -3,19 +3,10 @@ package com.example.seg2105_project;
 public class Complaint {
     private int id;
     private String description;
-    private int clientID;
-    private int cookID;
+    private String clientID;
+    private String cookID;
     private Boolean dismissed;
     private Boolean suspended;
-
-    public Complaint(int id, String description, int clientID, int cookID) {
-        this.id = id;
-        this.description = description;
-        this.clientID = clientID;
-        this.cookID = cookID;
-        this.dismissed = false;
-        this.suspended = false;
-    }
 
     public int getId() {
         return id;
@@ -33,19 +24,19 @@ public class Complaint {
         this.description = description;
     }
 
-    public int getClientID() {
+    public String getClientID() {
         return clientID;
     }
 
-    public void setClientID(int clientID) {
+    public void setClientID(String clientID) {
         this.clientID = clientID;
     }
 
-    public int getCookID() {
+    public String getCookID() {
         return cookID;
     }
 
-    public void setCookID(int cookID) {
+    public void setCookID(String cookID) {
         this.cookID = cookID;
     }
 
@@ -64,4 +55,19 @@ public class Complaint {
     public void setSuspended(Boolean suspended) {
         this.suspended = suspended;
     }
+
+    public Complaint(int id, String description, String clientID, String cookID, Boolean dismissed, Boolean suspended) {
+        this.id = id;
+        this.description = description;
+        this.clientID = clientID;
+        this.cookID = cookID;
+        this.dismissed = dismissed;
+        this.suspended = suspended;
+    }
+
+    public Complaint(){
+    }
+
+
+
 }

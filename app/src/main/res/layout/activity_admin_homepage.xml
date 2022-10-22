@@ -21,9 +21,19 @@
                 android:text="You are logged in as Admin"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-            <Space
+            <EditText
+                android:id="@+id/editTextTextPersonName2"
                 android:layout_width="match_parent"
-                android:layout_height="599dp" />
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="List of complaints" />
+
+            <Button
+                android:id="@+id/btnComplaint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Complaint" />
 
             <Button
                 android:id="@+id/btnLogout"
@@ -31,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="log"
                 android:text="Log Out" />
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
