@@ -4,50 +4,63 @@
              android:layout_height="match_parent">
 
     <LinearLayout
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="40dp">
 
         <TextView
-            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:text="Complaint page"
-            android:textSize="48sp" />
+            android:textSize="48dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="30dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Cook:"
-            android:textSize="24sp" />
+            android:textSize="24dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp"/>
 
         <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="name"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Client:"
-            android:textSize="24sp" />
+            android:textSize="24dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp"/>
 
         <TextView
-            android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="name"
-            android:textSize="24sp" />
+            android:text="Description:"
+            android:textSize="24dp"
+            android:textColor="@color/black"/>
 
-        <TextView
-            android:id="@+id/textView7"
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="150dp"/>
+
+        <Button
+            android:id="@+id/btnDismiss"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="description"
-            android:textSize="24sp" />
+            android:text="Dismiss" />
+
+        <Button
+            android:id="@+id/btnSuspend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Suspend" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="70dp"/>
 
         <Button
             android:id="@+id/btnBackComplaint"
@@ -55,16 +68,5 @@
             android:layout_height="wrap_content"
             android:text="Back" />
 
-        <Button
-            android:id="@+id/btnDismiss"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Dimiss" />
-
-        <Button
-            android:id="@+id/btnSuspend"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Suspend" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
