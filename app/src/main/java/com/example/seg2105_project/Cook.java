@@ -9,6 +9,9 @@ public class Cook extends User{
     private String description;
     private int mealsSold;
     private double averageRating;
+    private boolean banned;
+    private boolean suspended;
+    private int daysSuspended;
     private ArrayList<Integer> ratings = new ArrayList<>();
     private ArrayList<Integer> menu = new ArrayList<>();
     private ArrayList<Integer> mealsRequest = new ArrayList<>();
@@ -35,6 +38,19 @@ public class Cook extends User{
         this.description = description;
         this.mealsSold = 0;
         this.averageRating = 0;
+        this.suspended = false;
+        this.daysSuspended = 0;
+        this.banned = false;
+    }
+
+    public Cook(String id, String firstName, String lastName, String email, String password, String address, String description, int mealsSold, double averageRating, boolean suspended, int daysSuspended, boolean banned) {
+        super(id, firstName, lastName, email, password, address);
+        this.description = description;
+        this.mealsSold = mealsSold;
+        this.averageRating = averageRating;
+        this.suspended = suspended;
+        this.daysSuspended = daysSuspended;
+        this.banned = banned;
     }
 
     /**
@@ -52,7 +68,7 @@ public class Cook extends User{
     public void setDescription(String description) {
         this.description = description;
     }
-/*
+
     public int getMealsSold() {
         return mealsSold;
     }
@@ -67,6 +83,30 @@ public class Cook extends User{
 
     public void setAverageRating(double averageRating) {
         this.averageRating = averageRating;
+    }
+
+    public boolean getSuspended(){
+        return suspended;
+    }
+
+    public void setSuspended(boolean suspension){
+        suspended = suspension;
+    }
+
+    public int getDaysSuspended(){
+        return daysSuspended;
+    }
+
+    public void setDaysSuspended(int numDays){
+        daysSuspended = numDays;
+    }
+
+    public boolean getBanned(){
+        return banned;
+    }
+
+    public void setBanned(boolean ban){
+        banned = ban;
     }
 
     public ArrayList<Integer> getRatings() {
@@ -100,5 +140,5 @@ public class Cook extends User{
         }
         averageRating = Math.round((sum/ratings.size())*10)/10.0;
     }
-    */
+
 }

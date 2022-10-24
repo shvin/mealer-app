@@ -28,15 +28,15 @@ import com.google.firebase.database.ValueEventListener;
  */
 public class Cook_Registration extends AppCompatActivity implements View.OnClickListener{
 
-    Button btnRegisterCook;
-    Button btnBackCookReg;
-    EditText firstNameCook;
-    EditText lastNameCook;
-    EditText emailAddressCook;
-    EditText passwordCook;
-    EditText addressNumCook;
-    EditText addressNameCook;
-    EditText descriptionCook;
+    private Button btnRegisterCook;
+    private Button btnBackCookReg;
+    private EditText firstNameCook;
+    private EditText lastNameCook;
+    private EditText emailAddressCook;
+    private EditText passwordCook;
+    private EditText addressNumCook;
+    private EditText addressNameCook;
+    private EditText descriptionCook;
     boolean repeat = false;
     boolean goneThrough = false;
 
@@ -190,8 +190,6 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
                 Log.e(TAG, "onCancelled: Something went wrong! Error:" + databaseError.getMessage());
             }
         });
-
-
     }
 
     /**
