@@ -20,21 +20,12 @@
                 android:textColor="@color/black"
                 android:layout_marginBottom="50dp"/>
 
-            <EditText
-                android:id="@+id/listOfComplaints"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="List of complaints" />
-
             <Button
                 android:id="@+id/btnComplaint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Complaint" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="200dp"/>
+                android:text="See list of complaints"
+                android:layout_marginBottom="20dp"/>
 
             <Button
                 android:id="@+id/btnLogout"

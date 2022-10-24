@@ -13,8 +13,8 @@ import android.widget.Button;
  * Admin homepage lets you know you're logged in as an admin and lets you back out to the register/login page
  */
 public class Admin_Homepage extends AppCompatActivity  implements View.OnClickListener{
-    Button btnLogout;
-    Button btnComplaint;
+    private Button btnLogout;
+    private Button btnComplaint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

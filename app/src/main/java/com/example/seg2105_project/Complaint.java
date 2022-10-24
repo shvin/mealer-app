@@ -1,18 +1,31 @@
 package com.example.seg2105_project;
 
 public class Complaint {
-    private int id;
+    private String id;
     private String description;
     private String clientID;
     private String cookID;
     private Boolean dismissed;
     private Boolean suspended;
+    private Boolean permanentlySuspended;
 
-    public int getId() {
+    public Complaint(){
+
+    }
+    public Complaint(String id, String description, String cookID) {
+        this.id = id;
+        this.description = description;
+        this.cookID = cookID;
+//        this.dismissed = dismissed;
+//        this.suspended = suspended;
+//        this.permanentlySuspended = permanentlySuspended;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -40,6 +53,12 @@ public class Complaint {
         this.cookID = cookID;
     }
 
+    public String toString(){
+        return "Cook ID: " + cookID + "\n" + "Description: " + description;
+    }
+
+
+    /*
     public Boolean getDismissed() {
         return dismissed;
     }
@@ -54,20 +73,6 @@ public class Complaint {
 
     public void setSuspended(Boolean suspended) {
         this.suspended = suspended;
-    }
-
-    public Complaint(int id, String description, String clientID, String cookID, Boolean dismissed, Boolean suspended) {
-        this.id = id;
-        this.description = description;
-        this.clientID = clientID;
-        this.cookID = cookID;
-        this.dismissed = dismissed;
-        this.suspended = suspended;
-    }
-
-    public Complaint(){
-    }
-
-
+    }*/
 
 }

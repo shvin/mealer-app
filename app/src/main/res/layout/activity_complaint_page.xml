@@ -8,65 +8,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="10dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="Complaint page"
-            android:textSize="48dp"
+            android:text="Complaints page"
             android:textColor="@color/black"
-            android:layout_marginBottom="30dp" />
-
-        <TextView
+            android:textSize="40dp"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"/>
+        
+        <ListView
+            android:id="@+id/listViewComplaints"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cook:"
-            android:textSize="24dp"
-            android:textColor="@color/black"
-            android:layout_marginBottom="20dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Client:"
-            android:textSize="24dp"
-            android:textColor="@color/black"
-            android:layout_marginBottom="20dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Description:"
-            android:textSize="24dp"
-            android:textColor="@color/black"/>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="150dp"/>
+            android:layout_height="500dp"/>
 
         <Button
-            android:id="@+id/btnDismiss"
+            android:id="@+id/dismissBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dismiss" />
+            android:text="Delete Complaint"/>
 
-        <Button
-            android:id="@+id/btnSuspend"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Suspend" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="70dp"/>
-
-        <Button
-            android:id="@+id/btnBackComplaint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Back" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
