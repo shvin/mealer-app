@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/dialog_cook_name"
+        android:text=""
+        android:textSize="30dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/dialog_cook_ID"
+        android:text=""
+        android:textSize="30dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/dialog_suspensionLength"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="enter suspension length (if blank set to 0)"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/suspendBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_margin="16dp"
+            android:layout_weight="1"
+            android:text="suspend" />
+
+        <Button
+            android:id="@+id/banBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_margin="16dp"
+            android:layout_weight="1"
+            android:text="Ban" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/dismissBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="Dismiss" />
+
+</LinearLayout>

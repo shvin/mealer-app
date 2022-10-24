@@ -25,10 +25,18 @@
             android:layout_height="500dp"/>
 
         <Button
-            android:id="@+id/dismissBtn"
+            android:id="@+id/updateBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Delete Complaint"/>
+            android:text="Update Page"/>
+
+        <Button
+            android:id="@+id/backBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back"/>
+
+
 
 
     </LinearLayout>
