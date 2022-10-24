@@ -1,5 +1,7 @@
 package com.example.seg2105_project;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -9,6 +11,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -88,6 +91,7 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
         });
 //        addComplaint();
         onItemLongClick();
+        getCook("d2893042-c055-45d0-97dc-acb8e9158366", "30");
     }
 
     public void onClick(View v) {
@@ -145,7 +149,8 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
         suspendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                getCook(complaint.getCookID(), String.valueOf(suspensionLength));
+                deleteComplaint(complaint.getId());
             }
         });
         banBtn.setOnClickListener(new View.OnClickListener() {
@@ -163,12 +168,37 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
         Toast.makeText(this, "The Complaint has been dismissed", Toast.LENGTH_LONG).show();
     }
 
-    private void suspend(String complaintID, String cookID, TextView length){
+    private void ban(){
 
     }
 
-    private void ban(){
+    private void getCook(String cookID, String length){
+        System.out.println("1");
 
+        DatabaseReference dataBaseR = FirebaseDatabase.getInstance().getReference("Users/Cooks");
+        dataBaseR.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Cook cook = data.getValue(Cook.class);
+                    System.out.println("Cook ID" + cookID);
+                    System.out.println("Cook ID2" + cook.getId());
+
+                    if(cookID.equals(cook.getId())){
+                        System.out.println("here");
+                        Cook newCook = new Cook(cook.getId(),cook.getFirstName(),cook.getLastName(),cook.getEmail(),cook.getPassword(),cook.getAddress(),
+                                cook.getDescription(),cook.getMealsSold(),cook.getAverageRating(),true, Integer.parseInt(length), false);
+                        dataBaseR.child(cook.getId()).setValue(newCook);
+                        break;
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled: Something went wrong! Error:" + databaseError.getMessage());
+
+            }
+        });
     }
 
     private void addComplaint(){
