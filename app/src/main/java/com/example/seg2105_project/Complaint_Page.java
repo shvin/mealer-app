@@ -40,6 +40,7 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
     private ArrayAdapter<Complaint> complaintsAdapter;
     private Button backBtn;
     private Button updateBtn;
+    private String clickedComplaint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +90,9 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
 
             }
         });
-//        addComplaint();
+        //addComplaint();
         onItemLongClick();
-        getCook("d2893042-c055-45d0-97dc-acb8e9158366", "30");
+        banOrSuspend("97320e01-cba2-4d23-b0d8-588d8744a3cb", "30",1);
     }
 
     public void onClick(View v) {
@@ -125,15 +126,13 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
         View newView = inflater.inflate(R.layout.dismiss_suspend_dialog, null);
         alertDialog.setView(newView);
 
-        TextView cookName = (TextView) newView.findViewById(R.id.dialog_cook_name);
         TextView cookID = (TextView) newView.findViewById(R.id.dialog_cook_ID);
         EditText suspensionLength = (EditText) newView.findViewById(R.id.dialog_suspensionLength);
         Button suspendBtn = (Button) newView.findViewById(R.id.suspendBtn);
         Button banBtn = (Button) newView.findViewById(R.id.banBtn);
         Button dismissBtn = (Button) newView.findViewById(R.id.dismissBtn);
 
-       cookName.setText("Tmp name");
-       cookID.setText(complaint.getCookID());
+        cookID.setText(complaint.getCookID());
 
         alertDialog.setTitle("Complaint");
         AlertDialog other = alertDialog.create();
@@ -149,14 +148,17 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
         suspendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getCook(complaint.getCookID(), String.valueOf(suspensionLength));
+                banOrSuspend(complaint.getCookID(), suspensionLength.toString(),1);
                 deleteComplaint(complaint.getId());
+                other.dismiss();
             }
         });
         banBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                banOrSuspend(complaint.getCookID(), "",0);
+                deleteComplaint(complaint.getId());
+                other.dismiss();
             }
         });
     }
@@ -165,18 +167,19 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
         DatabaseReference dataBaseR = FirebaseDatabase.getInstance().getReference("Complaints").child(id);
 
         dataBaseR.removeValue();
-        Toast.makeText(this, "The Complaint has been dismissed", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "The Complaint has been removed", Toast.LENGTH_LONG).show();
     }
 
-    private void ban(){
+    private void banOrSuspend(String cookID, String length, int banOrSuspend){
 
-    }
+        if (clickedComplaint == cookID){
+            return;
+        } else {
+            clickedComplaint = cookID;
+        }
 
-    private void getCook(String cookID, String length){
-        System.out.println("1");
-
-        DatabaseReference dataBaseR = FirebaseDatabase.getInstance().getReference("Users/Cooks");
-        dataBaseR.addValueEventListener(new ValueEventListener() {
+        DatabaseReference dataBaseR1 = FirebaseDatabase.getInstance().getReference("Users/Cooks");
+        dataBaseR1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
@@ -185,30 +188,37 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
                     System.out.println("Cook ID2" + cook.getId());
 
                     if(cookID.equals(cook.getId())){
-                        System.out.println("here");
-                        Cook newCook = new Cook(cook.getId(),cook.getFirstName(),cook.getLastName(),cook.getEmail(),cook.getPassword(),cook.getAddress(),
-                                cook.getDescription(),cook.getMealsSold(),cook.getAverageRating(),true, Integer.parseInt(length), false);
-                        dataBaseR.child(cook.getId()).setValue(newCook);
-                        break;
+                        // Bans the cook indefinitely
+                        if (banOrSuspend == 0) {
+                            Cook newCook = new Cook(cook.getId(),cook.getFirstName(),cook.getLastName(),cook.getEmail(),cook.getPassword(),cook.getAddress(),
+                                    cook.getDescription(),cook.getMealsSold(),cook.getAverageRating(),false, 0, true);
+                            dataBaseR1.child(cook.getId()).setValue(newCook);
+                            break;
+                        }
+                        if (banOrSuspend == 1) {
+                            Cook newCook = new Cook(cook.getId(),cook.getFirstName(),cook.getLastName(),cook.getEmail(),cook.getPassword(),cook.getAddress(),
+                                    cook.getDescription(),cook.getMealsSold(),cook.getAverageRating(),true, 2, false);
+                            dataBaseR1.child(cook.getId()).setValue(newCook);
+                            break;
+                        }
                     }
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.e(TAG, "onCancelled: Something went wrong! Error:" + databaseError.getMessage());
-
             }
-        });
-    }
+            });
+        }
 
     private void addComplaint(){
-        Complaint complaint = new Complaint("123","This is a complaint", "432122");
+        Complaint complaint = new Complaint("123","This is a complaint", "a4a42e04-bc1b-4709-b4a8-2fe7148f5a2a");
         DR.child(complaint.getId()).setValue(complaint);
 
-        Complaint complaint2 = new Complaint("2","This is a complaint", "55522");
+        Complaint complaint2 = new Complaint("2","This is a complaint", "e950a107-70d5-4649-90bd-bd8c30683ada");
         DR.child(complaint2.getId()).setValue(complaint2);
 
-        Complaint complaint3 = new Complaint("3","This is a complaint", "99900");
+        Complaint complaint3 = new Complaint("3","This is a complaint", "f619f35d-7b0c-4415-8750-fc182370c288");
         DR.child(complaint3.getId()).setValue(complaint3);
     }
 

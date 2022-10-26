@@ -1,4 +1,5 @@
 package com.example.seg2105_project;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 

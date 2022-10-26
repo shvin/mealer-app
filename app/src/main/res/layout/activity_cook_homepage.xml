@@ -12,13 +12,30 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:textSize="30dp"
             android:textColor="@color/black"
             android:text="You are logged in as Cook!"/>
 
+        <TextView
+            android:id="@+id/typeOfSuspension"
+            android:textSize="25dp"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/suspensionLength"
+            android:textSize="25dp"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"/>
+
         <Space
             android:layout_width="match_parent"
-            android:layout_height="600dp" />
+            android:layout_height="500dp" />
 
         <Button
             android:id="@+id/btnLogout"

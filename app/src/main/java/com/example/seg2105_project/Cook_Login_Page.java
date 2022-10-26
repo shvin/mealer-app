@@ -91,7 +91,7 @@ public class Cook_Login_Page extends AppCompatActivity implements View.OnClickLi
                     if (userCheck.equals(cook.getEmail()) && userPass.equals(cook.getPassword())) {
 
                         returnTrueValue();
-                        optionTrue();
+                        optionTrue(cook.getId());
                     }
                 }
                 if (valid == false) {
@@ -117,8 +117,10 @@ public class Cook_Login_Page extends AppCompatActivity implements View.OnClickLi
     /**
      * Starts the Cook Homepage Activity and lets the user know they are signed in
      */
-    private void optionTrue(){
-        startActivity(new Intent(this, Cook_Homepage.class));
+    private void optionTrue(String cookId){
+        Intent intent = new Intent(this,Cook_Homepage.class);
+        intent.putExtra("cookID", cookId);
+        startActivity(intent);
         Toast.makeText(getApplicationContext(), "LOGGED IN", Toast.LENGTH_SHORT).show();
     }
 
