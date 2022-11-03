@@ -31,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Complaint_Page extends AppCompatActivity implements View.OnClickListener{
 
@@ -59,13 +60,19 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
         updateBtn.setOnClickListener(this);
         backBtn.setOnClickListener(this);
 
+        addComplaint();
+        addComplaintList();
+
+        onItemLongClick();
+    }
+
+    public void addComplaintList(){
+
         DR.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, @Nullable String previousChildName) {
                 Complaint value = dataSnapshot.getValue(Complaint.class);
                 complaintsList.add(value);
-
-                System.out.println(complaintsList);
 
                 complaintsAdapter.notifyDataSetChanged();
             }
@@ -76,7 +83,7 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
             }
 
             @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
 
             }
 
@@ -90,17 +97,19 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
 
             }
         });
-        //addComplaint();
-        onItemLongClick();
-        banOrSuspend("97320e01-cba2-4d23-b0d8-588d8744a3cb", "30",1);
     }
 
     public void onClick(View v) {
         if (v.getId() == R.id.updateBtn){
-            finish();
-            overridePendingTransition(0, 0);
-            startActivity(getIntent());
-            overridePendingTransition(0, 0);
+            System.out.println(complaintsList.size());
+            if(complaintsList.size()  != 0){
+                complaintsList.clear();
+                addComplaintList();
+            } else {
+                complaintsAdapter.clear();
+                complaintsAdapter.notifyDataSetChanged();
+            }
+
         }
         if (v.getId() == R.id.backBtn){
             startActivity(new Intent(this, Admin_Homepage.class));
@@ -148,7 +157,12 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
         suspendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                banOrSuspend(complaint.getCookID(), suspensionLength.toString(),1);
+                if (suspensionLength.getText().toString().equals("")){
+                    banOrSuspend(complaint.getCookID(), 0,1);
+                } else {
+                    banOrSuspend(complaint.getCookID(), Integer.parseInt(suspensionLength.getText().toString()),1);
+                }
+
                 deleteComplaint(complaint.getId());
                 other.dismiss();
             }
@@ -156,7 +170,7 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
         banBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                banOrSuspend(complaint.getCookID(), "",0);
+                banOrSuspend(complaint.getCookID(), 1,0);
                 deleteComplaint(complaint.getId());
                 other.dismiss();
             }
@@ -170,7 +184,7 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
         Toast.makeText(this, "The Complaint has been removed", Toast.LENGTH_LONG).show();
     }
 
-    private void banOrSuspend(String cookID, String length, int banOrSuspend){
+    private void banOrSuspend(String cookID, int length, int banOrSuspend){
 
         if (clickedComplaint == cookID){
             return;
@@ -197,7 +211,7 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
                         }
                         if (banOrSuspend == 1) {
                             Cook newCook = new Cook(cook.getId(),cook.getFirstName(),cook.getLastName(),cook.getEmail(),cook.getPassword(),cook.getAddress(),
-                                    cook.getDescription(),cook.getMealsSold(),cook.getAverageRating(),true, 2, false);
+                                    cook.getDescription(),cook.getMealsSold(),cook.getAverageRating(),true, length, false);
                             dataBaseR1.child(cook.getId()).setValue(newCook);
                             break;
                         }
@@ -211,14 +225,20 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
             });
         }
 
+    /**
+     * Add complaints when starting the complaint page
+     */
     private void addComplaint(){
-        Complaint complaint = new Complaint("123","This is a complaint", "a4a42e04-bc1b-4709-b4a8-2fe7148f5a2a");
+        // email: a231@gmail.com -- pass: 11111111
+        Complaint complaint = new Complaint("1","This is complaint number 1", "76c62824-87db-41fc-b358-265fa12b5cf5");
         DR.child(complaint.getId()).setValue(complaint);
 
-        Complaint complaint2 = new Complaint("2","This is a complaint", "e950a107-70d5-4649-90bd-bd8c30683ada");
+        // email: a888@gmail.com -- pass: 11111111
+        Complaint complaint2 = new Complaint("2","This is complaint number 2", "97320e01-cba2-4d23-b0d8-588d8744a3cb");
         DR.child(complaint2.getId()).setValue(complaint2);
 
-        Complaint complaint3 = new Complaint("3","This is a complaint", "f619f35d-7b0c-4415-8750-fc182370c288");
+        // email: a@gmail.com -- pass: 11111111
+        Complaint complaint3 = new Complaint("3","This is complaint number 3", "f619f35d-7b0c-4415-8750-fc182370c288");
         DR.child(complaint3.getId()).setValue(complaint3);
     }
 
