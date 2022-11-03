@@ -42,6 +42,7 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
     private Button backBtn;
     private Button updateBtn;
     private String clickedComplaint;
+    private int listSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,8 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
         complaintsList = new ArrayList<>();
         complaintsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, complaintsList);
         listViewComplaints.setAdapter(complaintsAdapter);
+
+        listSize = 0;
 
         updateBtn.setOnClickListener(this);
         backBtn.setOnClickListener(this);
@@ -72,6 +75,7 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, @Nullable String previousChildName) {
                 Complaint value = dataSnapshot.getValue(Complaint.class);
+                listSize++;
                 complaintsList.add(value);
 
                 complaintsAdapter.notifyDataSetChanged();
@@ -101,8 +105,9 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
 
     public void onClick(View v) {
         if (v.getId() == R.id.updateBtn){
-            System.out.println(complaintsList.size());
-            if(complaintsList.size()  != 0){
+            System.out.println(listSize);
+            if(listSize != 0){
+                listSize = 0;
                 complaintsList.clear();
                 addComplaintList();
             } else {
@@ -179,7 +184,7 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
 
     private void deleteComplaint(String id) {
         DatabaseReference dataBaseR = FirebaseDatabase.getInstance().getReference("Complaints").child(id);
-
+        listSize--;
         dataBaseR.removeValue();
         Toast.makeText(this, "The Complaint has been removed", Toast.LENGTH_LONG).show();
     }
