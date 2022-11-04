@@ -33,6 +33,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Complaint Page lists the complaints issued by clients towards cooks. The admin can ban, suspend, or dismiss the complaints
+ */
 public class Complaint_Page extends AppCompatActivity implements View.OnClickListener{
 
     private ListView listViewComplaints;
@@ -42,7 +45,6 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
     private Button backBtn;
     private Button updateBtn;
     private String clickedComplaint;
-    private int listSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,6 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
         complaintsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, complaintsList);
         listViewComplaints.setAdapter(complaintsAdapter);
 
-        listSize = 0;
 
         updateBtn.setOnClickListener(this);
         backBtn.setOnClickListener(this);
@@ -69,13 +70,15 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
         onItemLongClick();
     }
 
+    /**
+     * Adds and removes the complaints listed on the page
+     */
     public void addComplaintList(){
 
         DR.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, @Nullable String previousChildName) {
                 Complaint value = dataSnapshot.getValue(Complaint.class);
-                listSize++;
                 complaintsList.add(value);
 
                 complaintsAdapter.notifyDataSetChanged();
@@ -103,11 +106,13 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
         });
     }
 
+    /**
+     * When its called, performs the action to either update the page, or go back
+     * @param v
+     */
     public void onClick(View v) {
         if (v.getId() == R.id.updateBtn){
-            System.out.println(listSize);
-            if(listSize != 0){
-                listSize = 0;
+            if(complaintsList.size() != 0){
                 complaintsList.clear();
                 addComplaintList();
             } else {
@@ -121,18 +126,24 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    /**
+     * When an item is clicked on for a long time, a new view pops up on the page
+     */
     private void onItemLongClick() {
         listViewComplaints.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Complaint complaint = complaintsList.get(i);
-                System.out.println(complaint.toString());
                 dismissSuspendDialog(complaint);
                 return true;
             }
         });
     }
 
+    /**
+     * Actions that can be performed on the pop up page. You can dismiss, suspend, or ban.
+     * @param complaint
+     */
     private void dismissSuspendDialog(Complaint complaint){
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -182,13 +193,22 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
         });
     }
 
+    /**
+     * Deletes the complaint from the database/list
+     * @param id
+     */
     private void deleteComplaint(String id) {
         DatabaseReference dataBaseR = FirebaseDatabase.getInstance().getReference("Complaints").child(id);
-        listSize--;
         dataBaseR.removeValue();
         Toast.makeText(this, "The Complaint has been removed", Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * Bans or suspends a cook based on the parameters input
+     * @param cookID
+     * @param length
+     * @param banOrSuspend
+     */
     private void banOrSuspend(String cookID, int length, int banOrSuspend){
 
         if (clickedComplaint == cookID){
@@ -203,8 +223,6 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Cook cook = data.getValue(Cook.class);
-                    System.out.println("Cook ID" + cookID);
-                    System.out.println("Cook ID2" + cook.getId());
 
                     if(cookID.equals(cook.getId())){
                         // Bans the cook indefinitely

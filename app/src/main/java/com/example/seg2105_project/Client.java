@@ -38,6 +38,14 @@ public class Client extends User {
         this.orderHistory = orderHistory;
     }
 
+    public Client(String id, String firstName, String lastName, String email, String password, String address, String cardNumber, String expiry, String cvv) {
+        super(id, firstName, lastName, email, password, address);
+        this.cardNumber = cardNumber;
+        this.expiry = expiry;
+        this.cvv = cvv;
+        this.orderHistory = null;
+    }
+
     /**
      * returns Client card number
      * @return cardNumber
