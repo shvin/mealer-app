@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp"
+        tools:context=".Client_Registration">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Meal Name:" />
+
+        <EditText
+            android:id="@+id/nameMeal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Meal Type:"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/mealTypeMeal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cuisine Type:"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/cuisineTypeMeal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:inputType="textEmailAddress" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingredients:"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/ingredientsMeal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Allergens:"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/allergensMeal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="100dp"
+            android:text="Price:"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/priceMeal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="100dp"
+            android:text="Description:"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/descriptionMeal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnBackMeal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="back" />
+
+        <Button
+            android:id="@+id/btnAddMeal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ADD MEAL" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,159 @@
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2022-10-16_4_04_a_m__[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-16_4_04_a_m__[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-16_4_04_a_m__[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-16_4_04_a_m__[Changes]/shelved.patch	(revision 6fefde300a1880297d278e4982369bc2611a6adc)
++++ /dev/null	(revision 6fefde300a1880297d278e4982369bc2611a6adc)
+@@ -1,19 +0,0 @@
+-Index: app/src/main/java/com/example/seg2105_project/Login_Page.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package com.example.seg2105_project;\r\n\r\nimport static android.content.ContentValues.TAG;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\npublic class Login_Page extends AppCompatActivity implements View.OnClickListener{\r\n\r\n    EditText usernameLogin;\r\n    EditText passwordLogin;\r\n    TextView registerTXT;\r\n    Button loginBtn;\r\n    DatabaseReference DR;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_login_page);\r\n\r\n        usernameLogin = (EditText) findViewById(R.id.usernameLogin);\r\n        passwordLogin = (EditText) findViewById(R.id.passwordLogin);\r\n        registerTXT = (TextView) findViewById(R.id.registerTXT);\r\n        loginBtn = (Button) findViewById(R.id.loginBtn);\r\n\r\n        DR = FirebaseDatabase.getInstance().getReference();\r\n\r\n        registerTXT.setOnClickListener(this);\r\n        loginBtn.setOnClickListener(this);\r\n\r\n    }\r\n    public void onClick(View v){\r\n        switch(v.getId()){\r\n            case R.id.registerTXT:\r\n                startActivity(new Intent(this,MainActivity.class));\r\n                break;\r\n            case R.id.loginBtn:\r\n                if (checkForExistingUser(usernameLogin, passwordLogin)){\r\n                    startActivity(new Intent(this,Client_Homepage.class));\r\n                }\r\n\r\n                break;\r\n\r\n        }\r\n    }\r\n\r\n    boolean exists = false;\r\n\r\n\r\n\r\n    private boolean checkForExistingUser(EditText user, EditText pass){\r\n        return true;\r\n    }\r\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/java/com/example/seg2105_project/Login_Page.java b/app/src/main/java/com/example/seg2105_project/Login_Page.java
+---- a/app/src/main/java/com/example/seg2105_project/Login_Page.java	(revision ecbd3080a39158cd23ce8519c86be9b17662c7af)
+-+++ b/app/src/main/java/com/example/seg2105_project/Login_Page.java	(date 1665872403195)
+-@@ -64,6 +64,7 @@
+- 
+- 
+-     private boolean checkForExistingUser(EditText user, EditText pass){
+-+
+-         return true;
+-     }
+- }
+-\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2022-10-16_4_04_a_m___Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-16_4_04_a_m___Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-16_4_04_a_m___Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-16_4_04_a_m___Changes_.xml	(revision 6fefde300a1880297d278e4982369bc2611a6adc)
++++ /dev/null	(revision 6fefde300a1880297d278e4982369bc2611a6adc)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_2022-10-16_4_04_a_m__[Changes]" date="1665907477248" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-16_4_04_a_m__[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2022-10-16 4:04 a.m. [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2022-10-19_6_55_p_m___Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-19_6_55_p_m___Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-19_6_55_p_m___Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-19_6_55_p_m___Changes_.xml	(revision 6fefde300a1880297d278e4982369bc2611a6adc)
++++ /dev/null	(revision 6fefde300a1880297d278e4982369bc2611a6adc)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_2022-10-19_6_55_p_m__[Changes]" date="1666220156230" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-19_6_55_p_m__[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2022-10-19 6:55 p.m. [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2022-10-19_6_55_p_m__[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-19_6_55_p_m__[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-19_6_55_p_m__[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-19_6_55_p_m__[Changes]/shelved.patch	(revision 6fefde300a1880297d278e4982369bc2611a6adc)
++++ /dev/null	(revision 6fefde300a1880297d278e4982369bc2611a6adc)
+@@ -1,102 +0,0 @@
+-Index: app/src/main/java/com/example/seg2105_project/Cook_Registration.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package com.example.seg2105_project;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\n\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\n\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\n\r\npublic class Cook_Registration extends AppCompatActivity implements View.OnClickListener{\r\n\r\n    Button btnRegisterCook;\r\n    Button btnBackCookReg;\r\n    EditText firstNameCook;\r\n    EditText lastNameCook;\r\n    EditText emailAddressCook;\r\n    EditText passwordCook;\r\n    EditText addressCook;\r\n    EditText descriptionCook;\r\n\r\n    boolean correctFirstName = true;\r\n    boolean correctLastName = true;\r\n    boolean correctEmail = true;\r\n    boolean correctPassword = true;\r\n    boolean correctAddress = true;\r\n\r\n    DatabaseReference DR;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_cook_registration);\r\n\r\n        btnRegisterCook = (Button) findViewById(R.id.btnRegisterCook);\r\n        btnBackCookReg = (Button) findViewById(R.id.btnBackCookReg);\r\n        firstNameCook = (EditText) findViewById(R.id.firstNameCook);\r\n        lastNameCook = (EditText) findViewById(R.id.lastNameCook);\r\n        emailAddressCook = (EditText) findViewById(R.id.emailAddressCook);\r\n        passwordCook = (EditText) findViewById(R.id.passwordCook);\r\n        addressCook = (EditText) findViewById(R.id.addressCook);\r\n        descriptionCook = (EditText) findViewById(R.id.descriptionCook);\r\n\r\n        DR = FirebaseDatabase.getInstance().getReference();\r\n\r\n        btnRegisterCook.setOnClickListener( this);\r\n        btnBackCookReg.setOnClickListener( this);\r\n    }\r\n\r\n    public void onClick(View v) {\r\n        switch(v.getId()) {\r\n            case R.id.btnRegisterCook:\r\n                if (checkInfo() == true) {\r\n\r\n                    try {\r\n                        writeNewUser();\r\n                    } catch (ClassNotFoundException e) {\r\n                        e.printStackTrace();\r\n                    } catch (IOException e) {\r\n                        e.printStackTrace();\r\n                    }\r\n                    startActivity(new Intent(this, Client_Login_Page.class));\r\n                }\r\n            case R.id.btnBackCookReg:\r\n                startActivity(new Intent(this, MainActivity.class));\r\n        }\r\n    }\r\n\r\n\r\n    public boolean checkInfo() {\r\n        boolean correct = true;\r\n        final String firstNameEntered = firstNameCook.getText().toString();\r\n        final String lastNameEntered = lastNameCook.getText().toString();\r\n        final String emailEntered = emailAddressCook.getText().toString();\r\n        final String passwordEntered = passwordCook.getText().toString();\r\n        final String addressEntered = addressCook.getText().toString();\r\n        final String descriptionEntered = descriptionCook.getText().toString();\r\n        for (int i = 0; i < firstNameEntered.length(); i++) {\r\n            if ((Character.isLetter(firstNameEntered.charAt(i)) == false)) {\r\n                correctFirstName = false;\r\n            }\r\n        }\r\n        for (int i = 0; i < lastNameEntered.length(); i++) {\r\n            if ((Character.isLetter(lastNameEntered.charAt(i)) == false)) {\r\n                correctLastName = false;\r\n            }\r\n        }\r\n        for (int i = 0; i < emailEntered.length(); i++) {\r\n            boolean found = false;\r\n            if ((emailEntered.charAt(i) == ' ')) {\r\n                correctEmail = false;\r\n            }\r\n            if (emailEntered.charAt(i) == '@' == true) {\r\n                found = true;\r\n                for (int j = i + 1; j < emailEntered.length(); j++) {\r\n                    if (emailEntered.charAt(j) == '@') {\r\n                        correctEmail = false;\r\n                    }\r\n                }\r\n                if (i == emailEntered.length() - 1 && found == false) {\r\n                    correctEmail = false;\r\n                }\r\n            }\r\n        }\r\n        if (passwordEntered.length() < 8) {\r\n            correctPassword = false;\r\n        }\r\n\r\n\r\n\r\n        /*System.out.println((correctFirstName == false || correctLastName == false || correctEmail == false || correctPassword == false || correctAddress == false || correctCardNum == false || correctMonthYear == false || correctCVV == false));\r\n        if (correctFirstName == false || correctLastName == false || correctEmail == false || correctPassword == false || correctAddress == false || correctCardNum == false || correctMonthYear == false || correctCVV == false)\r\n            return false;*/\r\n        return true;\r\n    }\r\n\r\n    public void writeNewUser() throws IOException, ClassNotFoundException {\r\n        final String firstNameEntered = firstNameCook.getText().toString();\r\n        final String lastNameEntered = lastNameCook.getText().toString();\r\n        final String emailEntered = emailAddressCook.getText().toString();\r\n        final String passwordEntered = passwordCook.getText().toString();\r\n        final String addressEntered = addressCook.getText().toString();\r\n        final String descriptionEntered = descriptionCook.getText().toString();\r\n        Runner run = Runner.getInstance();\r\n        final int tempId = run.randomIdGenerator();\r\n        ArrayList<Integer> menu = new ArrayList<>();\r\n        menu.add(2);\r\n        Cook cook = new Cook(tempId, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressEntered, descriptionEntered);\r\n\r\n        DR.child(\"Users\").child(\"Cooks\").child(Integer.toString(tempId)).setValue(cook);\r\n    }\r\n\r\n\r\n}\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/java/com/example/seg2105_project/Cook_Registration.java b/app/src/main/java/com/example/seg2105_project/Cook_Registration.java
+---- a/app/src/main/java/com/example/seg2105_project/Cook_Registration.java	(revision d84a94326f0daeae5fa1737543f121cf517356b4)
+-+++ b/app/src/main/java/com/example/seg2105_project/Cook_Registration.java	(date 1666215171060)
+-@@ -57,7 +57,6 @@
+-         switch(v.getId()) {
+-             case R.id.btnRegisterCook:
+-                 if (checkInfo() == true) {
+--
+-                     try {
+-                         writeNewUser();
+-                     } catch (ClassNotFoundException e) {
+-@@ -72,15 +71,11 @@
+-         }
+-     }
+- 
+--
+-     public boolean checkInfo() {
+--        boolean correct = true;
+-         final String firstNameEntered = firstNameCook.getText().toString();
+-         final String lastNameEntered = lastNameCook.getText().toString();
+-         final String emailEntered = emailAddressCook.getText().toString();
+-         final String passwordEntered = passwordCook.getText().toString();
+--        final String addressEntered = addressCook.getText().toString();
+--        final String descriptionEntered = descriptionCook.getText().toString();
+-         for (int i = 0; i < firstNameEntered.length(); i++) {
+-             if ((Character.isLetter(firstNameEntered.charAt(i)) == false)) {
+-                 correctFirstName = false;
+-@@ -112,11 +107,9 @@
+-             correctPassword = false;
+-         }
+- 
+--
+--
+--        /*System.out.println((correctFirstName == false || correctLastName == false || correctEmail == false || correctPassword == false || correctAddress == false || correctCardNum == false || correctMonthYear == false || correctCVV == false));
+--        if (correctFirstName == false || correctLastName == false || correctEmail == false || correctPassword == false || correctAddress == false || correctCardNum == false || correctMonthYear == false || correctCVV == false)
+--            return false;*/
+-+        System.out.println(correctFirstName == false || correctLastName == false || correctEmail == false || correctPassword == false || correctAddress == false );
+-+        if (correctFirstName == false || correctLastName == false || correctEmail == false || correctPassword == false || correctAddress == false)
+-+            return false;
+-         return true;
+-     }
+- 
+-Index: app/src/main/java/com/example/seg2105_project/Client_Registration.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package com.example.seg2105_project;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\n\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\n\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\n\r\npublic class Client_Registration extends AppCompatActivity implements View.OnClickListener {\r\n\r\n    Button btnRegisterClient;\r\n    Button btnBack;\r\n    EditText firstNameClient;\r\n    EditText lastNameClient;\r\n    EditText emailAddressClient;\r\n    EditText passwordClient;\r\n    EditText addressClient;\r\n    EditText cardNumberClient;\r\n    EditText monthYearClient;\r\n    EditText cvvClient;\r\n\r\n    boolean correctFirstName = true;\r\n    boolean correctLastName = true;\r\n    boolean correctEmail = true;\r\n    boolean correctPassword = true;\r\n    boolean correctAddress = true;\r\n    boolean correctCardNum = true;\r\n    boolean correctMonthYear = true;\r\n    boolean correctCVV = true;\r\n\r\n\r\n    DatabaseReference DR;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState){\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_client_registration);\r\n\r\n        btnRegisterClient = (Button) findViewById(R.id.btnRegisterClient);\r\n        btnBack = (Button) findViewById(R.id.btnBack);\r\n        firstNameClient = (EditText) findViewById(R.id.firstNameClient);\r\n        lastNameClient = (EditText) findViewById(R.id.lastNameClient);\r\n        emailAddressClient = (EditText) findViewById(R.id.emailAddressClient);\r\n        passwordClient = (EditText) findViewById(R.id.passwordClient);\r\n        addressClient = (EditText) findViewById(R.id.addressClient);\r\n        cardNumberClient = (EditText) findViewById(R.id.cardNumberClient);\r\n        monthYearClient = (EditText) findViewById(R.id.monthYearClient);\r\n        cvvClient = (EditText) findViewById(R.id.cvvClient);\r\n\r\n        DR = FirebaseDatabase.getInstance().getReference();\r\n\r\n        btnRegisterClient.setOnClickListener(this);\r\n        btnBack.setOnClickListener(this);\r\n    }\r\n\r\n    public void onClick(View v) {\r\n        switch(v.getId()) {\r\n            case R.id.btnRegisterClient:\r\n               if (checkInfo() == true) {\r\n\r\n                   try {\r\n                       writeNewUser();\r\n                   } catch (ClassNotFoundException e) {\r\n                       e.printStackTrace();\r\n                   } catch (IOException e) {\r\n                       e.printStackTrace();\r\n                   }\r\n                   startActivity(new Intent(this, Client_Login_Page.class));\r\n               }\r\n            case R.id.btnBack:\r\n                    startActivity(new Intent(this, MainActivity.class));\r\n\r\n        }\r\n    }\r\n\r\n\r\n    public boolean checkInfo() {\r\n        boolean correct = true;\r\n        final String firstNameEntered = firstNameClient.getText().toString();\r\n        final String lastNameEntered = lastNameClient.getText().toString();\r\n        final String emailEntered = emailAddressClient.getText().toString();\r\n        final String passwordEntered = passwordClient.getText().toString();\r\n        final String addressEntered = addressClient.getText().toString();\r\n        final String cardNumEntered = (cardNumberClient.getText().toString()).replace(\" \",\"\");\r\n        final String monthYearEntered = monthYearClient.getText().toString();\r\n        final String cvvEntered = cvvClient.getText().toString();\r\n        for (int i = 0; i < firstNameEntered.length(); i++) {\r\n            if ((Character.isLetter(firstNameEntered.charAt(i)) == false)) {\r\n                correctFirstName = false;\r\n            }\r\n        }\r\n        for (int i = 0; i < lastNameEntered.length(); i++) {\r\n            if ((Character.isLetter(lastNameEntered.charAt(i)) == false)) {\r\n                correctLastName = false;\r\n            }\r\n        }\r\n        for (int i = 0; i < emailEntered.length(); i++) {\r\n            boolean found = false;\r\n            if ((emailEntered.charAt(i) == ' ')) {\r\n                correctEmail = false;\r\n            }\r\n            if (emailEntered.charAt(i) == '@' == true) {\r\n                found = true;\r\n                for (int j = i + 1; j < emailEntered.length(); j++) {\r\n                    if (emailEntered.charAt(j) == '@') {\r\n                        correctEmail = false;\r\n                    }\r\n                }\r\n                if (i == emailEntered.length() - 1 && found == false) {\r\n                    correctEmail = false;\r\n                }\r\n            }\r\n        }\r\n        if (passwordEntered.length() < 8) {\r\n            correctPassword = false;\r\n        }\r\n\r\n        for (int i = 0; i < cardNumEntered.length(); i++) {\r\n\r\n            if (!Character.isDigit(cardNumEntered.charAt(i))) {\r\n                correctCardNum = false;\r\n            }\r\n            if (i > 15){\r\n                correctCardNum = false;\r\n            }\r\n        }\r\n        if (monthYearEntered.length() != 5){\r\n            correctMonthYear = false;\r\n        } else {\r\n            for (int i = 0; i < monthYearEntered.length(); i++) {\r\n                switch(i){\r\n                    case 0:\r\n                    if (!Character.isDigit(monthYearEntered.charAt(0))){\r\n                        correctMonthYear = false;\r\n                    } else {\r\n                        if (monthYearEntered.charAt(0) != '0'||monthYearEntered.charAt(0) != '1'){\r\n                            correctMonthYear = false;\r\n\r\n                        }\r\n                    }\r\n                    case 1:\r\n                        if (!Character.isDigit(monthYearEntered.charAt(1))){\r\n                            correctMonthYear = false;\r\n                        }\r\n                    case 2:\r\n                        if (monthYearEntered.charAt(2) != '/'){\r\n                            correctMonthYear = false;\r\n                        }\r\n                    case 3:\r\n                        if (!Character.isDigit(monthYearEntered.charAt(0))){\r\n                            correctMonthYear = false;\r\n                        }\r\n                    case 4:\r\n                        if (!Character.isDigit(monthYearEntered.charAt(0))){\r\n                            correctMonthYear = false;\r\n                        }\r\n                }\r\n\r\n            }\r\n\r\n        }\r\n\r\n        for(int i = 0; i < cvvEntered.length(); i++){\r\n            if (!Character.isDigit(cvvEntered.charAt(i))){\r\n                correctCVV = false;\r\n            }\r\n            if (i > 2){\r\n                correctCVV = false;\r\n            }\r\n        }\r\n\r\n        /*System.out.println((correctFirstName == false || correctLastName == false || correctEmail == false || correctPassword == false || correctAddress == false || correctCardNum == false || correctMonthYear == false || correctCVV == false));\r\n        if (correctFirstName == false || correctLastName == false || correctEmail == false || correctPassword == false || correctAddress == false || correctCardNum == false || correctMonthYear == false || correctCVV == false)\r\n            return false;*/\r\n        return true;\r\n    }\r\n\r\n    public void writeNewUser() throws IOException, ClassNotFoundException {\r\n        final String firstNameEntered = firstNameClient.getText().toString();\r\n        final String lastNameEntered = lastNameClient.getText().toString();\r\n        final String emailEntered = emailAddressClient.getText().toString();\r\n        final String passwordEntered = passwordClient.getText().toString();\r\n        final String addressEntered = addressClient.getText().toString();\r\n        final String cardNumEntered = (cardNumberClient.getText().toString()).replace(\" \",\"\");\r\n        final String monthYearEntered = monthYearClient.getText().toString();\r\n        final String cvvEntered = cvvClient.getText().toString();\r\n        Runner run = Runner.getInstance();\r\n        final int tempId = run.randomIdGenerator();\r\n        ArrayList<Integer> orderHistory = new ArrayList<>();\r\n        orderHistory.add(2);\r\n        Client client = new Client(tempId, firstNameEntered, lastNameEntered, emailEntered, passwordEntered, addressEntered, cardNumEntered, monthYearEntered, cvvEntered,orderHistory);\r\n\r\n        DR.child(\"Users\").child(\"Clients\").child(Integer.toString(tempId)).setValue(client);\r\n    }\r\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/java/com/example/seg2105_project/Client_Registration.java b/app/src/main/java/com/example/seg2105_project/Client_Registration.java
+---- a/app/src/main/java/com/example/seg2105_project/Client_Registration.java	(revision d84a94326f0daeae5fa1737543f121cf517356b4)
+-+++ b/app/src/main/java/com/example/seg2105_project/Client_Registration.java	(date 1666215682959)
+-@@ -64,7 +64,7 @@
+-     public void onClick(View v) {
+-         switch(v.getId()) {
+-             case R.id.btnRegisterClient:
+--               if (checkInfo() == true) {
+-+               while (checkInfo() == true) {
+- 
+-                    try {
+-                        writeNewUser();
+-@@ -81,7 +81,6 @@
+-         }
+-     }
+- 
+--
+-     public boolean checkInfo() {
+-         boolean correct = true;
+-         final String firstNameEntered = firstNameClient.getText().toString();
+-@@ -92,9 +91,11 @@
+-         final String cardNumEntered = (cardNumberClient.getText().toString()).replace(" ","");
+-         final String monthYearEntered = monthYearClient.getText().toString();
+-         final String cvvEntered = cvvClient.getText().toString();
+-+
+-         for (int i = 0; i < firstNameEntered.length(); i++) {
+-             if ((Character.isLetter(firstNameEntered.charAt(i)) == false)) {
+-                 correctFirstName = false;
+-+
+-             }
+-         }
+-         for (int i = 0; i < lastNameEntered.length(); i++) {
+-@@ -177,9 +178,9 @@
+-             }
+-         }
+- 
+--        /*System.out.println((correctFirstName == false || correctLastName == false || correctEmail == false || correctPassword == false || correctAddress == false || correctCardNum == false || correctMonthYear == false || correctCVV == false));
+-+        System.out.println((correctFirstName == false || correctLastName == false || correctEmail == false || correctPassword == false || correctAddress == false || correctCardNum == false || correctMonthYear == false || correctCVV == false));
+-         if (correctFirstName == false || correctLastName == false || correctEmail == false || correctPassword == false || correctAddress == false || correctCardNum == false || correctMonthYear == false || correctCVV == false)
+--            return false;*/
+-+            return false;
+-         return true;
+-     }
+- 
+-diff --git a/app/src/main/java/com/example/seg2105_project/client.txt b/app/src/main/java/com/example/seg2105_project/client.txt
+-deleted file mode 100644
