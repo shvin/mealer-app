@@ -45,6 +45,12 @@
             android:layout_height="300dp" />
 
         <Button
+            android:id="@+id/addMealBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Meal" />
+
+        <Button
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

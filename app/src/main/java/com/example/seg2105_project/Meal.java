@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Meal {
     private String id;
+    private String cookID;
     private String name;
     private String mealType;
     private String cuisineType;
@@ -11,9 +12,13 @@ public class Meal {
     private String allergens;
     private double price;
     private String description;
+    private boolean offered;
 
-    public Meal(String id, String name, String mealType, String cuisineType, String ingredients, String allergens, double price, String description) {
+    public Meal(){}
+
+    public Meal(String id, String cookID, String name, String mealType, String cuisineType, String ingredients, String allergens, double price, String description) {
         this.id = id;
+        this.cookID = cookID;
         this.name = name;
         this.mealType = mealType;
         this.cuisineType = cuisineType;
@@ -21,6 +26,7 @@ public class Meal {
         this.allergens = allergens;
         this.price = price;
         this.description = description;
+        this.offered = true;
     }
 
     public String getId() {
@@ -30,6 +36,10 @@ public class Meal {
     public void setId(String id) {
         this.id = id;
     }
+
+    public String getCookID() {return cookID; }
+
+    public void setCookID(String cookID) { this.cookID = cookID; }
 
     public String getName() {
         return name;
@@ -85,5 +95,13 @@ public class Meal {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isOffered() {
+        return offered;
+    }
+
+    public void setOffered(boolean offered) {
+        this.offered = offered;
     }
 }

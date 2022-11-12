@@ -19,7 +19,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/firstNameClient"
+        android:id="@+id/nameMeal"
         android:layout_marginBottom="20dp"
         />
     <TextView
@@ -33,7 +33,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/lastNameClient"
+        android:id="@+id/mealTypeMeal"
         android:layout_marginBottom="20dp"
         />
     <TextView
@@ -47,7 +47,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/emailAddressClient"
+        android:id="@+id/cuisineTypeMeal"
         android:layout_marginBottom="20dp"
         android:inputType="textEmailAddress"/>
     <TextView
@@ -61,7 +61,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/passwordClient"
+        android:id="@+id/ingredientsMeal"
         android:inputType="textPassword"
         android:layout_marginBottom="20dp"
         />
@@ -88,7 +88,7 @@
         <EditText
             android:layout_width="343dp"
             android:layout_height="wrap_content"
-            android:id="@+id/addressNameClient"
+            android:id="@+id/allergensMeal"
             android:layout_marginBottom="20dp"
             />
 
@@ -132,7 +132,7 @@
         <EditText
             android:layout_width="220dp"
             android:layout_height="wrap_content"
-            android:id="@+id/cardNumberClient"
+            android:id="@+id/priceMeal"
             />
         <EditText
             android:layout_width="86dp"
@@ -153,11 +153,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="REGISTER"
-        android:id="@+id/btnRegisterClient"
+        android:id="@+id/btnAddMeal"
         />
 
     <Button
-        android:id="@+id/btnBack"
+        android:id="@+id/btnBackMeal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="back" />

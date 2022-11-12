@@ -2,7 +2,6 @@ package com.example.seg2105_project;
 
 import static android.content.ContentValues.TAG;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -24,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 public class Cook_Homepage extends AppCompatActivity  implements View.OnClickListener{
     private Button btnLogout;
     private Button viewMenuBtn;
+    private Button addMealBtn;
     private TextView typeOfSuspension;
     private TextView suspensionLength;
     private String cookID;
@@ -39,7 +39,8 @@ public class Cook_Homepage extends AppCompatActivity  implements View.OnClickLis
         suspensionLength.setTextColor(Color.RED);
         btnLogout = (Button) findViewById(R.id.btnLogout);
         viewMenuBtn = (Button) findViewById(R.id.viewMenuBtn);
-        btnLogout.setOnClickListener(this);
+        addMealBtn = (Button) findViewById(R.id.addMealBtn);
+
 
         DR = FirebaseDatabase.getInstance().getReference("Users/Cooks");
 
@@ -49,6 +50,8 @@ public class Cook_Homepage extends AppCompatActivity  implements View.OnClickLis
         getCook();
 
         viewMenuBtn.setOnClickListener(this);
+        addMealBtn.setOnClickListener(this);
+        btnLogout.setOnClickListener(this);
     }
 
     /**
@@ -62,6 +65,10 @@ public class Cook_Homepage extends AppCompatActivity  implements View.OnClickLis
             startActivity(intent);
         }if (v.getId() == R.id.viewMenuBtn){
             Intent intent = new Intent(this,Cook_Menu_Page.class);
+            intent.putExtra("cookID", cookID);
+            startActivity(intent);
+        }if (v.getId() == R.id.addMealBtn){
+            Intent intent = new Intent(this,Meal_Page.class);
             intent.putExtra("cookID", cookID);
             startActivity(intent);
         }

@@ -54,6 +54,8 @@ public class Cook extends User{
         this.banned = banned;
     }
 
+
+
     /**
      * returns the cook's description
      * @return

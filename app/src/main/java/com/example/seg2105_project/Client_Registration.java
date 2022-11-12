@@ -49,15 +49,15 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_registration);
 
-        btnRegisterClient = (Button) findViewById(R.id.btnRegisterClient);
-        btnBack = (Button) findViewById(R.id.btnBack);
-        firstNameClient = (EditText) findViewById(R.id.firstNameClient);
-        lastNameClient = (EditText) findViewById(R.id.lastNameClient);
-        emailAddressClient = (EditText) findViewById(R.id.emailAddressClient);
-        passwordClient = (EditText) findViewById(R.id.passwordClient);
+        btnRegisterClient = (Button) findViewById(R.id.btnAddMeal);
+        btnBack = (Button) findViewById(R.id.btnBackMeal);
+        firstNameClient = (EditText) findViewById(R.id.nameMeal);
+        lastNameClient = (EditText) findViewById(R.id.mealTypeMeal);
+        emailAddressClient = (EditText) findViewById(R.id.cuisineTypeMeal);
+        passwordClient = (EditText) findViewById(R.id.ingredientsMeal);
         addressNumClient = (EditText) findViewById(R.id.addressNumClient);
-        addressNameClient = (EditText) findViewById(R.id.addressNameClient);
-        cardNumberClient = (EditText) findViewById(R.id.cardNumberClient);
+        addressNameClient = (EditText) findViewById(R.id.allergensMeal);
+        cardNumberClient = (EditText) findViewById(R.id.priceMeal);
         monthYearClient = (EditText) findViewById(R.id.monthYearClient);
         cvvClient = (EditText) findViewById(R.id.cvvClient);
 
@@ -75,12 +75,12 @@ public class Client_Registration extends AppCompatActivity implements View.OnCli
      */
     public void onClick(View v) {
         switch(v.getId()) {
-            case R.id.btnRegisterClient:
+            case R.id.btnAddMeal:
                 checkEmail(emailAddressClient);
                 repeat = false;
 
                break;
-            case R.id.btnBack:
+            case R.id.btnBackMeal:
                 startActivity(new Intent(this, Register_Login_Page.class));
                 break;
         }
