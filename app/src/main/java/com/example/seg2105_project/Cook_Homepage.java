@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
  */
 public class Cook_Homepage extends AppCompatActivity  implements View.OnClickListener{
     private Button btnLogout;
+    private Button viewMenuBtn;
     private TextView typeOfSuspension;
     private TextView suspensionLength;
     private String cookID;
@@ -37,6 +38,7 @@ public class Cook_Homepage extends AppCompatActivity  implements View.OnClickLis
         typeOfSuspension.setTextColor(Color.RED);
         suspensionLength.setTextColor(Color.RED);
         btnLogout = (Button) findViewById(R.id.btnLogout);
+        viewMenuBtn = (Button) findViewById(R.id.viewMenuBtn);
         btnLogout.setOnClickListener(this);
 
         DR = FirebaseDatabase.getInstance().getReference("Users/Cooks");
@@ -46,6 +48,7 @@ public class Cook_Homepage extends AppCompatActivity  implements View.OnClickLis
 
         getCook();
 
+        viewMenuBtn.setOnClickListener(this);
     }
 
     /**
@@ -56,6 +59,10 @@ public class Cook_Homepage extends AppCompatActivity  implements View.OnClickLis
     public void onClick(View v) {
         if(v.getId() == R.id.btnLogout){
             Intent intent = new Intent(this, Register_Login_Page.class);
+            startActivity(intent);
+        }if (v.getId() == R.id.viewMenuBtn){
+            Intent intent = new Intent(this,Cook_Menu_Page.class);
+            intent.putExtra("cookID", cookID);
             startActivity(intent);
         }
     }

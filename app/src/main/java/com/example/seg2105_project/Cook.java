@@ -13,8 +13,8 @@ public class Cook extends User{
     private boolean banned;
     private boolean suspended;
     private int daysSuspended;
-    private ArrayList<Integer> ratings = new ArrayList<>();
-    private ArrayList<Integer> menu = new ArrayList<>();
+    private ArrayList<Double> ratings = new ArrayList<>();
+    private ArrayList<Meal> menu = new ArrayList<>();
     private ArrayList<Integer> mealsRequest = new ArrayList<>();
 
     /**
@@ -110,19 +110,19 @@ public class Cook extends User{
         banned = ban;
     }
 
-    public ArrayList<Integer> getRatings() {
+    public ArrayList<Double> getRatings() {
         return ratings;
     }
 
-    public void setRatings(ArrayList<Integer> ratings) {
+    public void setRatings(ArrayList<Double> ratings) {
         this.ratings = ratings;
     }
 
-    public ArrayList<Integer> getMenu() {
+    public ArrayList<Meal> getMenu() {
         return menu;
     }
 
-    public void setMenu(ArrayList<Integer> menu) {
+    public void setMenu(ArrayList<Meal> menu) {
         this.menu = menu;
     }
 
