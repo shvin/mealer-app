@@ -91,7 +91,13 @@ public class Cook_Login_Page extends AppCompatActivity implements View.OnClickLi
                     if (userCheck.equals(cook.getEmail()) && userPass.equals(cook.getPassword())) {
 
                         returnTrueValue();
-                        optionTrue(cook.getId());
+                        if(cook.getBanned()==true||cook.getSuspended()==true){
+                            System.out.println("123");
+                            optionTrueBanned(cook.getId());
+
+                        } else{
+                            optionTrue(cook.getId());
+                        }
                     }
                 }
                 if (valid == false) {
@@ -119,6 +125,13 @@ public class Cook_Login_Page extends AppCompatActivity implements View.OnClickLi
      */
     private void optionTrue(String cookId){
         Intent intent = new Intent(this,Cook_Homepage.class);
+        intent.putExtra("cookID", cookId);
+        startActivity(intent);
+        Toast.makeText(getApplicationContext(), "LOGGED IN", Toast.LENGTH_SHORT).show();
+    }
+
+    private void optionTrueBanned(String cookId){
+        Intent intent = new Intent(this,Cook_Banned_Homepage.class);
         intent.putExtra("cookID", cookId);
         startActivity(intent);
         Toast.makeText(getApplicationContext(), "LOGGED IN", Toast.LENGTH_SHORT).show();

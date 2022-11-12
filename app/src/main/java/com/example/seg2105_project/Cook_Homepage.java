@@ -47,7 +47,6 @@ public class Cook_Homepage extends AppCompatActivity  implements View.OnClickLis
         Intent intent = getIntent();
         cookID = intent.getStringExtra("cookID");
 
-        getCook();
 
         viewMenuBtn.setOnClickListener(this);
         addMealBtn.setOnClickListener(this);
@@ -74,36 +73,6 @@ public class Cook_Homepage extends AppCompatActivity  implements View.OnClickLis
         }
     }
 
-    private void checkIfBanOrSuspend(Cook cook){
-        System.out.println(cook.getBanned());
-        System.out.println(cook.getSuspended());
-        if (cook.getBanned()){
-            typeOfSuspension.setText("You have been banned indefinitely");
-            suspensionLength.setText("You can no longer use the application");
-            typeOfSuspension.setTextColor(Color.RED);
-            suspensionLength.setTextColor(Color.RED);
-        } else if (cook.getSuspended()) {
-            typeOfSuspension.setText("You have been suspended");
-            suspensionLength.setText("Your suspension will end in " + cook.getDaysSuspended() + " days");
-        }
-    }
 
-    private void getCook(){
-        DR.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    Cook currentCook = data.getValue(Cook.class);
-                    if (cookID.equals(currentCook.getId())) {
-                        checkIfBanOrSuspend(currentCook);
-                        break;
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAG, "onCancelled: Something went wrong! Error:" + databaseError.getMessage());
-            }
-        });
-    }
+
 }
