@@ -14,8 +14,8 @@ public class Cook extends User{
     private boolean suspended;
     private int daysSuspended;
     private ArrayList<Integer> ratings = new ArrayList<>();
-    private ArrayList<Integer> menu = new ArrayList<>();
-    private ArrayList<Integer> mealsRequest = new ArrayList<>();
+    private ArrayList<Meal> menu = new ArrayList<>();
+    private ArrayList<Meal> mealsRequest = new ArrayList<>();
 
     /**
      * Empty constructor
@@ -118,19 +118,23 @@ public class Cook extends User{
         this.ratings = ratings;
     }
 
-    public ArrayList<Integer> getMenu() {
+    public ArrayList<Meal> getMenu() {
         return menu;
     }
 
-    public void setMenu(ArrayList<Integer> menu) {
+    public void setMenu(ArrayList<Meal> menu) {
         this.menu = menu;
     }
 
-    public ArrayList<Integer> getMealsRequest() {
+    public void addMeal (Meal meal){
+        menu.add(meal);
+    }
+
+    public ArrayList<Meal> getMealsRequest() {
         return mealsRequest;
     }
 
-    public void setMealsRequest(ArrayList<Integer> mealsRequest) {
+    public void setMealsRequest(ArrayList<Meal> mealsRequest) {
         this.mealsRequest = mealsRequest;
     }
 

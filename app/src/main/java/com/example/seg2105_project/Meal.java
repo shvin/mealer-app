@@ -3,16 +3,16 @@ package com.example.seg2105_project;
 import java.util.ArrayList;
 
 public class Meal {
-    private int id;
+    private String id;
     private String name;
-    private MEAL_TYPE mealType;
-    private CUISINE_TYPE cuisineType;
+    private String mealType;
+    private String cuisineType;
     private String ingredients;
     private String allergens;
-    private String price;
+    private double price;
     private String description;
 
-    public Meal(int id, String name, MEAL_TYPE mealType, CUISINE_TYPE cuisineType, String ingredients, String allergens, String price, String description) {
+    public Meal(String id, String name, String mealType, String cuisineType, String ingredients, String allergens, double price, String description) {
         this.id = id;
         this.name = name;
         this.mealType = mealType;
@@ -23,11 +23,11 @@ public class Meal {
         this.description = description;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -39,19 +39,19 @@ public class Meal {
         this.name = name;
     }
 
-    public MEAL_TYPE getMealType() {
+    public String getMealType() {
         return mealType;
     }
 
-    public void setMealType(MEAL_TYPE mealType) {
+    public void setMealType(String mealType) {
         this.mealType = mealType;
     }
 
-    public CUISINE_TYPE getCuisineType() {
+    public String getCuisineType() {
         return cuisineType;
     }
 
-    public void setCuisineType(CUISINE_TYPE cuisineType) {
+    public void setCuisineType(String cuisineType) {
         this.cuisineType = cuisineType;
     }
 
@@ -71,11 +71,11 @@ public class Meal {
         this.allergens = allergens;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

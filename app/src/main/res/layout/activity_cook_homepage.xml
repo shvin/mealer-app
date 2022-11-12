@@ -35,7 +35,13 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="500dp" />
+            android:layout_height="436dp" />
+
+        <Button
+            android:id="@+id/addMealButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Meal" />
 
         <Button
             android:id="@+id/btnLogout"
