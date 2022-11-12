@@ -85,7 +85,7 @@ public class Meal_Page extends AppCompatActivity implements View.OnClickListener
         final String descriptionEntered = descriptionMeal.getText().toString();
 
         if(nameEntered.length() == 0 || mealTypeEntered.length() == 0 || cuisineTypeEntered.length() == 0||
-                ingredientsEntered.length() == 0 || allergensEntered.length() == 0 || priceEntered.length() == 0 || descriptionEntered.length() == 0){
+                ingredientsEntered.length() == 0 || priceEntered.length() == 0 || descriptionEntered.length() == 0){
             Toast toast = Toast.makeText(getApplicationContext(), "Input cannot be empty",Toast.LENGTH_SHORT);
             toast.show();
             return false;
