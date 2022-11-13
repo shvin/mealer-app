@@ -51,6 +51,8 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complaint_page);
 
+        Toast.makeText(this,"Long click on a complaint  to remove it from the complaints list",Toast.LENGTH_LONG).show();
+
         listViewComplaints = (ListView) findViewById(R.id.listViewComplaints);
         DR = FirebaseDatabase.getInstance().getReference("Complaints");
         backBtn = (Button) findViewById(R.id.backBtn);

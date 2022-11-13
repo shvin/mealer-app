@@ -105,7 +105,7 @@ public class Meal_Page extends AppCompatActivity implements View.OnClickListener
             }
 
         }
-        catch(NumberFormatException e)
+        catch(Exception e)
         {
             Toast toast = Toast.makeText(getApplicationContext(), "Your price is invalid",Toast.LENGTH_SHORT);
             toast.show();

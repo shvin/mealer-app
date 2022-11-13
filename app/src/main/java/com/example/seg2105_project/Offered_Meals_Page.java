@@ -44,6 +44,8 @@ public class Offered_Meals_Page extends AppCompatActivity implements View.OnClic
         Intent intent = getIntent();
         cookID = intent.getStringExtra("cookID");
 
+        Toast.makeText(this,"Long click on a meal item to remove it from the offered meals list",Toast.LENGTH_LONG).show();
+
         System.out.println("OFFERED: " + cookID);
 
         listViewOffered = (ListView) findViewById(R.id.listViewOffered);

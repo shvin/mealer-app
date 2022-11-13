@@ -52,6 +52,8 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
         Intent intent = getIntent();
         cookID = intent.getStringExtra("cookID");
 
+        Toast.makeText(this,"Long click on a meal item to remove it from the menu or add it to the offered meals",Toast.LENGTH_LONG).show();
+
         System.out.println("MENU: " + cookID);
 
         listViewMenu = (ListView) findViewById(R.id.listViewMenu);
