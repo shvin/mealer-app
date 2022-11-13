@@ -165,6 +165,8 @@ public class Meal_Page extends AppCompatActivity implements View.OnClickListener
         UUID randID = UUID.randomUUID();
         String randIDString = randID.toString();
 
+        System.out.println("ID: " + cookID);
+
         Meal meal = new Meal(randIDString, cookID, nameEntered, mealTypeEntered, cuisineTypeEntered, ingredientsEntered, allergensEntered, price, descriptionEntered);
 
         DR.child(randIDString).setValue(meal);

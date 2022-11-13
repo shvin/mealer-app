@@ -124,6 +124,7 @@ public class Cook_Login_Page extends AppCompatActivity implements View.OnClickLi
      * Starts the Cook Homepage Activity and lets the user know they are signed in
      */
     private void optionTrue(String cookId){
+        System.out.println("LOGIN ID: " + cookId);
         Intent intent = new Intent(this,Cook_Homepage.class);
         intent.putExtra("cookID", cookId);
         startActivity(intent);

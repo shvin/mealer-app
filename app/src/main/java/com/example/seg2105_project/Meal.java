@@ -26,7 +26,7 @@ public class Meal {
         this.allergens = allergens;
         this.price = price;
         this.description = description;
-        this.offered = true;
+        this.offered = false;
     }
 
     public String getId() {
@@ -103,5 +103,9 @@ public class Meal {
 
     public void setOffered(boolean offered) {
         this.offered = offered;
+    }
+
+    public String toString(){
+        return "Meal name: " + name + "\n" + " Price: " + price;
     }
 }
