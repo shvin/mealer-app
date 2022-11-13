@@ -29,6 +29,19 @@ public class Meal {
         this.offered = false;
     }
 
+    public Meal(String id, String cookID, String name, String mealType, String cuisineType, String ingredients, String allergens, double price, String description, Boolean offered) {
+        this.id = id;
+        this.cookID = cookID;
+        this.name = name;
+        this.mealType = mealType;
+        this.cuisineType = cuisineType;
+        this.ingredients = ingredients;
+        this.allergens = allergens;
+        this.price = price;
+        this.description = description;
+        this.offered = offered;
+    }
+
     public String getId() {
         return id;
     }

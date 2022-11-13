@@ -12,13 +12,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Menu"
+        android:text="Offered Meals"
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="25dp"/>
 
     <ListView
-        android:id="@+id/listViewMenu"
+        android:id="@+id/listViewOffered"
         android:layout_width="match_parent"
         android:layout_height="300dp"/>
 
@@ -28,11 +28,6 @@
         android:layout_height="wrap_content"
         android:text="refresh page"/>
 
-    <Button
-        android:id="@+id/offeredMealsBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="view offered meals"/>
 
     <Button
         android:id="@+id/backBtn"

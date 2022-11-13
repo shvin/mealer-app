@@ -88,7 +88,9 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
             }
         }
         if(v.getId() == R.id.offeredMealsBtn){
-            // offered meals page redirect
+            Intent intent = new Intent(this,Offered_Meals_Page.class);
+            intent.putExtra("cookID", cookID);
+            startActivity(intent);
         }
         if(v.getId() == R.id.backBtn){
             Intent intent = new Intent(this,Cook_Homepage.class);
@@ -109,7 +111,6 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
                     menuList.add(meal);
                     menuAdapter.notifyDataSetChanged();
                 }
-
             }
 
             @Override
@@ -148,7 +149,12 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
 
     private void addRemoveDialog(Meal meal){
 
-        System.out.println(meal.getId());
+        //TEST THIS
+//        if (clickedMeal.equals(meal.getId())){
+//            return;
+//        } else {
+//            clickedMeal = meal.getId();
+//        }
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -169,7 +175,7 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
         addMeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // If meal not in offeredList, adds to the offeredList
+                addMeal(meal);
             }
         });
         removeMeal.setOnClickListener(new View.OnClickListener() {
@@ -194,11 +200,19 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
             }
         });
     }
+
+    private void addMeal(Meal meal){
+        DatabaseReference DR1 = FirebaseDatabase.getInstance().getReference("Meals");
+        Meal newMeal = new Meal(meal.getId(),meal.getCookID(),meal.getName(),meal.getMealType(),meal.getCuisineType(),meal.getIngredients(),meal.getAllergens(),meal.getPrice(),
+                meal.getDescription(), true);
+        DR1.child(meal.getId()).setValue(newMeal);
+    }
+
     private void removeMessage(Boolean removal){
         if (removal){
-            Toast.makeText(this, "The Complaint has been removed", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "The Meal has been removed", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "The Complaint has not been removed since it's offered", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "The Meal has not been removed since it's offered", Toast.LENGTH_LONG).show();
 
         }
     }
