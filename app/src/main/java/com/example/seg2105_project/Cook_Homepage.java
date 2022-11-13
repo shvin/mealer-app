@@ -47,6 +47,8 @@ public class Cook_Homepage extends AppCompatActivity  implements View.OnClickLis
         Intent intent = getIntent();
         cookID = intent.getStringExtra("cookID");
 
+        System.out.println("HOMEPAGE: " + cookID);
+
 
         viewMenuBtn.setOnClickListener(this);
         addMealBtn.setOnClickListener(this);

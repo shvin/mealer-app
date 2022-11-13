@@ -216,12 +216,13 @@ public class Cook_Registration extends AppCompatActivity implements View.OnClick
         if (checkInfo() == true) {
             try {
                 writeNewUser();
+                startActivity(new Intent(this, Register_Login_Page.class));
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            startActivity(new Intent(this, Register_Login_Page.class));
+
         }
     }
 

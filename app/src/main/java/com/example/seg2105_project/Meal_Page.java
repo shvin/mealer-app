@@ -56,6 +56,8 @@ public class Meal_Page extends AppCompatActivity implements View.OnClickListener
 
         Intent intent = getIntent();
         cookID = intent.getStringExtra("cookID");
+        System.out.println("MEAL 2" + cookID);
+
         DR = FirebaseDatabase.getInstance().getReference("Meals");
 
         btnAddMeal.setOnClickListener(this);
@@ -68,7 +70,9 @@ public class Meal_Page extends AppCompatActivity implements View.OnClickListener
                 checkName(nameMeal);
                 break;
             case R.id.btnBackMeal:
-                startActivity(new Intent(this, Cook_Homepage.class));
+                Intent intent = new Intent(this,Cook_Homepage.class);
+                intent.putExtra("cookID", cookID);
+                startActivity(intent);
                 break;
         }
     }
@@ -143,14 +147,14 @@ public class Meal_Page extends AppCompatActivity implements View.OnClickListener
         if (checkInfo() == true) {
             try {
                 writeNewUser();
+                Intent intent = new Intent(this,Cook_Homepage.class);
+                intent.putExtra("cookID", cookID);
+                startActivity(intent);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Intent intent = new Intent(this,Cook_Homepage.class);
-            intent.putExtra("cookID", cookID);
-            startActivity(intent);
         }
     }
 

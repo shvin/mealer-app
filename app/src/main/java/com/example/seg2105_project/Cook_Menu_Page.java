@@ -52,6 +52,8 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
         Intent intent = getIntent();
         cookID = intent.getStringExtra("cookID");
 
+        System.out.println("MENU: " + cookID);
+
         listViewMenu = (ListView) findViewById(R.id.listViewMenu);
         backBtn = (Button) findViewById(R.id.backBtn);
         updateBtn = (Button) findViewById(R.id.updateBtn);
@@ -89,7 +91,9 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
             // offered meals page redirect
         }
         if(v.getId() == R.id.backBtn){
-            startActivity(new Intent(this,Cook_Homepage.class));
+            Intent intent = new Intent(this,Cook_Homepage.class);
+            intent.putExtra("cookID", cookID);
+            startActivity(intent);
         }
     }
 
@@ -99,7 +103,8 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
                 Meal meal = dataSnapshot.getValue(Meal.class);
-                System.out.println(meal.getId());
+                System.out.println("MEAL: " + meal.getCookID());
+                System.out.println("COOK ID:" + cookID);
                 if (meal.getCookID().equals(cookID)){
                     menuList.add(meal);
                     menuAdapter.notifyDataSetChanged();

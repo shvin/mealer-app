@@ -16,7 +16,9 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Meal Name:" />
+            android:text="Meal Name:"
+            android:textColor="@color/black"
+            android:textSize="20dp"/>
 
         <EditText
             android:id="@+id/nameMeal"
