@@ -10,9 +10,6 @@ import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 /**
  * Instrumented test, which will execute on an Android device.
  *
@@ -25,14 +22,5 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         assertEquals("com.example.seg2105_project", appContext.getPackageName());
-
-        // test on a client with a credit card that has 16 digits
-        DatabaseReference DR = FirebaseDatabase.getInstance().getReference().child("Users/Clients/f65a3d55-68f3-4552-b7d8-d2f665dc46e3");
-        String creditCardNumber = DR.child("cardNumber").toString();
-        if (creditCardNumber.length() == 16) {
-            assertTrue(true);
-        } else {
-            fail();
-        }
     }
 }
