@@ -56,7 +56,6 @@ public class Meal_Page extends AppCompatActivity implements View.OnClickListener
 
         Intent intent = getIntent();
         cookID = intent.getStringExtra("cookID");
-        System.out.println("MEAL 2" + cookID);
 
         DR = FirebaseDatabase.getInstance().getReference("Meals");
 
@@ -121,7 +120,6 @@ public class Meal_Page extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    //System.out.println(data);
                     Meal meal = data.getValue(Meal.class);
                     if (nameEntered.equals(meal.getName()) && cookID == meal.getCookID()) {
                         repeatTrue();
@@ -168,8 +166,6 @@ public class Meal_Page extends AppCompatActivity implements View.OnClickListener
 
         UUID randID = UUID.randomUUID();
         String randIDString = randID.toString();
-
-        System.out.println("ID: " + cookID);
 
         Meal meal = new Meal(randIDString, cookID, nameEntered, mealTypeEntered, cuisineTypeEntered, ingredientsEntered, allergensEntered, price, descriptionEntered);
 

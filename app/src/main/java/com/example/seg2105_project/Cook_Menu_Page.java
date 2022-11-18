@@ -39,7 +39,6 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
     private DatabaseReference DR;
     private ArrayList<Meal> menuList;
     private ArrayAdapter<Meal> menuAdapter;
-    private String clickedMeal;
     private String cookID;
 
     private Boolean removed = false;
@@ -54,8 +53,6 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
 
         Toast.makeText(this,"Long click on a meal item to remove it from the menu or add it to the offered meals",Toast.LENGTH_LONG).show();
 
-        System.out.println("MENU: " + cookID);
-
         listViewMenu = (ListView) findViewById(R.id.listViewMenu);
         backBtn = (Button) findViewById(R.id.backBtn);
         updateBtn = (Button) findViewById(R.id.updateBtn);
@@ -67,16 +64,12 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
         menuAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, menuList);
         listViewMenu.setAdapter(menuAdapter);
 
-
-
         updateBtn.setOnClickListener(this);
         backBtn.setOnClickListener(this);
         offeredMealsBtn.setOnClickListener(this);
 
         addMenuList();
         onItemLongClick();
-
-
     }
 
     public void onClick(View v){
@@ -107,8 +100,6 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
                 Meal meal = dataSnapshot.getValue(Meal.class);
-                System.out.println("MEAL: " + meal.getCookID());
-                System.out.println("COOK ID:" + cookID);
                 if (meal.getCookID().equals(cookID)){
                     menuList.add(meal);
                     menuAdapter.notifyDataSetChanged();
@@ -150,13 +141,6 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
     }
 
     private void addRemoveDialog(Meal meal){
-
-        //TEST THIS
-//        if (clickedMeal.equals(meal.getId())){
-//            return;
-//        } else {
-//            clickedMeal = meal.getId();
-//        }
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -218,34 +202,4 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
 
         }
     }
-
-//    private void deleteMeal(String mealID){
-//
-//        DatabaseReference databaseR = FirebaseDatabase.getInstance().getReference("Meals");
-//        ValueEventListener eventListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                for (DataSnapshot data : dataSnapshot.getChildren()){
-//                    Meal meal = data.getValue(Meal.class);
-//
-//                    if (mealID.equals(meal.getId()) && !meal.isOffered()){
-//                        databaseR.removeValue();
-//                        removed = true;
-//                        break;
-//                    }
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                Log.e(TAG, "onCancelled: Something went wrong! Error:" + databaseError.getMessage());
-//            }
-//        };
-//        if (removed){
-//            Toast.makeText(this, "The meal has been removed", Toast.LENGTH_LONG).show();
-//        } else {
-//            Toast.makeText(this, "The meal has not been removed because it is offered", Toast.LENGTH_LONG).show();
-//        }
-//
-//    }
-
 }

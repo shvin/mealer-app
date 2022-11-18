@@ -3,11 +3,7 @@ package com.example.seg2105_project;
 public class Complaint {
     private String id;
     private String description;
-    private String clientID;
     private String cookID;
-    private Boolean dismissed;
-    private Boolean suspended;
-    private Boolean permanentlySuspended;
 
     public Complaint(){
 
@@ -16,9 +12,6 @@ public class Complaint {
         this.id = id;
         this.description = description;
         this.cookID = cookID;
-//        this.dismissed = dismissed;
-//        this.suspended = suspended;
-//        this.permanentlySuspended = permanentlySuspended;
     }
 
     public String getId() {
@@ -48,23 +41,4 @@ public class Complaint {
     public String toString(){
         return "Cook ID: " + cookID + "\n" + "Description: " + description;
     }
-
-
-    /*
-    public Boolean getDismissed() {
-        return dismissed;
-    }
-
-    public void setDismissed(Boolean dismissed) {
-        this.dismissed = dismissed;
-    }
-
-    public Boolean getSuspended() {
-        return suspended;
-    }
-
-    public void setSuspended(Boolean suspended) {
-        this.suspended = suspended;
-    }*/
-
 }

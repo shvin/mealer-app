@@ -33,7 +33,6 @@ public class Offered_Meals_Page extends AppCompatActivity implements View.OnClic
     private DatabaseReference DR;
     private ArrayList<Meal> offeredList;
     private ArrayAdapter<Meal> offeredAdapter;
-    private String clickedMeal;
     private String cookID;
 
     @Override
@@ -45,8 +44,6 @@ public class Offered_Meals_Page extends AppCompatActivity implements View.OnClic
         cookID = intent.getStringExtra("cookID");
 
         Toast.makeText(this,"Long click on a meal item to remove it from the offered meals list",Toast.LENGTH_LONG).show();
-
-        System.out.println("OFFERED: " + cookID);
 
         listViewOffered = (ListView) findViewById(R.id.listViewOffered);
         backBtn = (Button) findViewById(R.id.backBtn);
@@ -129,12 +126,6 @@ public class Offered_Meals_Page extends AppCompatActivity implements View.OnClic
     }
 
     private void removeSelectedDialog(Meal meal){
-
-//        if (clickedMeal.equals(meal.getId())){
-//            return;
-//        } else {
-//            clickedMeal = meal.getId();
-//        }
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
