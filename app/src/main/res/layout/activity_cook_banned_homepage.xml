@@ -13,9 +13,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="You are logged in as Cook!"
+            android:text="Cook Dashboard"
             android:textColor="@color/black"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/progressBar6"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:max="10"
+            android:progress="10"
+            android:progressTint="#6100EC" />
 
         <TextView
             android:id="@+id/typeOfSuspension"
@@ -35,12 +46,13 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="300dp" />
+            android:layout_height="462dp" />
 
         <Button
             android:id="@+id/btnLogout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
             android:onClick="logoutButtonHomepage"
             android:text="Log Out" />
     </LinearLayout>

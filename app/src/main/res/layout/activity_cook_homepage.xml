@@ -13,17 +13,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:textSize="30dp"
+            android:text="Cook Dashboard"
             android:textColor="@color/black"
-            android:text="You are logged in as Cook!"/>
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/progressBar7"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:max="10"
+            android:progress="10"
+            android:progressTint="#6100EC" />
 
         <TextView
             android:id="@+id/typeOfSuspension"
-            android:textSize="25dp"
-            android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:textSize="25dp" />
 
         <TextView
             android:id="@+id/suspensionLength"
@@ -33,26 +44,53 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"/>
 
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="Current Menu"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#000000" />
+
         <Button
             android:id="@+id/viewMenuBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="View menu"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:text="View" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="300dp" />
+            android:layout_height="279dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="Create a Meal"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#000000" />
 
         <Button
             android:id="@+id/addMealBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Meal" />
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:text="Add" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="63dp" />
 
         <Button
             android:id="@+id/btnLogout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="logoutButtonHomepage"
             android:text="Log Out" />

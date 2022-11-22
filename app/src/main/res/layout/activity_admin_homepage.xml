@@ -5,35 +5,71 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-        <LinearLayout
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="10dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="You are logged in as Admin!"
-                android:textSize="30dp"
-                android:textColor="@color/black"
-                android:layout_marginBottom="50dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="Admin Dashboard"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btnComplaint"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="See list of complaints"
-                android:layout_marginBottom="20dp"/>
+                android:orientation="horizontal" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="10"
+            android:progress="10"
+            android:progressTint="#6100EC" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="46dp" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="Complaints Portal"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#000000" />
+
+        <Button
+            android:id="@+id/btnComplaint"
+            android:layout_width="189dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:text="View" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="442dp" />
 
             <Button
                 android:id="@+id/btnLogout"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:insetLeft="30dp"
                 android:onClick="log"
                 android:text="Log Out" />
 
-        </LinearLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

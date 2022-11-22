@@ -8,6 +8,13 @@
     android:padding="10dp"
     tools:context=".Client_Registration">
 
+    <Button
+        android:id="@+id/btnBackMeal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="< Back" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -79,18 +86,16 @@
         android:orientation="horizontal">
 
         <EditText
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
             android:id="@+id/addressNumClient"
-            android:layout_marginBottom="20dp"
-            />
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp" />
 
         <EditText
-            android:layout_width="343dp"
-            android:layout_height="wrap_content"
             android:id="@+id/allergensMeal"
-            android:layout_marginBottom="20dp"
-            />
+            android:layout_width="313dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp" />
 
     </LinearLayout>
 
@@ -150,16 +155,10 @@
     </LinearLayout>
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="REGISTER"
         android:id="@+id/btnAddMeal"
-        />
-
-    <Button
-        android:id="@+id/btnBackMeal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="back" />
+        android:layout_marginTop="15dp"
+        android:text="REGISTER" />
 
 </LinearLayout>

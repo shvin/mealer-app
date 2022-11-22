@@ -2,94 +2,95 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:padding="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".Cook_Registration">
+
+    <Button
+        android:id="@+id/btnBackCookReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="< Back" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="First Name: "
         android:textColor="@color/black"
-        android:textSize="20dp"
-        />
+        android:textSize="20dp" />
 
     <EditText
+        android:id="@+id/firstNameCook"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/firstNameCook"
-        android:layout_marginBottom="20dp"
-        />
+        android:layout_marginBottom="10dp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Last Name: "
         android:textColor="@color/black"
-        android:textSize="20dp"
-        />
+        android:textSize="20dp" />
 
     <EditText
+        android:id="@+id/lastNameCook"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/lastNameCook"
-        android:layout_marginBottom="20dp"
-        />
+        android:layout_marginBottom="10dp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email Address: "
         android:textColor="@color/black"
-        android:textSize="20dp"
-        />
+        android:textSize="20dp" />
 
     <EditText
+        android:id="@+id/emailAddressCook"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/emailAddressCook"
-        android:layout_marginBottom="20dp"
-        android:inputType="textEmailAddress"
-        />
+        android:layout_marginBottom="10dp"
+        android:inputType="textEmailAddress" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Password: "
         android:textColor="@color/black"
-        android:textSize="20dp"
-        />
+        android:textSize="20dp" />
 
     <EditText
+        android:id="@+id/passwordCook"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/passwordCook"
-        android:inputType="textPassword"
-        android:layout_marginBottom="20dp"
-        />
+        android:layout_marginBottom="10dp"
+        android:inputType="textPassword" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Address: "
         android:textColor="@color/black"
-        android:textSize="20dp"
-        />
+        android:textSize="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp">
 
         <EditText
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
             android:id="@+id/addressNumCook"
-            android:layout_marginBottom="20dp"
-            />
-        <EditText
-            android:layout_width="343dp"
+            android:layout_width="71dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp" />
+
+        <EditText
             android:id="@+id/addressNameCook"
-            android:layout_marginBottom="20dp"
-            />
+            android:layout_width="320dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp" />
 
 
     </LinearLayout>
@@ -100,15 +101,13 @@
         android:layout_height="wrap_content"
         android:text="Description: "
         android:textColor="@color/black"
-        android:textSize="20dp"
-        />
+        android:textSize="20dp" />
 
     <EditText
+        android:id="@+id/descriptionCook"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/descriptionCook"
-        android:layout_marginBottom="20dp"
-        />
+        android:layout_marginBottom="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -119,31 +118,22 @@
             android:layout_height="wrap_content"
             android:text="Void Check:  "
             android:textColor="@color/black"
-            android:textSize="20dp"
-            />
+            android:textSize="20dp" />
 
         <Button
+            android:id="@+id/voidCheckCook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SELECT IMAGE"
-            android:id="@+id/voidCheckCook"
-            android:backgroundTint="@color/teal_200"/>
+            android:backgroundTint="@color/teal_200"
+            android:text="SELECT IMAGE" />
     </LinearLayout>
 
 
-
-
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="REGISTER"
         android:id="@+id/btnRegisterCook"
-        android:backgroundTint="@color/teal_200"/>
-
-    <Button
-        android:id="@+id/btnBackCookReg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Back" />
+        android:layout_marginTop="10dp"
+        android:text="REGISTER" />
 
 </LinearLayout>

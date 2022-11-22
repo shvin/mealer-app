@@ -12,19 +12,39 @@
         android:padding="10dp"
         tools:context=".Login_Page">
 
-        <TextView
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:text="Cook Log In"
-            android:textColor="@color/black"
-            android:textSize="40dp" />
+            android:text="< Back" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="Cook Login"
+            android:textColor="@color/black"
+            android:textSize="40dp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar8"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:max="10"
+            android:progress="10"
+            android:progressTint="#6100EC" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="Username:"
             android:textColor="@color/black"
             android:textSize="20dp" />
@@ -53,15 +73,9 @@
             android:id="@+id/loginBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="85dp"
+            android:layout_marginRight="85dp"
             android:text="login" />
-
-        <Button
-            android:id="@+id/backBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Back" />
 
     </LinearLayout>
 

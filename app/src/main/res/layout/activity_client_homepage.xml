@@ -15,18 +15,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:text="Client Dashboard"
+            android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="30dp"
-            android:text="You are logged in as Client!"
-            android:textColor="@color/black"/>
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="10"
+            android:progress="10"
+            android:progressTint="#6100EC" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="600dp" />
+            android:layout_height="585dp" />
 
         <Button
             android:id="@+id/btnLogout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:insetLeft="30dp"
             android:onClick="log"
             android:text="Log Out" />
     </LinearLayout>
