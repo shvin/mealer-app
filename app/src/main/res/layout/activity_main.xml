@@ -12,66 +12,126 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="Welcome to Mealer!"
         android:textColor="@color/black"
-        android:textSize="40dp" />
+        android:textSize="40dp"
+        android:textStyle="bold" />
+
+    <ProgressBar
+        android:id="@+id/progressBar10"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:max="10"
+        android:progress="10"
+        android:progressTint="#6100EC" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="24dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Register as a..."
+        android:text="Login Portal"
         android:textColor="@color/black"
-        android:textSize="20dp" />
+        android:textSize="25dp"
+        android:textStyle="italic" />
 
-    <Button
-        android:id="@+id/btnClient"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/btnLoginClient"
+            android:layout_width="99dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Client" />
+
+        <Button
+            android:id="@+id/btnLoginCook"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Cook" />
+
+        <Button
+            android:id="@+id/btnLoginAdmin"
+            android:layout_width="99dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Admin" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar13"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
+        android:max="10"
+        android:progress="10"
+        android:progressTint="#6100EC" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="70dp" />
+
+    <TextView
+        android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="50dp"
-        android:backgroundTint="@color/teal_200"
         android:gravity="center"
-        android:paddingLeft="75dp"
-        android:paddingTop="50dp"
-        android:paddingRight="75dp"
-        android:paddingBottom="50dp"
-        android:text="CLIENT" />
+        android:text="Need to Register?"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="italic" />
 
-    <Button
-        android:id="@+id/btnCook"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="50dp"
-        android:backgroundTint="@color/teal_200"
-        android:gravity="center"
-        android:paddingLeft="75dp"
-        android:paddingTop="50dp"
-        android:paddingRight="75dp"
-        android:paddingBottom="50dp"
-        android:text="COOK" />
+        android:padding="10dp">
 
-    <Button
-        android:id="@+id/btnLoginClient"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login as Client" />
+        <Button
+            android:id="@+id/btnClient"
+            android:layout_width="155dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:text="CLIENT" />
 
-    <Button
-        android:id="@+id/btnLoginCook"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login as cook" />
+        <Button
+            android:id="@+id/btnCook"
+            android:layout_width="155dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:text="COOK" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/btnLoginAdmin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login as Admin" />
+    <ProgressBar
+        android:id="@+id/progressBar12"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="316dp"
+        android:layout_height="2dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
+        android:max="10"
+        android:progress="10"
+        android:progressTint="#6100EC" />
 
 </LinearLayout>
