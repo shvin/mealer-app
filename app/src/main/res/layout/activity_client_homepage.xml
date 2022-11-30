@@ -32,7 +32,19 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="585dp" />
+            android:layout_height="428dp" />
+
+        <Button
+            android:id="@+id/btnSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search Meals" />
+
+        <Button
+            android:id="@+id/btnStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Status of Purchases" />
 
         <Button
             android:id="@+id/btnLogout"

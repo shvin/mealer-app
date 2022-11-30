@@ -14,11 +14,19 @@ import android.widget.Button;
  */
 public class Client_Homepage extends AppCompatActivity  implements View.OnClickListener{
     Button btnLogout;
+    Button btnSearch;
+    Button btnStatus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_homepage);
         btnLogout = (Button) findViewById(R.id.btnLogout);
+        btnSearch = (Button) findViewById(R.id.btnSearch);
+        btnStatus = (Button) findViewById(R.id.btnStatus);
+
+        btnSearch.setOnClickListener(this);
+        btnStatus.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
     }
 
@@ -30,6 +38,9 @@ public class Client_Homepage extends AppCompatActivity  implements View.OnClickL
     public void onClick(View v) {
         if(v.getId() == R.id.btnLogout){
             Intent intent = new Intent(this, Register_Login_Page.class);
+            startActivity(intent);
+        } else if(v.getId() == R.id.btnSearch){
+            Intent intent = new Intent(this, Search_Meals_Page.class);
             startActivity(intent);
         }
     }
