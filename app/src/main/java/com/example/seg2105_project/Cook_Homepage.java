@@ -24,6 +24,7 @@ public class Cook_Homepage extends AppCompatActivity  implements View.OnClickLis
     private Button btnLogout;
     private Button viewMenuBtn;
     private Button addMealBtn;
+    private Button viewProfileBtn;
     private TextView typeOfSuspension;
     private TextView suspensionLength;
     private String cookID;
@@ -40,6 +41,7 @@ public class Cook_Homepage extends AppCompatActivity  implements View.OnClickLis
         btnLogout = (Button) findViewById(R.id.btnLogout);
         viewMenuBtn = (Button) findViewById(R.id.viewMenuBtn);
         addMealBtn = (Button) findViewById(R.id.addMealBtn);
+        viewProfileBtn = (Button) findViewById(R.id.viewProfileBtn);
 
 
         DR = FirebaseDatabase.getInstance().getReference("Users/Cooks");
@@ -53,6 +55,7 @@ public class Cook_Homepage extends AppCompatActivity  implements View.OnClickLis
         viewMenuBtn.setOnClickListener(this);
         addMealBtn.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
+        viewProfileBtn.setOnClickListener(this);
     }
 
     /**
@@ -70,6 +73,10 @@ public class Cook_Homepage extends AppCompatActivity  implements View.OnClickLis
             startActivity(intent);
         }if (v.getId() == R.id.addMealBtn){
             Intent intent = new Intent(this,Meal_Page.class);
+            intent.putExtra("cookID", cookID);
+            startActivity(intent);
+        }if (v.getId() == R.id.viewProfileBtn){
+            Intent intent = new Intent(this,Profile_Page.class);
             intent.putExtra("cookID", cookID);
             startActivity(intent);
         }

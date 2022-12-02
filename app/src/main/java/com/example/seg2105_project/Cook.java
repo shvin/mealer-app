@@ -13,7 +13,8 @@ public class Cook extends User{
     private boolean banned;
     private boolean suspended;
     private int daysSuspended;
-    private ArrayList<Integer> ratings = new ArrayList<>();
+    private double totalRatings;
+    private int numOfRatings;
     private ArrayList<Meal> menu = new ArrayList<>();
     private ArrayList<Meal> mealsRequest = new ArrayList<>();
 
@@ -42,6 +43,8 @@ public class Cook extends User{
         this.suspended = false;
         this.daysSuspended = 0;
         this.banned = false;
+        totalRatings = 0;
+        numOfRatings = 0;
     }
 
     public Cook(String id, String firstName, String lastName, String email, String password, String address, String description, int mealsSold, double averageRating, boolean suspended, int daysSuspended, boolean banned) {
@@ -52,6 +55,8 @@ public class Cook extends User{
         this.suspended = suspended;
         this.daysSuspended = daysSuspended;
         this.banned = banned;
+        totalRatings = 0;
+        numOfRatings = 0;
     }
 
 
@@ -112,40 +117,27 @@ public class Cook extends User{
         banned = ban;
     }
 
-    public ArrayList<Integer> getRatings() {
-        return ratings;
+    public double getTotalRatings() {
+        return totalRatings;
     }
 
-    public void setRatings(ArrayList<Integer> ratings) {
-        this.ratings = ratings;
+    public void addToTotalRatings(double totalRatings) {
+        this.totalRatings+= this.totalRatings + totalRatings;
     }
 
-    public ArrayList<Meal> getMenu() {
-        return menu;
+    public int getNumOfRatings(){return numOfRatings;}
+
+    public void incrementNumOfRatings(){
+        this.numOfRatings+=1;
     }
 
-    public void setMenu(ArrayList<Meal> menu) {
-        this.menu = menu;
-    }
-
-    public void addMeal (Meal meal){
-        menu.add(meal);
-    }
-
-    public ArrayList<Meal> getMealsRequest() {
-        return mealsRequest;
-    }
-
-    public void setMealsRequest(ArrayList<Meal> mealsRequest) {
-        this.mealsRequest = mealsRequest;
-    }
-
-    public void calculateAverageRating(){
-        int sum = 0;
-        for (int i = 0; i < ratings.size(); i++){
-            sum += ratings.get(i);
+    public double calculateAverageRating(){
+        double average = 0;
+        if (numOfRatings == 0 || totalRatings == 0) return 0.0;
+        else {
+            average = totalRatings/numOfRatings;
         }
-        averageRating = Math.round((sum/ratings.size())*10)/10.0;
+        return average;
     }
 
 }
