@@ -1,45 +1,55 @@
 package com.example.seg2105_project;
 
 public class Order {
-    int cookId;
-    int mealId;
-    int clientId;
+    String id;
+    String cookId;
+    String mealId;
+    String clientId;
     boolean pending;
     boolean approved;
     boolean rejected;
 
     public Order(){}
 
-    public Order(int cookId, int mealId, int clientId, boolean pending, boolean approved, boolean rejected) {
+    public Order(String id, String cookId, String mealId, String clientId, boolean pending, boolean approved, boolean rejected) {
+        this.id = id;
         this.cookId = cookId;
         this.mealId = mealId;
         this.clientId = clientId;
-        this.pending = true;
-        this.approved = false;
-        this.rejected = false;
+        this.pending = pending;
+        this.approved = approved;
+        this.rejected = rejected;
     }
 
-    public int getCookId() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getCookId() {
         return cookId;
     }
 
-    public void setCookId(int cookId) {
+    public void setCookId(String cookId) {
         this.cookId = cookId;
     }
 
-    public int getMealId() {
+    public String getMealId() {
         return mealId;
     }
 
-    public void setMealId(int mealId) {
+    public void setMealId(String mealId) {
         this.mealId = mealId;
     }
 
-    public int getClientId() {
+    public String getClientId() {
         return clientId;
     }
 
-    public void setClientId(int clientId) {
+    public void setClientId(String clientId) {
         this.clientId = clientId;
     }
 
