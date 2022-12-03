@@ -16,6 +16,7 @@ public class Client_Homepage extends AppCompatActivity  implements View.OnClickL
     Button btnLogout;
     Button btnSearch;
     Button btnStatus;
+    private String clientID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,9 @@ public class Client_Homepage extends AppCompatActivity  implements View.OnClickL
         btnLogout = (Button) findViewById(R.id.btnLogout);
         btnSearch = (Button) findViewById(R.id.btnSearch);
         btnStatus = (Button) findViewById(R.id.btnStatus);
+
+        Intent intent = getIntent();
+        clientID = intent.getStringExtra("clientID");
 
         btnSearch.setOnClickListener(this);
         btnStatus.setOnClickListener(this);
@@ -40,10 +44,12 @@ public class Client_Homepage extends AppCompatActivity  implements View.OnClickL
             Intent intent = new Intent(this, Register_Login_Page.class);
             startActivity(intent);
         } else if(v.getId() == R.id.btnSearch){
-            Intent intent = new Intent(this, Search_Meals_Page.class);
+            Intent intent = new Intent(this,Search_Meals_Page.class);
+            intent.putExtra("clientID", clientID);
             startActivity(intent);
         } else if(v.getId() == R.id.btnStatus){
-            Intent intent = new Intent(this, Search_Meals_Page.class);
+            Intent intent = new Intent(this,Search_Meals_Page.class);
+            intent.putExtra("clientID", clientID);
             startActivity(intent);
         }
     }
