@@ -8,13 +8,16 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -35,12 +38,15 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
 
     Button btnBack_Search;
     Button btn_Search;
-    Button name_search;
-    Button cuisine_search;
-    Button meal_search;
     private ListView listViewSearchResults;
     private EditText searchBar;
+    CheckBox nameFilter;
+    CheckBox cuisineFilter;
+    CheckBox typeFilter;
 
+    Boolean nameChecked;
+    Boolean cuisineChecked;
+    Boolean typeChecked;
     Cook cook;
 
     private String clientID;
@@ -55,16 +61,15 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_client_search);
         btnBack_Search = (Button) findViewById(R.id.btnBack_Search);
         btn_Search = (Button) findViewById(R.id.btn_Search);
-        name_search = (Button) findViewById(R.id.name_search);
-        meal_search = (Button) findViewById(R.id.meal_search);
-        cuisine_search = (Button) findViewById(R.id.cuisine_search);
         listViewSearchResults = (ListView) findViewById(R.id.listViewSearchResults);
 
         DR = FirebaseDatabase.getInstance().getReference("Meals");
         searchResultsList = new ArrayList<>();
         searchResultAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, searchResultsList);
         searchBar = (EditText) findViewById(R.id.searchBar);
-
+        nameFilter = (CheckBox)findViewById(R.id.nameCB);
+        typeFilter = (CheckBox)findViewById(R.id.typeCB);
+        cuisineFilter = (CheckBox)findViewById(R.id.cuisineCB);
 
 
         Intent intent = getIntent();
@@ -73,9 +78,6 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
         listViewSearchResults.setAdapter(searchResultAdapter);
         btnBack_Search.setOnClickListener(this);
         btn_Search.setOnClickListener(this);
-        name_search.setOnClickListener(this);
-        meal_search.setOnClickListener(this);
-        cuisine_search.setOnClickListener(this);
 
 
         fillSearchResultsArray();
@@ -89,9 +91,13 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
      */
     @Override
     public void onClick(View v) {
-        String searchAttemptName = searchBar.getText().toString().trim().toLowerCase();
+        String searchAttempt = searchBar.getText().toString().trim().toLowerCase();
 
-        Boolean filled = searchAttemptName.length()!=0;
+        Boolean filled = searchAttempt.length()!=0;
+
+        nameChecked = nameFilter.isChecked();
+        cuisineChecked = cuisineFilter.isChecked();
+        typeChecked =typeFilter.isChecked();
 
         if(v.getId() == R.id.btnBack_Search){
             Intent intent = new Intent(this,Client_Homepage.class);
@@ -101,15 +107,21 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
         if (v.getId() == R.id.btn_Search){
             if (filled){
                 searchResultsList.clear();
-                fillSearchResultsArray(searchAttemptName,searchAttemptType,searchAttemptCuisine,nameFilled,typeFilled,cuisineFilled);
+                if (!nameChecked && !typeChecked && !cuisineChecked ){
+                    fillSearchResultsArray(searchAttempt,true,true,true);
+                } else{
+                    fillSearchResultsArray(searchAttempt,nameChecked,typeChecked,cuisineChecked);
+                }
+
                 searchResultAdapter.notifyDataSetChanged();
             } else {
                 searchResultsList.clear();
                 fillSearchResultsArray();
             }
         }
-    }
 
+
+    }
     private void onItemLongClick() {
         listViewSearchResults.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -250,17 +262,17 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
     }
 
     Boolean mealEntered = false;
-    public void fillSearchResultsArray(String enteredName, String enteredType, String enteredCuisine, Boolean name, Boolean type, Boolean cuisine){
+    public void fillSearchResultsArray(String entered, Boolean name, Boolean type, Boolean cuisine){
+
         DR.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
                 Meal meal = dataSnapshot.getValue(Meal.class);
 
                 if (meal.isOffered()) {
-
                     if (name) {
                         if (meal.getName() != null) {
-                            if (meal.getName().toLowerCase().contains(enteredName)) {
+                            if (meal.getName().toLowerCase().contains(entered)) {
                                 searchResultsList.add(meal);
                                 mealEntered = true;
                             }
@@ -268,7 +280,7 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
                     }
                     if (type) {
                         if (meal.getMealType() != null) {
-                            if (meal.getMealType().toLowerCase().contains(enteredType) && !mealEntered) {
+                            if (meal.getMealType().toLowerCase().contains(entered) && !mealEntered) {
                                 searchResultsList.add(meal);
                                 mealEntered = true;
                             }
@@ -277,7 +289,7 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
 
                     if (cuisine) {
                         if (meal.getCuisineType() != null) {
-                            if (meal.getCuisineType().toLowerCase().contains(enteredCuisine) && !mealEntered) {
+                            if (meal.getCuisineType().toLowerCase().contains(entered) && !mealEntered) {
                                 searchResultsList.add(meal);
                                 mealEntered = true;
                             }

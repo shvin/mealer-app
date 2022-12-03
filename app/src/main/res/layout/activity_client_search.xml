@@ -33,23 +33,24 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/name_search"
+            <CheckBox
+                android:id="@+id/nameCB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Name" />
+                android:text="Meal Name" />
 
-            <Button
-                android:id="@+id/cuisine_search"
+            <CheckBox
+                android:id="@+id/typeCB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cuisine"/>
+                android:text="Meal Type" />
 
-            <Button
-                android:id="@+id/meal_search"
-                android:layout_width="match_parent"
+            <CheckBox
+                android:id="@+id/cuisineCB"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Meal" />
+                android:layout_weight="1"
+                android:text="Cuisine" />
         </LinearLayout>
 
 
