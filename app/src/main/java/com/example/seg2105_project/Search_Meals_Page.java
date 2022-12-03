@@ -1,36 +1,49 @@
 package com.example.seg2105_project;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 
 public class Search_Meals_Page extends AppCompatActivity implements View.OnClickListener{
 
     Button btnBack_Search;
     Button btn_Search;
+    Button name_search;
+    Button cuisine_search;
+    Button meal_search;
     private ListView listViewSearchResults;
-    private EditText searchBarName;
-    private EditText searchBarType;
-    private EditText searchBarCuisine;
+    private EditText searchBar;
 
+    Cook cook;
 
+    private String clientID;
     private DatabaseReference DR;
     private ArrayList<Meal> searchResultsList;
     private ArrayAdapter<Meal> searchResultAdapter;
@@ -42,20 +55,32 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_client_search);
         btnBack_Search = (Button) findViewById(R.id.btnBack_Search);
         btn_Search = (Button) findViewById(R.id.btn_Search);
+        name_search = (Button) findViewById(R.id.name_search);
+        meal_search = (Button) findViewById(R.id.meal_search);
+        cuisine_search = (Button) findViewById(R.id.cuisine_search);
         listViewSearchResults = (ListView) findViewById(R.id.listViewSearchResults);
 
         DR = FirebaseDatabase.getInstance().getReference("Meals");
         searchResultsList = new ArrayList<>();
         searchResultAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, searchResultsList);
-        searchBarName = (EditText) findViewById(R.id.searchBarName);
-        searchBarType = (EditText) findViewById(R.id.searchBarType);
-        searchBarCuisine = (EditText) findViewById(R.id.searchBarCuisine);
+        searchBar = (EditText) findViewById(R.id.searchBar);
+
+
+
+        Intent intent = getIntent();
+        clientID = intent.getStringExtra("clientID");
 
         listViewSearchResults.setAdapter(searchResultAdapter);
         btnBack_Search.setOnClickListener(this);
         btn_Search.setOnClickListener(this);
+        name_search.setOnClickListener(this);
+        meal_search.setOnClickListener(this);
+        cuisine_search.setOnClickListener(this);
+
 
         fillSearchResultsArray();
+
+        onItemLongClick();
     }
 
     /**
@@ -64,20 +89,17 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
      */
     @Override
     public void onClick(View v) {
-        String searchAttemptName = searchBarName.getText().toString().trim().toLowerCase();
-        String searchAttemptType = searchBarType.getText().toString().trim().toLowerCase();
-        String searchAttemptCuisine = searchBarCuisine.getText().toString().trim().toLowerCase();
+        String searchAttemptName = searchBar.getText().toString().trim().toLowerCase();
 
-        Boolean nameFilled = searchAttemptName.length()!=0;
-        Boolean typeFilled = searchAttemptType.length()!=0;
-        Boolean cuisineFilled = searchAttemptCuisine.length()!=0;
+        Boolean filled = searchAttemptName.length()!=0;
 
         if(v.getId() == R.id.btnBack_Search){
-            Intent intent = new Intent(this, Client_Homepage.class);
+            Intent intent = new Intent(this,Client_Homepage.class);
+            intent.putExtra("clientID", clientID);
             startActivity(intent);
         }
         if (v.getId() == R.id.btn_Search){
-            if (nameFilled ||typeFilled || cuisineFilled){
+            if (filled){
                 searchResultsList.clear();
                 fillSearchResultsArray(searchAttemptName,searchAttemptType,searchAttemptCuisine,nameFilled,typeFilled,cuisineFilled);
                 searchResultAdapter.notifyDataSetChanged();
@@ -87,6 +109,110 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
             }
         }
     }
+
+    private void onItemLongClick() {
+        listViewSearchResults.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Meal meal = searchResultsList.get(i);
+                dismissSuspendDialog(meal);
+                return true;
+            }
+        });
+    }
+
+    private void dismissSuspendDialog(Meal meal){
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View newView = inflater.inflate(R.layout.view_meal_dialog, null);
+        alertDialog.setView(newView);
+
+        TextView cookName = (TextView) newView.findViewById(R.id.cookName);
+        TextView address = (TextView) newView.findViewById(R.id.address);
+        TextView descriptionCook = (TextView) newView.findViewById(R.id.descriptionCook);
+        TextView ratings = (TextView) newView.findViewById(R.id.ratings);
+        TextView mealName = (TextView) newView.findViewById(R.id.mealName);
+        TextView descriptionMeal = (TextView) newView.findViewById(R.id.descriptionMeal);
+        TextView mealType = (TextView) newView.findViewById(R.id.mealType);
+        TextView cuisineType = (TextView) newView.findViewById(R.id.cuisineType);
+        TextView price = (TextView) newView.findViewById(R.id.price);
+
+        Button orderBtn = (Button) newView.findViewById(R.id.orderBtn);
+        Button dismissBtn = (Button) newView.findViewById(R.id.dismissBtn);
+
+//        searchCook(meal.getCookID());
+//
+//        System.out.println(cook.getId());
+
+//         Cook information
+//        cookName.setText(cook.getFirstName() + " " + cook.getLastName());
+//        address.setText(cook.getAddress());
+//        descriptionCook.setText(cook.getDescription());
+//        ratings.setText(String.valueOf(cook.calculateAverageRating()));
+//
+        // Meal information
+        mealName.setText(meal.getName());
+        descriptionMeal.setText(meal.getDescription());
+        mealType.setText(meal.getMealType());
+        cuisineType.setText(meal.getCuisineType());
+        price.setText(String.valueOf(meal.getPrice()));
+
+        alertDialog.setTitle("Cook/Meal information");
+        AlertDialog other = alertDialog.create();
+        other.show();
+
+        dismissBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                other.dismiss();
+            }
+        });
+
+        orderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                writeNewOrder(meal);
+                other.dismiss();
+            }
+        });
+    }
+
+    private void writeNewOrder(Meal meal){
+            DatabaseReference DR2 = FirebaseDatabase.getInstance().getReference("Orders");
+
+            UUID randID = UUID.randomUUID();
+            String randIDString = randID.toString();
+            Order order = new Order(randIDString, meal.getCookID(), meal.getId(), clientID, true, false, false);
+            DR2.child(randIDString).setValue(order);
+    }
+
+    public void searchCook(String cookID){
+        DatabaseReference DR1 = FirebaseDatabase.getInstance().getReference("Users/Cooks");
+        DR1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Cook currentCook = data.getValue(Cook.class);
+                    if (cookID.equals(currentCook.getId())) {
+                        System.out.println("HERE");
+                        writeCook(currentCook);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void writeCook(Cook cook){
+        this.cook = cook;
+        System.out.println(this.cook.getId());
+    }
+
 
     public void fillSearchResultsArray(){
         DR.addChildEventListener(new ChildEventListener() {
@@ -122,6 +248,7 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
             }
         });
     }
+
     Boolean mealEntered = false;
     public void fillSearchResultsArray(String enteredName, String enteredType, String enteredCuisine, Boolean name, Boolean type, Boolean cuisine){
         DR.addChildEventListener(new ChildEventListener() {
