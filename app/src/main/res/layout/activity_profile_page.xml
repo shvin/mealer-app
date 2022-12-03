@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:text="Description: "
             android:textSize="15dp"
-            android:marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"/>
 
         <TextView
             android:id="@+id/descriptionCook"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:text="Number of meals sold: "
             android:textSize="15dp"
-            android:marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"/>
 
         <TextView
             android:id="@+id/mealsSold"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:text="Rating: "
             android:textSize="15dp"
-            android:marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"/>
 
         <TextView
             android:id="@+id/rating"
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:text="Email: "
             android:textSize="15dp"
-            android:marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"/>
 
         <TextView
             android:id="@+id/email"
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:text="Name: "
             android:textSize="15dp"
-            android:marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"/>
 
         <TextView
             android:id="@+id/name"
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:text="Address: "
             android:textSize="15dp"
-            android:marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"/>
 
         <TextView
             android:id="@+id/address"

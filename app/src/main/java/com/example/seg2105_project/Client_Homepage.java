@@ -42,6 +42,9 @@ public class Client_Homepage extends AppCompatActivity  implements View.OnClickL
         } else if(v.getId() == R.id.btnSearch){
             Intent intent = new Intent(this, Search_Meals_Page.class);
             startActivity(intent);
+        } else if(v.getId() == R.id.btnStatus){
+            Intent intent = new Intent(this, Search_Meals_Page.class);
+            startActivity(intent);
         }
     }
 }
