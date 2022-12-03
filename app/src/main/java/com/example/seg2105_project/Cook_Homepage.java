@@ -25,6 +25,7 @@ public class Cook_Homepage extends AppCompatActivity  implements View.OnClickLis
     private Button viewMenuBtn;
     private Button addMealBtn;
     private Button viewProfileBtn;
+    private Button purchaseRequestsBtn;
     private TextView typeOfSuspension;
     private TextView suspensionLength;
     private String cookID;
@@ -42,6 +43,7 @@ public class Cook_Homepage extends AppCompatActivity  implements View.OnClickLis
         viewMenuBtn = (Button) findViewById(R.id.viewMenuBtn);
         addMealBtn = (Button) findViewById(R.id.addMealBtn);
         viewProfileBtn = (Button) findViewById(R.id.viewProfileBtn);
+        purchaseRequestsBtn = (Button) findViewById(R.id.purchaseRequestsBtn);
 
 
         DR = FirebaseDatabase.getInstance().getReference("Users/Cooks");
@@ -56,6 +58,7 @@ public class Cook_Homepage extends AppCompatActivity  implements View.OnClickLis
         addMealBtn.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
         viewProfileBtn.setOnClickListener(this);
+        purchaseRequestsBtn.setOnClickListener(this);
     }
 
     /**
@@ -67,16 +70,24 @@ public class Cook_Homepage extends AppCompatActivity  implements View.OnClickLis
         if(v.getId() == R.id.btnLogout){
             Intent intent = new Intent(this, Register_Login_Page.class);
             startActivity(intent);
-        }if (v.getId() == R.id.viewMenuBtn){
+        }
+        if (v.getId() == R.id.viewMenuBtn){
             Intent intent = new Intent(this,Cook_Menu_Page.class);
             intent.putExtra("cookID", cookID);
             startActivity(intent);
-        }if (v.getId() == R.id.addMealBtn){
+        }
+        if (v.getId() == R.id.addMealBtn){
             Intent intent = new Intent(this,Meal_Page.class);
             intent.putExtra("cookID", cookID);
             startActivity(intent);
-        }if (v.getId() == R.id.viewProfileBtn){
+        }
+        if (v.getId() == R.id.viewProfileBtn){
             Intent intent = new Intent(this,Profile_Page.class);
+            intent.putExtra("cookID", cookID);
+            startActivity(intent);
+        }
+        if (v.getId() == R.id.purchaseRequestsBtn){
+            Intent intent = new Intent(this,Cook_Requests_Page.class);
             intent.putExtra("cookID", cookID);
             startActivity(intent);
         }

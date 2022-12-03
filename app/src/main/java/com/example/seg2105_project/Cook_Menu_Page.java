@@ -1,7 +1,5 @@
 package com.example.seg2105_project;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,14 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +21,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -149,8 +143,8 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
         alertDialog.setView(newView);
 
         TextView nameOfDialog = (TextView) newView.findViewById(R.id.nameOfDialog);
-        Button addMeal = (Button) newView.findViewById(R.id.add_meal);
-        Button removeMeal = (Button) newView.findViewById(R.id.remove_meal);
+        Button addMeal = (Button) newView.findViewById(R.id.btnAccept);
+        Button removeMeal = (Button) newView.findViewById(R.id.btnReject);
         Button dismissBtn = (Button) newView.findViewById(R.id.dismissBtn);
 
         nameOfDialog.setText("Add/remove meals");

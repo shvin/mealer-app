@@ -133,7 +133,7 @@ public class Offered_Meals_Page extends AppCompatActivity implements View.OnClic
         alertDialog.setView(newView);
 
         TextView nameOfDialog = (TextView) newView.findViewById(R.id.nameOfDialog);
-        Button removeMeal = (Button) newView.findViewById(R.id.remove_meal);
+        Button removeMeal = (Button) newView.findViewById(R.id.btnReject);
         Button dismissBtn = (Button) newView.findViewById(R.id.dismissBtn);
 
         nameOfDialog.setText("Add/remove meals");
