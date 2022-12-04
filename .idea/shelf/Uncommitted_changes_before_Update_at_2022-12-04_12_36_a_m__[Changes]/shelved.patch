@@ -1,0 +1,66 @@
+Index: app/src/main/java/com/example/seg2105_project/Meal.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.seg2105_project;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class Meal {\r\n    private String id;\r\n    private String cookID;\r\n    private String name;\r\n    private String mealType;\r\n    private String cuisineType;\r\n    private String ingredients;\r\n    private String allergens;\r\n    private double price;\r\n    private String description;\r\n    private boolean offered;\r\n\r\n    public Meal(){}\r\n\r\n    public Meal(String id, String cookID, String name, String mealType, String cuisineType, String ingredients, String allergens, double price, String description) {\r\n        this.id = id;\r\n        this.cookID = cookID;\r\n        this.name = name;\r\n        this.mealType = mealType;\r\n        this.cuisineType = cuisineType;\r\n        this.ingredients = ingredients;\r\n        this.allergens = allergens;\r\n        this.price = price;\r\n        this.description = description;\r\n        this.offered = false;\r\n    }\r\n\r\n    public Meal(String id, String cookID, String name, String mealType, String cuisineType, String ingredients, String allergens, double price, String description, Boolean offered) {\r\n        this.id = id;\r\n        this.cookID = cookID;\r\n        this.name = name;\r\n        this.mealType = mealType;\r\n        this.cuisineType = cuisineType;\r\n        this.ingredients = ingredients;\r\n        this.allergens = allergens;\r\n        this.price = price;\r\n        this.description = description;\r\n        this.offered = offered;\r\n    }\r\n\r\n    public String getId() {\r\n        return id;\r\n    }\r\n\r\n    public void setId(String id) {\r\n        this.id = id;\r\n    }\r\n\r\n    public String getCookID() {return cookID; }\r\n\r\n    public void setCookID(String cookID) { this.cookID = cookID; }\r\n\r\n    public String getName() {\r\n        return name;\r\n    }\r\n\r\n    public void setName(String name) {\r\n        this.name = name;\r\n    }\r\n\r\n    public String getMealType() {\r\n        return mealType;\r\n    }\r\n\r\n    public void setMealType(String mealType) {\r\n        this.mealType = mealType;\r\n    }\r\n\r\n    public String getCuisineType() {\r\n        return cuisineType;\r\n    }\r\n\r\n    public void setCuisineType(String cuisineType) {\r\n        this.cuisineType = cuisineType;\r\n    }\r\n\r\n    public String getIngredients() {\r\n        return ingredients;\r\n    }\r\n\r\n    public void setIngredients(String ingredients) {\r\n        this.ingredients = ingredients;\r\n    }\r\n\r\n    public String getAllergens() {\r\n        return allergens;\r\n    }\r\n\r\n    public void setAllergens(String allergens) {\r\n        this.allergens = allergens;\r\n    }\r\n\r\n    public double getPrice() {\r\n        return price;\r\n    }\r\n\r\n    public void setPrice(double price) {\r\n        this.price = price;\r\n    }\r\n\r\n    public String getDescription() {\r\n        return description;\r\n    }\r\n\r\n    public void setDescription(String description) {\r\n        this.description = description;\r\n    }\r\n\r\n    public boolean isOffered() {\r\n        return offered;\r\n    }\r\n\r\n    public void setOffered(boolean offered) {\r\n        this.offered = offered;\r\n    }\r\n\r\n    public String toString(){\r\n        return \"Meal name: \" + name + \"\\n\" + \" Price: \" + price;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/seg2105_project/Meal.java b/app/src/main/java/com/example/seg2105_project/Meal.java
+--- a/app/src/main/java/com/example/seg2105_project/Meal.java	(revision 4e47f0ab6ee2d70350a9c9fe594a8141b83b5cb2)
++++ b/app/src/main/java/com/example/seg2105_project/Meal.java	(date 1670131949695)
+@@ -13,6 +13,7 @@
+     private double price;
+     private String description;
+     private boolean offered;
++    private boolean available;
+ 
+     public Meal(){}
+ 
+@@ -27,6 +28,7 @@
+         this.price = price;
+         this.description = description;
+         this.offered = false;
++        this.available = true;
+     }
+ 
+     public Meal(String id, String cookID, String name, String mealType, String cuisineType, String ingredients, String allergens, double price, String description, Boolean offered) {
+@@ -118,6 +120,14 @@
+         this.offered = offered;
+     }
+ 
++    public boolean isAvailable() {
++        return available;
++    }
++
++    public void setAvailable(boolean available) {
++        this.available = available;
++    }
++
+     public String toString(){
+         return "Meal name: " + name + "\n" + " Price: " + price;
+     }
+Index: .idea/deploymentTargetDropDown.xml
+===================================================================
+diff --git a/.idea/deploymentTargetDropDown.xml b/.idea/deploymentTargetDropDown.xml
+deleted file mode 100644
+--- a/.idea/deploymentTargetDropDown.xml	(revision 4e47f0ab6ee2d70350a9c9fe594a8141b83b5cb2)
++++ /dev/null	(revision 4e47f0ab6ee2d70350a9c9fe594a8141b83b5cb2)
+@@ -1,17 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="deploymentTargetDropDown">
+-    <targetSelectedWithDropDown>
+-      <Target>
+-        <type value="QUICK_BOOT_TARGET" />
+-        <deviceKey>
+-          <Key>
+-            <type value="VIRTUAL_DEVICE_PATH" />
+-            <value value="$USER_HOME$/.android/avd/Resizable_Experimental_API_33.avd" />
+-          </Key>
+-        </deviceKey>
+-      </Target>
+-    </targetSelectedWithDropDown>
+-    <timeTargetWasSelectedWithDropDown value="2022-11-17T19:14:00.574021Z" />
+-  </component>
+-</project>
+\ No newline at end of file

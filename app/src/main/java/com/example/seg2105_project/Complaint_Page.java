@@ -40,8 +40,10 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
 
     private ListView listViewComplaints;
     private DatabaseReference DR;
+    private DatabaseReference DR2;
     private ArrayList<Complaint> complaintsList;
     private ArrayAdapter<Complaint> complaintsAdapter;
+    private ArrayList<Meal> unavailable;
     private Button backBtn;
     private Button updateBtn;
     private String clickedComplaint;
@@ -55,10 +57,12 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
 
         listViewComplaints = (ListView) findViewById(R.id.listViewComplaints);
         DR = FirebaseDatabase.getInstance().getReference("Complaints");
+        DR2 = FirebaseDatabase.getInstance().getReference("Meals");
         backBtn = (Button) findViewById(R.id.backBtn);
         updateBtn = (Button) findViewById(R.id.updateBtn);
 
         complaintsList = new ArrayList<>();
+        unavailable = new ArrayList<>();
         complaintsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, complaintsList);
         listViewComplaints.setAdapter(complaintsAdapter);
 
@@ -231,12 +235,16 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
                             Cook newCook = new Cook(cook.getId(),cook.getFirstName(),cook.getLastName(),cook.getEmail(),cook.getPassword(),cook.getAddress(),
                                     cook.getDescription(),cook.getMealsSold(), cook.getTotalRatings(), cook.getNumOfRatings(), false, 0, true);
                             dataBaseR1.child(cook.getId()).setValue(newCook);
+                            setMealsUnavailable(cook.getId());
+                            goThroughList();
                             break;
                         }
                         if (banOrSuspend == 1) {
                             Cook newCook = new Cook(cook.getId(),cook.getFirstName(),cook.getLastName(),cook.getEmail(),cook.getPassword(),cook.getAddress(),
                                     cook.getDescription(),cook.getMealsSold(), cook.getTotalRatings(), cook.getNumOfRatings(), false, 0, true);
                             dataBaseR1.child(cook.getId()).setValue(newCook);
+                            setMealsUnavailable(cook.getId());
+                            goThroughList();
                             break;
                         }
                     }
@@ -246,8 +254,60 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.e(TAG, "onCancelled: Something went wrong! Error:" + databaseError.getMessage());
             }
-            });
+        });
+    }
+
+
+    public void setMealsUnavailable(String cookID){
+
+        DR2.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
+                Meal meal = dataSnapshot.getValue(Meal.class);
+                if (meal.getCookID().equals(cookID)){
+                    updateMeal(meal);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+    private void goThroughList(){
+        for(Meal m:unavailable){
+            updateMeal(m);
+            System.out.println("5");
         }
+    }
+
+
+    private void updateMeal(Meal meal){
+        System.out.println("2231");
+        DatabaseReference DR3 = FirebaseDatabase.getInstance().getReference("Meals");
+        Meal newMeal = new Meal(meal.getId(),meal.getCookID(),meal.getName(),meal.getMealType(),meal.getCuisineType(),meal.getIngredients(),meal.getAllergens(),meal.getPrice(),
+                meal.getDescription(), false, false);
+        DR3.child(meal.getId()).setValue(newMeal);
+    }
+
 
 }
 

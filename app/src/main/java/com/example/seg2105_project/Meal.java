@@ -13,6 +13,7 @@ public class Meal {
     private double price;
     private String description;
     private boolean offered;
+    private boolean available;
 
     public Meal(){}
 
@@ -27,6 +28,7 @@ public class Meal {
         this.price = price;
         this.description = description;
         this.offered = false;
+        this.available = true;
     }
 
     public Meal(String id, String cookID, String name, String mealType, String cuisineType, String ingredients, String allergens, double price, String description, Boolean offered) {
@@ -40,7 +42,23 @@ public class Meal {
         this.price = price;
         this.description = description;
         this.offered = offered;
+        this.available = true;
     }
+
+    public Meal(String id, String cookID, String name, String mealType, String cuisineType, String ingredients, String allergens, double price, String description, Boolean offered, Boolean available) {
+        this.id = id;
+        this.cookID = cookID;
+        this.name = name;
+        this.mealType = mealType;
+        this.cuisineType = cuisineType;
+        this.ingredients = ingredients;
+        this.allergens = allergens;
+        this.price = price;
+        this.description = description;
+        this.offered = offered;
+        this.available = available;
+    }
+
 
     public String getId() {
         return id;
@@ -116,6 +134,14 @@ public class Meal {
 
     public void setOffered(boolean offered) {
         this.offered = offered;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
     public String toString(){

@@ -47,12 +47,17 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
     Boolean nameChecked;
     Boolean cuisineChecked;
     Boolean typeChecked;
-    Cook cook;
 
     private String clientID;
     private DatabaseReference DR;
     private ArrayList<Meal> searchResultsList;
     private ArrayAdapter<Meal> searchResultAdapter;
+    String firstName;
+    String lastName;
+    String addressRetrieved;
+    String email;
+    String description;
+    String ratingRetrieved;
 
 
     @Override
@@ -70,6 +75,13 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
         nameFilter = (CheckBox)findViewById(R.id.nameCB);
         typeFilter = (CheckBox)findViewById(R.id.typeCB);
         cuisineFilter = (CheckBox)findViewById(R.id.cuisineCB);
+
+        firstName ="";
+        lastName = "";
+        addressRetrieved = "";
+        email= "";
+        description = "";
+        ratingRetrieved = "";
 
 
         Intent intent = getIntent();
@@ -93,24 +105,24 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         String searchAttempt = searchBar.getText().toString().trim().toLowerCase();
 
-        Boolean filled = searchAttempt.length()!=0;
+        Boolean filled = searchAttempt.length() != 0;
 
         nameChecked = nameFilter.isChecked();
         cuisineChecked = cuisineFilter.isChecked();
-        typeChecked =typeFilter.isChecked();
+        typeChecked = typeFilter.isChecked();
 
-        if(v.getId() == R.id.btnBack_Search){
-            Intent intent = new Intent(this,Client_Homepage.class);
+        if (v.getId() == R.id.btnBack_Search) {
+            Intent intent = new Intent(this, Client_Homepage.class);
             intent.putExtra("clientID", clientID);
             startActivity(intent);
         }
-        if (v.getId() == R.id.btn_Search){
-            if (filled){
+        if (v.getId() == R.id.btn_Search) {
+            if (filled) {
                 searchResultsList.clear();
-                if (!nameChecked && !typeChecked && !cuisineChecked ){
-                    fillSearchResultsArray(searchAttempt,true,true,true);
-                } else{
-                    fillSearchResultsArray(searchAttempt,nameChecked,typeChecked,cuisineChecked);
+                if (!nameChecked && !typeChecked && !cuisineChecked) {
+                    fillSearchResultsArray(searchAttempt, true, true, true);
+                } else {
+                    fillSearchResultsArray(searchAttempt, nameChecked, typeChecked, cuisineChecked);
                 }
 
                 searchResultAdapter.notifyDataSetChanged();
@@ -119,21 +131,65 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
                 fillSearchResultsArray();
             }
         }
-
-
     }
+
     private void onItemLongClick() {
         listViewSearchResults.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Meal meal = searchResultsList.get(i);
-                dismissSuspendDialog(meal);
+                retrieveCookInfo(meal, meal.getCookID());
+                System.out.println(1);
+                System.out.println(firstName);
+                System.out.println(lastName);
+
                 return true;
             }
         });
     }
 
-    private void dismissSuspendDialog(Meal meal){
+    public void retrieveCookInfo(Meal meal, String cookID) {
+        DatabaseReference DR1 = FirebaseDatabase.getInstance().getReference("Users/Cooks");
+        DR1.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
+                Cook cook = dataSnapshot.getValue(Cook.class);
+                if (cook.getId().equals(cookID)) {
+                    firstName = cook.getFirstName();
+                    lastName = cook.getLastName();
+                    addressRetrieved = cook.getAddress();
+                    email = cook.getEmail();
+                    description = cook.getDescription();
+                    ratingRetrieved = String.valueOf(cook.getAverageRating());
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        if (ratingRetrieved.length() > 0) {
+            dismissSuspendDialog(meal, firstName, lastName, addressRetrieved, email, description, ratingRetrieved);
+        }
+    }
+
+    private void dismissSuspendDialog(Meal meal, String firstName2, String lastName2, String addressRetrieved2, String email2, String description2, String ratingRetrieved2){
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -142,6 +198,7 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
 
         TextView cookName = (TextView) newView.findViewById(R.id.cookName);
         TextView address = (TextView) newView.findViewById(R.id.address);
+        TextView emailCook = (TextView) newView.findViewById(R.id.email);
         TextView descriptionCook = (TextView) newView.findViewById(R.id.descriptionCook);
         TextView ratings = (TextView) newView.findViewById(R.id.ratings);
         TextView mealName = (TextView) newView.findViewById(R.id.mealName);
@@ -153,17 +210,12 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
         Button orderBtn = (Button) newView.findViewById(R.id.orderBtn);
         Button dismissBtn = (Button) newView.findViewById(R.id.dismissBtn);
 
-        System.out.println("1");
-//        searchCook(meal.getCookID());
-        System.out.println("2");
-
-//        System.out.println(cook.getId());
-
         //Cook information
-//        cookName.setText(cook.getFirstName() + " " + cook.getLastName());
-//        address.setText(cook.getAddress());
-//        descriptionCook.setText(cook.getDescription());
-//        ratings.setText(String.valueOf(cook.getAverageRating()));
+        cookName.setText(firstName2+ " " + lastName2);
+        address.setText(addressRetrieved2);
+        emailCook.setText(email2);
+        descriptionCook.setText(description2);
+        ratings.setText(String.valueOf(ratingRetrieved2));
 
         // Meal information
         mealName.setText(meal.getName());
@@ -201,10 +253,7 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
             DR2.child(randIDString).setValue(order);
     }
 
-//    public void searchCook(String cookID){
-//        retrievingCook rc = new retrievingCook(cookID);
-//        cook =rc.getCook();
-//    }
+
 
 //    public void searchCook(String cookID){
 //        System.out.println("3");
@@ -236,13 +285,14 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
 //    }
 
 
+
     public void fillSearchResultsArray(){
         DR.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
 
                 Meal meal = dataSnapshot.getValue(Meal.class);
-                if (meal.isOffered()) {
+                if (meal.isOffered() && meal.isAvailable()) {
                     searchResultsList.add(meal);
                     searchResultAdapter.notifyDataSetChanged();
                 }
@@ -279,7 +329,7 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
                 Meal meal = dataSnapshot.getValue(Meal.class);
 
-                if (meal.isOffered()) {
+                if (meal.isOffered()&&meal.isAvailable()) {
                     if (name) {
                         if (meal.getName() != null) {
                             if (meal.getName().toLowerCase().contains(entered)) {
@@ -332,5 +382,7 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
             }
         });
     }
+
+
 
 }
