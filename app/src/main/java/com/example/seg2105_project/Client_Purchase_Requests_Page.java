@@ -35,6 +35,7 @@ public class Client_Purchase_Requests_Page extends AppCompatActivity implements 
     private ArrayList<Order> requestsList;
     private ArrayAdapter<Order> requestsAdapter;
     private String clientID;
+    private Boolean updated = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,12 +145,18 @@ public class Client_Purchase_Requests_Page extends AppCompatActivity implements 
         rateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!order.isApproved()) {
-                    Toast.makeText(getApplicationContext(), "You cannot rate the meal since you have not received it yet", Toast.LENGTH_LONG).show();
-                }
-                else if (order.isApproved() && isValid(Double.parseDouble(ratingNum.getText().toString()))){
-                    rateMeal(order, Double.parseDouble(ratingNum.getText().toString()));
-                    other.dismiss();
+
+                try {
+                    isValid(Double.parseDouble(ratingNum.getText().toString()));
+                    if (!order.isApproved()) {
+                        Toast.makeText(getApplicationContext(), "You cannot rate the meal since you have not received it yet", Toast.LENGTH_LONG).show();
+                    }
+                    else if (order.isApproved() && isValid(Double.parseDouble(ratingNum.getText().toString()))){
+                        rateMeal(order, Double.parseDouble(ratingNum.getText().toString()));
+                        other.dismiss();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "Make sure your input is a number that resembles (x.xx)", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -186,17 +193,20 @@ public class Client_Purchase_Requests_Page extends AppCompatActivity implements 
     }
 
     public void rateMeal (Order order, double rating){
+        updated = false;
         DatabaseReference DR1 = FirebaseDatabase.getInstance().getReference("Users/Cooks");
         DR1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Cook currentCook = data.getValue(Cook.class);
-                    if (order.getCookId().equals(currentCook.getId())) {
+                    if (order.getCookId().equals(currentCook.getId()) && !updated) {
+                        System.out.println("HERE");
                         Cook cook = new Cook(currentCook.getId(), currentCook.getFirstName(), currentCook.getLastName(), currentCook.getEmail(),currentCook.getPassword(),
                                 currentCook.getAddress(), currentCook.getDescription(), currentCook.getMealsSold(), currentCook.getTotalRatings() + rating, currentCook.getNumOfRatings() + 1, currentCook.getSuspended(),
                                 currentCook.getDaysSuspended(), currentCook.getBanned());
                         DR1.child(currentCook.getId()).setValue(cook);
+                        alreadyUpdated(true);
                         break;
                     }
                 }
@@ -207,6 +217,11 @@ public class Client_Purchase_Requests_Page extends AppCompatActivity implements 
 
             }
         });
+        Toast.makeText(getApplicationContext(), "You have rated the meal " + rating + "/5", Toast.LENGTH_LONG).show();
+    }
+
+    public void alreadyUpdated(Boolean bool){
+        this.updated = bool;
     }
 
     public void complain (Order order, String description){

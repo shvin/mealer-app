@@ -154,16 +154,16 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
         Button dismissBtn = (Button) newView.findViewById(R.id.dismissBtn);
 
         System.out.println("1");
-        searchCook(meal.getCookID());
+//        searchCook(meal.getCookID());
         System.out.println("2");
 
-        System.out.println(cook.getId());
+//        System.out.println(cook.getId());
 
         //Cook information
-        cookName.setText(cook.getFirstName() + " " + cook.getLastName());
-        address.setText(cook.getAddress());
-        descriptionCook.setText(cook.getDescription());
-        ratings.setText(String.valueOf(cook.getAverageRating()));
+//        cookName.setText(cook.getFirstName() + " " + cook.getLastName());
+//        address.setText(cook.getAddress());
+//        descriptionCook.setText(cook.getDescription());
+//        ratings.setText(String.valueOf(cook.getAverageRating()));
 
         // Meal information
         mealName.setText(meal.getName());
@@ -201,10 +201,10 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
             DR2.child(randIDString).setValue(order);
     }
 
-    public void searchCook(String cookID){
-        retrievingCook rc = new retrievingCook(cookID);
-        cook =rc.getCook();
-    }
+//    public void searchCook(String cookID){
+//        retrievingCook rc = new retrievingCook(cookID);
+//        cook =rc.getCook();
+//    }
 
 //    public void searchCook(String cookID){
 //        System.out.println("3");

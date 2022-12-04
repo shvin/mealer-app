@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,7 @@ public class Cook_Requests_Page extends AppCompatActivity implements View.OnClic
     private ArrayList<Order> requestsList;
     private ArrayAdapter<Order> requestsAdapter;
     private String cookID;
+    private Boolean updated = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
@@ -169,6 +171,37 @@ public class Cook_Requests_Page extends AppCompatActivity implements View.OnClic
         DatabaseReference DR1 = FirebaseDatabase.getInstance().getReference("Orders");
         Order newOrder = new Order(order.getId(), order.getCookId(), order.getMealId(),order.getClientId(), order.getMealName(), false, true, false);
         DR1.child(order.getId()).setValue(newOrder);
+
+
+        updated = false;
+        DatabaseReference DR2 = FirebaseDatabase.getInstance().getReference("Users/Cooks");
+        DR2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Cook currentCook = data.getValue(Cook.class);
+                    if (order.getCookId().equals(currentCook.getId()) && !updated) {
+
+                        Cook cook = new Cook(currentCook.getId(), currentCook.getFirstName(), currentCook.getLastName(), currentCook.getEmail(),currentCook.getPassword(),
+                                currentCook.getAddress(), currentCook.getDescription(), currentCook.getMealsSold() + 1, currentCook.getTotalRatings(), currentCook.getNumOfRatings(), currentCook.getSuspended(),
+                                currentCook.getDaysSuspended(), currentCook.getBanned());
+                        DR2.child(currentCook.getId()).setValue(cook);
+                        alreadyUpdated(true);
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void alreadyUpdated(Boolean bool){
+        this.updated = bool;
     }
 
     public void orderRejected(Order order){

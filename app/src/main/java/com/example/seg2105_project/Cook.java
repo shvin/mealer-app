@@ -88,6 +88,9 @@ public class Cook extends User{
         else {
             average = totalRatings/numOfRatings;
         }
+        average = average * 100;
+        average = Math.round(average);
+        average = average/100;
         return average;
     }
 

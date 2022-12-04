@@ -36,6 +36,7 @@ public class Meal_Page extends AppCompatActivity implements View.OnClickListener
     private Button btnBackMeal;
     boolean repeat = false;
     boolean goneThrough = false;
+    boolean checked = false;
     DatabaseReference DR;
     String cookID;
 
@@ -116,16 +117,20 @@ public class Meal_Page extends AppCompatActivity implements View.OnClickListener
     private void checkName(EditText nameMeal){
         final String nameEntered = nameMeal.getText().toString().toLowerCase();
 
+        checked = false;
         DR.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Meal meal = data.getValue(Meal.class);
-                    if (nameEntered.equals(meal.getName()) && cookID == meal.getCookID()) {
-                        repeatTrue();
+                    System.out.println("HERE");
+                    if (nameEntered.equals(meal.getName()) && cookID.equals(meal.getCookID())) {
+                        repeat = true;
                     }
                 }
-                if (repeat == false){
+
+                if (repeat == false && !checked){
+                    checked = true;
                     nameNotRepeated();
                 }
             }
@@ -134,10 +139,6 @@ public class Meal_Page extends AppCompatActivity implements View.OnClickListener
                 Log.e(TAG, "onCancelled: Something went wrong! Error:" + databaseError.getMessage());
             }
         });
-    }
-
-    private void repeatTrue(){
-        repeat = true;
     }
 
     private void nameNotRepeated() {
@@ -154,6 +155,9 @@ public class Meal_Page extends AppCompatActivity implements View.OnClickListener
                 e.printStackTrace();
             }
         }
+        else {
+            checked = false;
+        }
     }
 
     public void writeNewUser() throws IOException, ClassNotFoundException {
@@ -169,6 +173,7 @@ public class Meal_Page extends AppCompatActivity implements View.OnClickListener
 
         Meal meal = new Meal(randIDString, cookID, nameEntered, mealTypeEntered, cuisineTypeEntered, ingredientsEntered, allergensEntered, price, descriptionEntered);
 
+        System.out.println("HERE");
         DR.child(randIDString).setValue(meal);
     }
 }
