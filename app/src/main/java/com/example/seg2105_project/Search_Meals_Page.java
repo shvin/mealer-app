@@ -153,16 +153,18 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
         Button orderBtn = (Button) newView.findViewById(R.id.orderBtn);
         Button dismissBtn = (Button) newView.findViewById(R.id.dismissBtn);
 
-//        searchCook(meal.getCookID());
-//
-//        System.out.println(cook.getId());
+        System.out.println("1");
+        searchCook(meal.getCookID());
+        System.out.println("2");
 
-//         Cook information
-//        cookName.setText(cook.getFirstName() + " " + cook.getLastName());
-//        address.setText(cook.getAddress());
-//        descriptionCook.setText(cook.getDescription());
-//        ratings.setText(String.valueOf(cook.calculateAverageRating()));
-//
+        System.out.println(cook.getId());
+
+        //Cook information
+        cookName.setText(cook.getFirstName() + " " + cook.getLastName());
+        address.setText(cook.getAddress());
+        descriptionCook.setText(cook.getDescription());
+        ratings.setText(String.valueOf(cook.calculateAverageRating()));
+
         // Meal information
         mealName.setText(meal.getName());
         descriptionMeal.setText(meal.getDescription());
@@ -200,37 +202,45 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
     }
 
     public void searchCook(String cookID){
-        DatabaseReference DR1 = FirebaseDatabase.getInstance().getReference("Users/Cooks");
-        DR1.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    Cook currentCook = data.getValue(Cook.class);
-                    if (cookID.equals(currentCook.getId())) {
-                        System.out.println("HERE");
-                        writeCook(currentCook);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        retrievingCook rc = new retrievingCook(cookID);
+        cook =rc.getCook();
     }
 
-    public void writeCook(Cook cook){
-        this.cook = cook;
-        System.out.println(this.cook.getId());
-    }
+//    public void searchCook(String cookID){
+//        System.out.println("3");
+//        DatabaseReference DR1 = FirebaseDatabase.getInstance().getReference("Users/Cooks");
+//        DR1.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                System.out.println("4");
+//                for (DataSnapshot data : dataSnapshot.getChildren()) {
+//                    Cook currentCook = data.getValue(Cook.class);
+//                    System.out.println("5");
+//                    if (cookID.equals(currentCook.getId())) {
+//                        System.out.println("HERE");
+//                        writeCook(currentCook);
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
+//
+//    public void writeCook(Cook cook){
+//        this.cook = cook;
+//        System.out.println(this.cook.getId());
+//    }
 
 
     public void fillSearchResultsArray(){
         DR.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
-                System.out.println(2);
+
                 Meal meal = dataSnapshot.getValue(Meal.class);
                 if (meal.isOffered()) {
                     searchResultsList.add(meal);
