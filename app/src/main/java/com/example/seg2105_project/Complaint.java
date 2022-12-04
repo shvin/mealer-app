@@ -1,5 +1,8 @@
 package com.example.seg2105_project;
 
+/**
+ * Complaint class which initializes a complaint
+ */
 public class Complaint {
     private String id;
     private String description;
@@ -8,6 +11,7 @@ public class Complaint {
     public Complaint(){
 
     }
+
     public Complaint(String id, String description, String cookID) {
         this.id = id;
         this.description = description;

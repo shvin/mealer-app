@@ -7,8 +7,6 @@ import java.util.ArrayList;
  */
 public class Admin{
 
-    private ArrayList<Integer> complaintsToProcess = new ArrayList<>();
-
     String adminId;
     String adminPassword;
 
@@ -36,13 +34,4 @@ public class Admin{
         return adminPassword;
     }
 
-
-
-//    public void addToComplaints(int id){
-//        this.complaintsToProcess.add(id);
-//    }
-
-//    public void removeFromComplaints(int id){
-//        this.complaintsToProcess.remove(0);
-//    }
 }

@@ -18,6 +18,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * The cook can view his profile information on this page
+ */
 public class Profile_Page extends AppCompatActivity implements View.OnClickListener{
 
     private DatabaseReference DR;
@@ -53,6 +56,10 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
         backBtn.setOnClickListener(this);
     }
 
+    /**
+     * handles button clicks
+     * @param v
+     */
     public void onClick(View v){
         if (v.getId() == R.id.backBtn){
             Intent intent = new Intent(this,Cook_Homepage.class);
@@ -61,6 +68,9 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * Search for the logged in cook's info
+     */
     private void searchCook(){
         DR.addValueEventListener(new ValueEventListener() {
             @Override
@@ -80,6 +90,10 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    /**
+     * displays the cook's info
+     * @param cook
+     */
     private void displayInfo(Cook cook){
         descriptionCook.setText(cook.getDescription());
         mealsSold.setText(Integer.toString(cook.getMealsSold()));

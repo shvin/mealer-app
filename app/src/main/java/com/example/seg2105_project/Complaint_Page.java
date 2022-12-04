@@ -257,7 +257,10 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
         });
     }
 
-
+    /**
+     * If a cook is banned, set the cook's meals to unavailable
+     * @param cookID
+     */
     public void setMealsUnavailable(String cookID){
 
         DR2.addChildEventListener(new ChildEventListener() {
@@ -299,7 +302,10 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-
+    /**
+     * Updates the meal if cook is banned (unavailable)
+     * @param meal
+     */
     private void updateMeal(Meal meal){
         System.out.println("2231");
         DatabaseReference DR3 = FirebaseDatabase.getInstance().getReference("Meals");

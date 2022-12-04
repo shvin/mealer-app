@@ -2,6 +2,9 @@ package com.example.seg2105_project;
 
 import java.util.ArrayList;
 
+/**
+ * The Class Meal initializes a meal object
+ */
 public class Meal {
     private String id;
     private String cookID;
@@ -27,7 +30,7 @@ public class Meal {
         this.allergens = allergens;
         this.price = price;
         this.description = description;
-        this.offered = false;
+        this.offered = true;
         this.available = true;
     }
 

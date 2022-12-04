@@ -21,6 +21,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -33,7 +34,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
 
-
+/**
+ * This class implements the searching for meals functionality
+ */
 public class Search_Meals_Page extends AppCompatActivity implements View.OnClickListener{
 
     Button btnBack_Search;
@@ -58,7 +61,6 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
     String email;
     String description;
     String ratingRetrieved;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,6 +135,9 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
         }
     }
 
+    /**
+     * Handles when meal is clicked
+     */
     private void onItemLongClick() {
         listViewSearchResults.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -148,6 +153,11 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
         });
     }
 
+    /**
+     * Retrieves the info of the cook who made the clicked on meal
+     * @param meal
+     * @param cookID
+     */
     public void retrieveCookInfo(Meal meal, String cookID) {
         DatabaseReference DR1 = FirebaseDatabase.getInstance().getReference("Users/Cooks");
         DR1.addChildEventListener(new ChildEventListener() {
@@ -155,12 +165,14 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
                 Cook cook = dataSnapshot.getValue(Cook.class);
                 if (cook.getId().equals(cookID)) {
+                    System.out.println(firstName);
                     firstName = cook.getFirstName();
                     lastName = cook.getLastName();
                     addressRetrieved = cook.getAddress();
                     email = cook.getEmail();
                     description = cook.getDescription();
                     ratingRetrieved = String.valueOf(cook.getAverageRating());
+                    dismissSuspendDialog(meal, firstName, lastName, addressRetrieved, email, description, ratingRetrieved);
                 }
             }
 
@@ -184,11 +196,18 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
 
             }
         });
-        if (ratingRetrieved.length() > 0) {
-            dismissSuspendDialog(meal, firstName, lastName, addressRetrieved, email, description, ratingRetrieved);
-        }
     }
 
+    /**
+     * A dialog window which handles button clicks
+     * @param meal
+     * @param firstName2
+     * @param lastName2
+     * @param addressRetrieved2
+     * @param email2
+     * @param description2
+     * @param ratingRetrieved2
+     */
     private void dismissSuspendDialog(Meal meal, String firstName2, String lastName2, String addressRetrieved2, String email2, String description2, String ratingRetrieved2){
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -228,9 +247,12 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
         AlertDialog other = alertDialog.create();
         other.show();
 
+        System.out.println("OPENED DIALOG");
+
         dismissBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println("DISMISSED");
                 other.dismiss();
             }
         });
@@ -238,54 +260,30 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
         orderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println("ORDER");
                 writeNewOrder(meal);
                 other.dismiss();
             }
         });
     }
 
+    /**
+     * Writes a new order to the database
+     * @param meal
+     */
     private void writeNewOrder(Meal meal){
             DatabaseReference DR2 = FirebaseDatabase.getInstance().getReference("Orders");
 
+            Toast.makeText(getApplicationContext(), "Order has been placed", Toast.LENGTH_SHORT).show();
             UUID randID = UUID.randomUUID();
             String randIDString = randID.toString();
             Order order = new Order(randIDString, meal.getCookID(), meal.getId(), clientID, meal.getName(), true, false, false);
             DR2.child(randIDString).setValue(order);
     }
 
-
-
-//    public void searchCook(String cookID){
-//        System.out.println("3");
-//        DatabaseReference DR1 = FirebaseDatabase.getInstance().getReference("Users/Cooks");
-//        DR1.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                System.out.println("4");
-//                for (DataSnapshot data : dataSnapshot.getChildren()) {
-//                    Cook currentCook = data.getValue(Cook.class);
-//                    System.out.println("5");
-//                    if (cookID.equals(currentCook.getId())) {
-//                        System.out.println("HERE");
-//                        writeCook(currentCook);
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
-//
-//    public void writeCook(Cook cook){
-//        this.cook = cook;
-//        System.out.println(this.cook.getId());
-//    }
-
-
-
+    /**
+     * populates the listview with meals
+     */
     public void fillSearchResultsArray(){
         DR.addChildEventListener(new ChildEventListener() {
             @Override
@@ -322,6 +320,14 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
     }
 
     Boolean mealEntered = false;
+
+    /**
+     * populates the listview with meals
+     * @param entered
+     * @param name
+     * @param type
+     * @param cuisine
+     */
     public void fillSearchResultsArray(String entered, Boolean name, Boolean type, Boolean cuisine){
 
         DR.addChildEventListener(new ChildEventListener() {

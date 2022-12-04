@@ -22,7 +22,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
+/**
+ * The meal page creates a meal for the logged in cook
+ */
 public class Meal_Page extends AppCompatActivity implements View.OnClickListener{
     private EditText nameMeal;
     private EditText mealTypeMeal;
@@ -64,6 +66,10 @@ public class Meal_Page extends AppCompatActivity implements View.OnClickListener
         btnBackMeal.setOnClickListener(this);
     }
 
+    /**
+     * Handles button clicks
+     * @param v
+     */
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.btnAddMeal:
@@ -77,6 +83,10 @@ public class Meal_Page extends AppCompatActivity implements View.OnClickListener
         }
     }
 
+    /**
+     * Checks if input info is correct
+     * @return
+     */
     public boolean checkInfo() {
 
         boolean found = false;
@@ -114,6 +124,10 @@ public class Meal_Page extends AppCompatActivity implements View.OnClickListener
        return true;
     }
 
+    /**
+     * Checks if name is already used
+     * @param nameMeal
+     */
     private void checkName(EditText nameMeal){
         final String nameEntered = nameMeal.getText().toString().toLowerCase();
 
@@ -141,6 +155,9 @@ public class Meal_Page extends AppCompatActivity implements View.OnClickListener
         });
     }
 
+    /**
+     * If the meal name isn't repeated, write a new user tothe database
+     */
     private void nameNotRepeated() {
         goneThrough=true;
         if (checkInfo() == true) {
@@ -160,6 +177,11 @@ public class Meal_Page extends AppCompatActivity implements View.OnClickListener
         }
     }
 
+    /**
+     * Writes a new meal to the database
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void writeNewUser() throws IOException, ClassNotFoundException {
         final String nameEntered = nameMeal.getText().toString();
         final String mealTypeEntered = mealTypeMeal.getText().toString();

@@ -26,6 +26,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/**
+ * This class implements the purchase requests functionality for Client
+ */
 public class Client_Purchase_Requests_Page extends AppCompatActivity implements View.OnClickListener{
 
     private Button btnBack_Homepage;
@@ -63,6 +66,10 @@ public class Client_Purchase_Requests_Page extends AppCompatActivity implements 
         onItemLongClick();
     }
 
+    /**
+     * Handles when a button is clicked
+     * @param v
+     */
     public void onClick(View v){
         if(v.getId() == R.id.btnBack_Homepage){
             Intent intent = new Intent(this,Client_Homepage.class);
@@ -80,6 +87,9 @@ public class Client_Purchase_Requests_Page extends AppCompatActivity implements 
         }
     }
 
+    /**
+     * Adds orders to the listView by checking for orders in the database
+     */
     public void fillRequestsArray(){
         DR.addChildEventListener(new ChildEventListener() {
             @Override
@@ -114,6 +124,9 @@ public class Client_Purchase_Requests_Page extends AppCompatActivity implements 
         });
     }
 
+    /**
+     * Handles when an order is clicked
+     */
     public void onItemLongClick(){
         listViewRequests.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -126,6 +139,10 @@ public class Client_Purchase_Requests_Page extends AppCompatActivity implements 
         });
     }
 
+    /**
+     * When an order is clicked, a dialog window opens up, this implements the window
+     * @param order
+     */
     private void addRemoveDialog(Order order){
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -153,7 +170,7 @@ public class Client_Purchase_Requests_Page extends AppCompatActivity implements 
                     }
                     else if (order.isApproved() && isValid(Double.parseDouble(ratingNum.getText().toString()))){
                         rateMeal(order, Double.parseDouble(ratingNum.getText().toString()));
-                        other.dismiss();
+                        //other.dismiss();
                     }
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), "Make sure your input is a number that resembles (x.xx)", Toast.LENGTH_LONG).show();
@@ -170,12 +187,17 @@ public class Client_Purchase_Requests_Page extends AppCompatActivity implements 
                 }
                 else if (complaintDesc.getText().toString().length() != 0){
                     complain(order, complaintDesc.getText().toString());
-                    other.dismiss();
+                    //other.dismiss();
                 }
             }
         });
     }
 
+    /**
+     * Checks if text inputs are valid
+     * @param rating
+     * @return
+     */
     public Boolean isValid(Double rating){
         if (rating instanceof Double){
             if (rating >= 0 && rating <= 5){
@@ -192,6 +214,11 @@ public class Client_Purchase_Requests_Page extends AppCompatActivity implements 
         }
     }
 
+    /**
+     * Rates the meal and changes the cook's ratings accordingly
+     * @param order
+     * @param rating
+     */
     public void rateMeal (Order order, double rating){
         updated = false;
         DatabaseReference DR1 = FirebaseDatabase.getInstance().getReference("Users/Cooks");
@@ -224,6 +251,11 @@ public class Client_Purchase_Requests_Page extends AppCompatActivity implements 
         this.updated = bool;
     }
 
+    /**
+     * Issues a complaint, which can be seen by admin
+     * @param order
+     * @param description
+     */
     public void complain (Order order, String description){
         DatabaseReference DR = FirebaseDatabase.getInstance().getReference("Complaints");
 

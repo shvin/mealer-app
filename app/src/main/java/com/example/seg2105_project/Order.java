@@ -1,5 +1,8 @@
 package com.example.seg2105_project;
 
+/**
+ * This class initializes a new order
+ */
 public class Order {
     String id;
     String cookId;

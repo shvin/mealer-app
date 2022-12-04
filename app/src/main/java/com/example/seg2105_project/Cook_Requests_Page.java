@@ -24,6 +24,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * The meals that are requested by clients will appear here
+ */
 public class Cook_Requests_Page extends AppCompatActivity implements View.OnClickListener{
     private Button btnBack_Homepage;
     private Button btnUpdate;
@@ -58,6 +61,10 @@ public class Cook_Requests_Page extends AppCompatActivity implements View.OnClic
         onItemLongClick();
     }
 
+    /**
+     * handles button clicks
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnBack_Homepage){
@@ -76,6 +83,9 @@ public class Cook_Requests_Page extends AppCompatActivity implements View.OnClic
         }
     }
 
+    /**
+     * populates the list view with orders
+     */
     public void fillRequestsArray(){
         DR.addChildEventListener(new ChildEventListener() {
             @Override
@@ -110,6 +120,9 @@ public class Cook_Requests_Page extends AppCompatActivity implements View.OnClic
         });
     }
 
+    /**
+     * Handles when an order is clicked
+     */
     public void onItemLongClick(){
         listViewRequests.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -122,6 +135,10 @@ public class Cook_Requests_Page extends AppCompatActivity implements View.OnClic
         });
     }
 
+    /**
+     * A diloag window which handles button clicks
+     * @param order
+     */
     private void addRemoveDialog(Order order){
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -166,6 +183,11 @@ public class Cook_Requests_Page extends AppCompatActivity implements View.OnClic
             }
         });
     }
+
+    /**
+     * Called when the order is accepted and increments the cooks mealsSold by 1
+     * @param order
+     */
     public void orderAccepted(Order order){
 
         DatabaseReference DR1 = FirebaseDatabase.getInstance().getReference("Orders");
@@ -204,6 +226,10 @@ public class Cook_Requests_Page extends AppCompatActivity implements View.OnClic
         this.updated = bool;
     }
 
+    /**
+     * Called if order is rejected and order is set to false
+     * @param order
+     */
     public void orderRejected(Order order){
         DatabaseReference DR2 = FirebaseDatabase.getInstance().getReference("Orders");
         Order newOrder = new Order(order.getId(), order.getCookId(), order.getMealId(),order.getClientId(),order.getMealName(),false,false,true);

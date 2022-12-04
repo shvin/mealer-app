@@ -24,6 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+/**
+ * Displays the offered meals of the logged in cook
+ */
 public class Offered_Meals_Page extends AppCompatActivity implements View.OnClickListener{
 
     private ListView listViewOffered;
@@ -62,6 +65,10 @@ public class Offered_Meals_Page extends AppCompatActivity implements View.OnClic
         onItemLongClick();
     }
 
+    /**
+     * handles button clicks
+     * @param v
+     */
     public void onClick(View v){
         if(v.getId() == R.id.updateBtn){
             if(offeredList.size() != 0){
@@ -79,6 +86,9 @@ public class Offered_Meals_Page extends AppCompatActivity implements View.OnClic
         }
     }
 
+    /**
+     * populates the list view with offered meals
+     */
     private void addOfferedList() {
 
         DR.addChildEventListener(new ChildEventListener() {
@@ -114,6 +124,9 @@ public class Offered_Meals_Page extends AppCompatActivity implements View.OnClic
         });
     }
 
+    /**
+     * Handles when a meal is clicked
+     */
     private void onItemLongClick() {
         listViewOffered.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -125,6 +138,10 @@ public class Offered_Meals_Page extends AppCompatActivity implements View.OnClic
         });
     }
 
+    /**
+     * A dialog window that handles button clicks
+     * @param meal
+     */
     private void removeSelectedDialog(Meal meal){
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -159,6 +176,10 @@ public class Offered_Meals_Page extends AppCompatActivity implements View.OnClic
         });
     }
 
+    /**
+     * Updates the meal already present in the database
+     * @param meal
+     */
     private void updateMeal(Meal meal){
         DatabaseReference DR1 = FirebaseDatabase.getInstance().getReference("Meals");
         Meal newMeal = new Meal(meal.getId(),meal.getCookID(),meal.getName(),meal.getMealType(),meal.getCuisineType(),meal.getIngredients(),meal.getAllergens(),meal.getPrice(),

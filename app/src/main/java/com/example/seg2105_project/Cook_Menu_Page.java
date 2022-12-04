@@ -24,6 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+/**
+ * Here the cook can see all of their meals
+ */
 public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickListener {
 
     private ListView listViewMenu;
@@ -67,6 +70,10 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
         onItemLongClick();
     }
 
+    /**
+     * Handles button clicks
+     * @param v
+     */
     public void onClick(View v){
         if(v.getId() == R.id.updateBtn){
             if(menuList.size() != 0){
@@ -89,6 +96,9 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    /**
+     * populates the cook's meals to their menu
+     */
     public void addMenuList(){
 
         DR.addChildEventListener(new ChildEventListener() {
@@ -123,6 +133,9 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
         });
     }
 
+    /**
+     * Handles when a meal is clicked
+     */
     public void onItemLongClick(){
         listViewMenu.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -135,6 +148,10 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
         });
     }
 
+    /**
+     * Opens a dialog window and handles button clicks
+     * @param meal
+     */
     private void addRemoveDialog(Meal meal){
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -182,6 +199,10 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
         });
     }
 
+    /**
+     * Adds a meal to the database
+     * @param meal
+     */
     private void addMeal(Meal meal){
         DatabaseReference DR1 = FirebaseDatabase.getInstance().getReference("Meals");
         Meal newMeal = new Meal(meal.getId(),meal.getCookID(),meal.getName(),meal.getMealType(),meal.getCuisineType(),meal.getIngredients(),meal.getAllergens(),meal.getPrice(),
@@ -189,6 +210,10 @@ public class Cook_Menu_Page extends AppCompatActivity implements View.OnClickLis
         DR1.child(meal.getId()).setValue(newMeal);
     }
 
+    /**
+     * A message which offers removal context
+     * @param removal
+     */
     private void removeMessage(Boolean removal){
         if (removal){
             Toast.makeText(this, "The Meal has been removed", Toast.LENGTH_LONG).show();

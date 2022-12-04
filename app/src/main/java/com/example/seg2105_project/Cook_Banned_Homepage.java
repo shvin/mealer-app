@@ -17,7 +17,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
+/**
+ * This Page is only visible to cook's who have been banned or suspended
+ */
 public class Cook_Banned_Homepage extends AppCompatActivity implements View.OnClickListener{
     private Button btnLogout;
     private TextView typeOfSuspension;
@@ -45,6 +47,10 @@ public class Cook_Banned_Homepage extends AppCompatActivity implements View.OnCl
         getCook();
     }
 
+    /**
+     * Handles button clicks
+     * @param v
+     */
     public void onClick(View v) {
         if(v.getId() == R.id.btnLogout){
             Intent intent = new Intent(this, Register_Login_Page.class);
@@ -52,7 +58,10 @@ public class Cook_Banned_Homepage extends AppCompatActivity implements View.OnCl
         }
     }
 
-
+    /**
+     * Checks if the cook is banned or suspended to write a personalized message
+     * @param cook
+     */
     private void checkIfBanOrSuspend(Cook cook){
         System.out.println(cook.getBanned());
         System.out.println(cook.getSuspended());
@@ -67,6 +76,9 @@ public class Cook_Banned_Homepage extends AppCompatActivity implements View.OnCl
         }
     }
 
+    /**
+     * Gets the cook who logged in
+     */
     private void getCook(){
         DR.addValueEventListener(new ValueEventListener() {
             @Override
