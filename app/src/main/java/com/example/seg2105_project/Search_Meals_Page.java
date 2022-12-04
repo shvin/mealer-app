@@ -163,7 +163,7 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
         cookName.setText(cook.getFirstName() + " " + cook.getLastName());
         address.setText(cook.getAddress());
         descriptionCook.setText(cook.getDescription());
-        ratings.setText(String.valueOf(cook.calculateAverageRating()));
+        ratings.setText(String.valueOf(cook.getAverageRating()));
 
         // Meal information
         mealName.setText(meal.getName());
@@ -197,7 +197,7 @@ public class Search_Meals_Page extends AppCompatActivity implements View.OnClick
 
             UUID randID = UUID.randomUUID();
             String randIDString = randID.toString();
-            Order order = new Order(randIDString, meal.getCookID(), meal.getId(), clientID, true, false, false);
+            Order order = new Order(randIDString, meal.getCookID(), meal.getId(), clientID, meal.getName(), true, false, false);
             DR2.child(randIDString).setValue(order);
     }
 

@@ -91,7 +91,7 @@ public class Client_Login_Page extends AppCompatActivity implements View.OnClick
                     if (userCheck.equals(client.getEmail()) && userPass.equals(client.getPassword())) {
 
                         returnTrueValue();
-                        optionTrue();
+                        optionTrue(client.getId());
                     }
                 }
                 if (valid == false) {
@@ -117,8 +117,10 @@ public class Client_Login_Page extends AppCompatActivity implements View.OnClick
     /**
      * Starts the Client Homepage Activity and lets the user know they are signed in
      */
-    private void optionTrue(){
-        startActivity(new Intent(this, Client_Homepage.class));
+    private void optionTrue(String clientID){
+        Intent intent = new Intent(this,Client_Homepage.class);
+        intent.putExtra("clientID", clientID);
+        startActivity(intent);
         Toast.makeText(getApplicationContext(), "LOGGED IN", Toast.LENGTH_SHORT).show();
     }
 

@@ -83,7 +83,7 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
     private void displayInfo(Cook cook){
         descriptionCook.setText(cook.getDescription());
         mealsSold.setText(Integer.toString(cook.getMealsSold()));
-        ratings.setText(String.valueOf(cook.calculateAverageRating()));
+        ratings.setText(String.valueOf(cook.getAverageRating()));
         email.setText(cook.getEmail());
         name.setText(cook.getFirstName() + " " + cook.getLastName());
         address.setText(cook.getAddress());

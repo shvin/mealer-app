@@ -5,17 +5,19 @@ public class Order {
     String cookId;
     String mealId;
     String clientId;
+    String mealName;
     boolean pending;
     boolean approved;
     boolean rejected;
 
     public Order(){}
 
-    public Order(String id, String cookId, String mealId, String clientId, boolean pending, boolean approved, boolean rejected) {
+    public Order(String id, String cookId, String mealId, String clientId, String mealName, boolean pending, boolean approved, boolean rejected) {
         this.id = id;
         this.cookId = cookId;
         this.mealId = mealId;
         this.clientId = clientId;
+        this.mealName = mealName;
         this.pending = pending;
         this.approved = approved;
         this.rejected = rejected;
@@ -53,6 +55,13 @@ public class Order {
         this.clientId = clientId;
     }
 
+    public String getMealName(){
+        return mealName;
+    }
+
+    public void setMealName(String meal){this.mealName = meal;}
+
+
     public boolean isPending() {
         return pending;
     }
@@ -75,5 +84,18 @@ public class Order {
 
     public void setRejected(boolean rejected) {
         this.rejected = rejected;
+    }
+
+    public String toString(){
+        String str = "Meal name: " + mealName + "\n" + "Status: ";
+        if(pending) {
+            str += "Pending";
+        } else if(approved){
+            str+= "Approved";
+        } else if(rejected){
+            str+= "Rejected";
+        }
+
+        return str;
     }
 }

@@ -15,8 +15,6 @@ public class Cook extends User{
     private int daysSuspended;
     private double totalRatings;
     private int numOfRatings;
-    private ArrayList<Meal> menu = new ArrayList<>();
-    private ArrayList<Meal> mealsRequest = new ArrayList<>();
 
     /**
      * Empty constructor
@@ -47,16 +45,15 @@ public class Cook extends User{
         numOfRatings = 0;
     }
 
-    public Cook(String id, String firstName, String lastName, String email, String password, String address, String description, int mealsSold, double averageRating, boolean suspended, int daysSuspended, boolean banned) {
+    public Cook(String id, String firstName, String lastName, String email, String password, String address, String description, int mealsSold, double totalRatings, int numOfRatings, boolean suspended, int daysSuspended, boolean banned) {
         super(id, firstName, lastName, email, password, address);
         this.description = description;
         this.mealsSold = mealsSold;
-        this.averageRating = averageRating;
         this.suspended = suspended;
         this.daysSuspended = daysSuspended;
         this.banned = banned;
-        totalRatings = 0;
-        numOfRatings = 0;
+        this.totalRatings = totalRatings;
+        this.numOfRatings = numOfRatings;
     }
 
 
@@ -86,7 +83,12 @@ public class Cook extends User{
     }
 
     public double getAverageRating() {
-        return averageRating;
+        double average = 0;
+        if (numOfRatings == 0 || totalRatings == 0) return 0.0;
+        else {
+            average = totalRatings/numOfRatings;
+        }
+        return average;
     }
 
     public void setAverageRating(double averageRating) {
@@ -123,21 +125,9 @@ public class Cook extends User{
 
     public void addToTotalRatings(double totalRatings) {
         this.totalRatings+= this.totalRatings + totalRatings;
+        this.numOfRatings++;
     }
 
     public int getNumOfRatings(){return numOfRatings;}
-
-    public void incrementNumOfRatings(){
-        this.numOfRatings+=1;
-    }
-
-    public double calculateAverageRating(){
-        double average = 0;
-        if (numOfRatings == 0 || totalRatings == 0) return 0.0;
-        else {
-            average = totalRatings/numOfRatings;
-        }
-        return average;
-    }
 
 }

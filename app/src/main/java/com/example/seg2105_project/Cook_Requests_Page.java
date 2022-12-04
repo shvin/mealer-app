@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -52,12 +53,14 @@ public class Cook_Requests_Page extends AppCompatActivity implements View.OnClic
 
         fillRequestsArray();
 
+        onItemLongClick();
     }
 
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnBack_Homepage){
-            Intent intent = new Intent(this, Client_Homepage.class);
+            Intent intent = new Intent(this,Cook_Homepage.class);
+            intent.putExtra("cookID", cookID);
             startActivity(intent);
         }
         if (v.getId() == R.id.btnUpdate){
@@ -76,7 +79,7 @@ public class Cook_Requests_Page extends AppCompatActivity implements View.OnClic
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
                 Order order = dataSnapshot.getValue(Order.class);
-                if (order.isPending() && order.getCookId().equals(cookID)) {
+                if (order.getCookId().equals(cookID)) {
                     requestsList.add(order);
                     requestsAdapter.notifyDataSetChanged();
                 }
@@ -135,7 +138,14 @@ public class Cook_Requests_Page extends AppCompatActivity implements View.OnClic
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                orderAccepted(order);
+                if (order.isPending()){
+                    Toast.makeText(getApplicationContext(), "You have accepted the order", Toast.LENGTH_LONG).show();
+                    orderAccepted(order);
+                } else if (order.isApproved()){
+                    Toast.makeText(getApplicationContext(), "You have already accepted the order", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "You have already rejected the order", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -143,20 +153,27 @@ public class Cook_Requests_Page extends AppCompatActivity implements View.OnClic
 
             @Override
             public void onClick(View view) {
-                orderRejected(order);
+                if (order.isPending()) {
+                    Toast.makeText(getApplicationContext(), "You have rejected the order", Toast.LENGTH_LONG).show();
+                    orderRejected(order);
+                } else if (order.isApproved()){
+                    Toast.makeText(getApplicationContext(), "You have already accepted the order", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "You have already rejected the order", Toast.LENGTH_LONG).show();
+                }
             }
-
         });
     }
     public void orderAccepted(Order order){
+
         DatabaseReference DR1 = FirebaseDatabase.getInstance().getReference("Orders");
-        Order newOrder = new Order(order.getId(), order.getCookId(), order.getMealId(),order.getClientId(),false,true,false);
+        Order newOrder = new Order(order.getId(), order.getCookId(), order.getMealId(),order.getClientId(), order.getMealName(), false, true, false);
         DR1.child(order.getId()).setValue(newOrder);
     }
 
     public void orderRejected(Order order){
         DatabaseReference DR2 = FirebaseDatabase.getInstance().getReference("Orders");
-        Order newOrder = new Order(order.getId(), order.getCookId(), order.getMealId(),order.getClientId(),false,false,true);
+        Order newOrder = new Order(order.getId(), order.getCookId(), order.getMealId(),order.getClientId(),order.getMealName(),false,false,true);
         DR2.child(order.getId()).setValue(newOrder);
     }
 }

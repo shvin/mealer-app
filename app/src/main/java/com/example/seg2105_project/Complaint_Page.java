@@ -66,7 +66,6 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
         updateBtn.setOnClickListener(this);
         backBtn.setOnClickListener(this);
 
-        addComplaint();
         addComplaintList();
 
         onItemLongClick();
@@ -230,13 +229,13 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
                         // Bans the cook indefinitely
                         if (banOrSuspend == 0) {
                             Cook newCook = new Cook(cook.getId(),cook.getFirstName(),cook.getLastName(),cook.getEmail(),cook.getPassword(),cook.getAddress(),
-                                    cook.getDescription(),cook.getMealsSold(),cook.getAverageRating(),false, 0, true);
+                                    cook.getDescription(),cook.getMealsSold(), cook.getTotalRatings(), cook.getNumOfRatings(), false, 0, true);
                             dataBaseR1.child(cook.getId()).setValue(newCook);
                             break;
                         }
                         if (banOrSuspend == 1) {
                             Cook newCook = new Cook(cook.getId(),cook.getFirstName(),cook.getLastName(),cook.getEmail(),cook.getPassword(),cook.getAddress(),
-                                    cook.getDescription(),cook.getMealsSold(),cook.getAverageRating(),true, length, false);
+                                    cook.getDescription(),cook.getMealsSold(), cook.getTotalRatings(), cook.getNumOfRatings(), false, 0, true);
                             dataBaseR1.child(cook.getId()).setValue(newCook);
                             break;
                         }
@@ -249,23 +248,6 @@ public class Complaint_Page extends AppCompatActivity implements View.OnClickLis
             }
             });
         }
-
-    /**
-     * Add complaints when starting the complaint page
-     */
-    private void addComplaint(){
-        // email: a231@gmail.com -- pass: 11111111
-        Complaint complaint = new Complaint("1","This is complaint number 1", "76c62824-87db-41fc-b358-265fa12b5cf5");
-        DR.child(complaint.getId()).setValue(complaint);
-
-        // email: a888@gmail.com -- pass: 11111111
-        Complaint complaint2 = new Complaint("2","This is complaint number 2", "97320e01-cba2-4d23-b0d8-588d8744a3cb");
-        DR.child(complaint2.getId()).setValue(complaint2);
-
-        // email: a@gmail.com -- pass: 11111111
-        Complaint complaint3 = new Complaint("3","This is complaint number 3", "f619f35d-7b0c-4415-8750-fc182370c288");
-        DR.child(complaint3.getId()).setValue(complaint3);
-    }
 
 }
 

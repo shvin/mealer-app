@@ -48,7 +48,7 @@ public class Client_Homepage extends AppCompatActivity  implements View.OnClickL
             intent.putExtra("clientID", clientID);
             startActivity(intent);
         } else if(v.getId() == R.id.btnStatus){
-            Intent intent = new Intent(this,Search_Meals_Page.class);
+            Intent intent = new Intent(this,Client_Purchase_Requests_Page.class);
             intent.putExtra("clientID", clientID);
             startActivity(intent);
         }
