@@ -1,0 +1,133 @@
+Index: app/src/main/java/com/example/seg2105_project/Search_Meals_Page.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.seg2105_project;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.ListView;\r\n\r\nimport com.google.firebase.database.ChildEventListener;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\n\r\nimport java.util.ArrayList;\r\n\r\n\r\npublic class Search_Meals_Page extends AppCompatActivity implements View.OnClickListener{\r\n\r\n    Button btnBack_Search;\r\n    Button btn_Search;\r\n    private ListView listViewSearchResults;\r\n    private EditText searchBarName;\r\n    private EditText searchBarType;\r\n    private EditText searchBarCuisine;\r\n\r\n\r\n    private DatabaseReference DR;\r\n    private ArrayList<Meal> searchResultsList;\r\n    private ArrayAdapter<Meal> searchResultAdapter;\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_client_search);\r\n        btnBack_Search = (Button) findViewById(R.id.btnBack_Search);\r\n        btn_Search = (Button) findViewById(R.id.btn_Search);\r\n        listViewSearchResults = (ListView) findViewById(R.id.listViewSearchResults);\r\n\r\n        DR = FirebaseDatabase.getInstance().getReference(\"Meals\");\r\n        searchResultsList = new ArrayList<>();\r\n        searchResultAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, searchResultsList);\r\n        searchBarName = (EditText) findViewById(R.id.searchBarName);\r\n        searchBarType = (EditText) findViewById(R.id.searchBarType);\r\n        searchBarCuisine = (EditText) findViewById(R.id.searchBarCuisine);\r\n\r\n        listViewSearchResults.setAdapter(searchResultAdapter);\r\n        btnBack_Search.setOnClickListener(this);\r\n        btn_Search.setOnClickListener(this);\r\n\r\n        fillSearchResultsArray();\r\n    }\r\n\r\n    /**\r\n     * onClick listens for a click and proceeds to corresponding activity\r\n     * @param v\r\n     */\r\n    @Override\r\n    public void onClick(View v) {\r\n        String searchAttemptName = searchBarName.getText().toString().trim().toLowerCase();\r\n        String searchAttemptType = searchBarType.getText().toString().trim().toLowerCase();\r\n        String searchAttemptCuisine = searchBarCuisine.getText().toString().trim().toLowerCase();\r\n\r\n        Boolean nameFilled = searchAttemptName.length()!=0;\r\n        Boolean typeFilled = searchAttemptType.length()!=0;\r\n        Boolean cuisineFilled = searchAttemptCuisine.length()!=0;\r\n\r\n        if(v.getId() == R.id.btnBack_Search){\r\n            Intent intent = new Intent(this, Client_Homepage.class);\r\n            startActivity(intent);\r\n        }\r\n        if (v.getId() == R.id.btn_Search){\r\n            if (nameFilled ||typeFilled || cuisineFilled){\r\n                searchResultsList.clear();\r\n                fillSearchResultsArray(searchAttemptName,searchAttemptType,searchAttemptCuisine,nameFilled,typeFilled,cuisineFilled);\r\n                searchResultAdapter.notifyDataSetChanged();\r\n            } else {\r\n                searchResultsList.clear();\r\n                fillSearchResultsArray();\r\n            }\r\n        }\r\n    }\r\n\r\n    public void fillSearchResultsArray(){\r\n        DR.addChildEventListener(new ChildEventListener() {\r\n            @Override\r\n            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {\r\n                System.out.println(2);\r\n                Meal meal = dataSnapshot.getValue(Meal.class);\r\n                if (meal.isOffered()) {\r\n                    searchResultsList.add(meal);\r\n                    searchResultAdapter.notifyDataSetChanged();\r\n                }\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onChildRemoved(@NonNull DataSnapshot snapshot) {\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError error) {\r\n\r\n            }\r\n        });\r\n    }\r\n    Boolean mealEntered = false;\r\n    public void fillSearchResultsArray(String enteredName, String enteredType, String enteredCuisine, Boolean name, Boolean type, Boolean cuisine){\r\n        DR.addChildEventListener(new ChildEventListener() {\r\n            @Override\r\n            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {\r\n                Meal meal = dataSnapshot.getValue(Meal.class);\r\n\r\n                if (meal.isOffered()) {\r\n\r\n                    if (name) {\r\n                        if (meal.getName() != null) {\r\n                            if (meal.getName().toLowerCase().contains(enteredName)) {\r\n                                searchResultsList.add(meal);\r\n                                mealEntered = true;\r\n                            }\r\n                        }\r\n                    }\r\n                    if (type) {\r\n                        if (meal.getMealType() != null) {\r\n                            if (meal.getMealType().toLowerCase().contains(enteredType) && !mealEntered) {\r\n                                searchResultsList.add(meal);\r\n                                mealEntered = true;\r\n                            }\r\n                        }\r\n                    }\r\n\r\n                    if (cuisine) {\r\n                        if (meal.getCuisineType() != null) {\r\n                            if (meal.getCuisineType().toLowerCase().contains(enteredCuisine) && !mealEntered) {\r\n                                searchResultsList.add(meal);\r\n                                mealEntered = true;\r\n                            }\r\n                        }\r\n                    }\r\n                    mealEntered = false;\r\n                    searchResultAdapter.notifyDataSetChanged();\r\n                }\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onChildRemoved(@NonNull DataSnapshot snapshot) {\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError error) {\r\n\r\n            }\r\n        });\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/seg2105_project/Search_Meals_Page.java b/app/src/main/java/com/example/seg2105_project/Search_Meals_Page.java
+--- a/app/src/main/java/com/example/seg2105_project/Search_Meals_Page.java	(revision 94385c482251b76138f385231903b127de075e94)
++++ b/app/src/main/java/com/example/seg2105_project/Search_Meals_Page.java	(date 1670098428646)
+@@ -30,7 +30,7 @@
+     private EditText searchBarType;
+     private EditText searchBarCuisine;
+ 
+-
++    private String clientID;
+     private DatabaseReference DR;
+     private ArrayList<Meal> searchResultsList;
+     private ArrayAdapter<Meal> searchResultAdapter;
+@@ -51,6 +51,9 @@
+         searchBarType = (EditText) findViewById(R.id.searchBarType);
+         searchBarCuisine = (EditText) findViewById(R.id.searchBarCuisine);
+ 
++        Intent intent = getIntent();
++        clientID = intent.getStringExtra("clientID");
++
+         listViewSearchResults.setAdapter(searchResultAdapter);
+         btnBack_Search.setOnClickListener(this);
+         btn_Search.setOnClickListener(this);
+@@ -73,7 +76,8 @@
+         Boolean cuisineFilled = searchAttemptCuisine.length()!=0;
+ 
+         if(v.getId() == R.id.btnBack_Search){
+-            Intent intent = new Intent(this, Client_Homepage.class);
++            Intent intent = new Intent(this,Client_Homepage.class);
++            intent.putExtra("clientID", clientID);
+             startActivity(intent);
+         }
+         if (v.getId() == R.id.btn_Search){
+@@ -122,6 +126,7 @@
+             }
+         });
+     }
++
+     Boolean mealEntered = false;
+     public void fillSearchResultsArray(String enteredName, String enteredType, String enteredCuisine, Boolean name, Boolean type, Boolean cuisine){
+         DR.addChildEventListener(new ChildEventListener() {
+Index: app/src/main/java/com/example/seg2105_project/Client_Homepage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.seg2105_project;\r\n\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\n\r\n\r\n/**\r\n * Client homepage lets you know you're logged in as a client and lets you back out to the register/login page\r\n */\r\npublic class Client_Homepage extends AppCompatActivity  implements View.OnClickListener{\r\n    Button btnLogout;\r\n    Button btnSearch;\r\n    Button btnStatus;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_client_homepage);\r\n        btnLogout = (Button) findViewById(R.id.btnLogout);\r\n        btnSearch = (Button) findViewById(R.id.btnSearch);\r\n        btnStatus = (Button) findViewById(R.id.btnStatus);\r\n\r\n        btnSearch.setOnClickListener(this);\r\n        btnStatus.setOnClickListener(this);\r\n        btnLogout.setOnClickListener(this);\r\n    }\r\n\r\n    /**\r\n     * onClick listens for a click and proceeds to corresponding activity\r\n     * @param v\r\n     */\r\n    @Override\r\n    public void onClick(View v) {\r\n        if(v.getId() == R.id.btnLogout){\r\n            Intent intent = new Intent(this, Register_Login_Page.class);\r\n            startActivity(intent);\r\n        } else if(v.getId() == R.id.btnSearch){\r\n            Intent intent = new Intent(this, Search_Meals_Page.class);\r\n            startActivity(intent);\r\n        } else if(v.getId() == R.id.btnStatus){\r\n            Intent intent = new Intent(this, Search_Meals_Page.class);\r\n            startActivity(intent);\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/seg2105_project/Client_Homepage.java b/app/src/main/java/com/example/seg2105_project/Client_Homepage.java
+--- a/app/src/main/java/com/example/seg2105_project/Client_Homepage.java	(revision 94385c482251b76138f385231903b127de075e94)
++++ b/app/src/main/java/com/example/seg2105_project/Client_Homepage.java	(date 1670098138054)
+@@ -16,6 +16,7 @@
+     Button btnLogout;
+     Button btnSearch;
+     Button btnStatus;
++    private String clientID;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -25,6 +26,9 @@
+         btnSearch = (Button) findViewById(R.id.btnSearch);
+         btnStatus = (Button) findViewById(R.id.btnStatus);
+ 
++        Intent intent = getIntent();
++        clientID = intent.getStringExtra("clientID");
++
+         btnSearch.setOnClickListener(this);
+         btnStatus.setOnClickListener(this);
+         btnLogout.setOnClickListener(this);
+@@ -40,10 +44,12 @@
+             Intent intent = new Intent(this, Register_Login_Page.class);
+             startActivity(intent);
+         } else if(v.getId() == R.id.btnSearch){
+-            Intent intent = new Intent(this, Search_Meals_Page.class);
++            Intent intent = new Intent(this,Search_Meals_Page.class);
++            intent.putExtra("clientID", clientID);
+             startActivity(intent);
+         } else if(v.getId() == R.id.btnStatus){
+-            Intent intent = new Intent(this, Search_Meals_Page.class);
++            Intent intent = new Intent(this,Search_Meals_Page.class);
++            intent.putExtra("clientID", clientID);
+             startActivity(intent);
+         }
+     }
+Index: app/src/main/res/layout/view_meal_dialog.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/view_meal_dialog.xml b/app/src/main/res/layout/view_meal_dialog.xml
+new file mode 100644
+--- /dev/null	(date 1670098428655)
++++ b/app/src/main/res/layout/view_meal_dialog.xml	(date 1670098428655)
+@@ -0,0 +1,32 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:orientation="vertical"
++    android:padding="10dp">
++
++    <TextView
++        android:id="@+id/nameOfDialog"
++        android:text=""
++        android:textSize="30dp"
++        android:gravity="center_horizontal"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:textColor="@color/black"/>
++
++    <Button
++        android:id="@+id/orderBtn"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:padding="5dp"
++        android:text="Order" />
++
++
++    <Button
++        android:id="@+id/dismissBtn"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:padding="5dp"
++        android:text="Dismiss" />
++
++</LinearLayout>
+\ No newline at end of file

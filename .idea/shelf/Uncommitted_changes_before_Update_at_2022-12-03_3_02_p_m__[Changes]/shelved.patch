@@ -1,0 +1,18 @@
+Index: app/src/main/java/com/example/seg2105_project/Search_Meals_Page.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.seg2105_project;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\n\r\npublic class Search_Meals_Page extends AppCompatActivity implements View.OnClickListener{\r\n\r\n    Button btnBack_Search;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_client_search);\r\n        btnBack_Search = (Button) findViewById(R.id.btnBack_Search);\r\n\r\n\r\n        btnBack_Search.setOnClickListener(this);\r\n    }\r\n\r\n    /**\r\n     * onClick listens for a click and proceeds to corresponding activity\r\n     * @param v\r\n     */\r\n    @Override\r\n    public void onClick(View v) {\r\n        if(v.getId() == R.id.btnBack_Search){\r\n            Intent intent = new Intent(this, Client_Homepage.class);\r\n            startActivity(intent);\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/seg2105_project/Search_Meals_Page.java b/app/src/main/java/com/example/seg2105_project/Search_Meals_Page.java
+--- a/app/src/main/java/com/example/seg2105_project/Search_Meals_Page.java	(revision bc8ec7a55bdeaee2182536923569c49e90e81690)
++++ b/app/src/main/java/com/example/seg2105_project/Search_Meals_Page.java	(date 1670013969061)
+@@ -17,7 +17,6 @@
+         setContentView(R.layout.activity_client_search);
+         btnBack_Search = (Button) findViewById(R.id.btnBack_Search);
+ 
+-
+         btnBack_Search.setOnClickListener(this);
+     }
+ 
